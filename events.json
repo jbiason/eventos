@@ -1,9 +1,7 @@
 ---
 layout: null
 ---
-[
-{% for event_hash in site.data.events %}
-{% assign event = event_hash[1] %}
+[{% for event_hash in site.data.events %}{% assign event = event_hash[1] %}
   {
     "name": "{{ event.name }}",
     "date": "{{ event.date }}",
@@ -12,7 +10,5 @@ layout: null
     "price": "{{ event.price }}",
     "img": "{{ event.img }}",
     "description": "{{ event.description }}"
-  }
-  {% unless forloop.last %},{% endunless %}
-{% endfor %}
+  }{% unless forloop.last %},{% endunless %}{% endfor %}
 ]

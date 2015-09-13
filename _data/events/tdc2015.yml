@@ -1,7 +1,10 @@
 name: TDC POA
-date: 01/01/2015
-time: 09:00 - 18:00
+date: 24/09/2015, 25/09/2015, 26/09/2015
+time: 09:00 - 18:30
 location: UniRitter
-price: R$200,00
+address: Rua Orfanotrófio, 555, Alto Teresópolis - Porto Alegre/RS CEP 90840-440
+price: 120.00, 150.00, 200.00
+url: http://www.thedevelopersconference.com.br/
 img: https://s3-sa-east-1.amazonaws.com/globalcodesp/tdc/2015/img/logo/logo-tdc-horizontal.svg
 description: Lorem ipsum dolor sit amet, consectetur adipisicing elit. A eos commodi laboriosam esse, similique sunt quam amet nobis distinctio consequuntur laborum fugiat soluta harum rerum aliquid cupiditate iste ad perferendis.
+tags: desenvolvimento, design, mobile
