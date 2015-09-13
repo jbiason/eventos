@@ -1,29 +1,28 @@
 var util = {
-  replaceDiacritics: function(c) {
+  _replaceDiacritics: function(c) {
     'àáãâ'.indexOf(c)>-1 && (c = 'a');
-    'èéê'.indexOf(c)>-1 && (c = 'e');
-    'ìíî'.indexOf(c)>-1 && (c = 'i');
-    'òóô'.indexOf(c)>-1 && (c = 'o');
-    'ùúû'.indexOf(c)>-1 && (c = 'u');
-    'ç'.indexOf(c)>-1 && (c = 'c');
-    'ñ'.indexOf(c)>-1 && (c = 'n');
+     'èéê'.indexOf(c)>-1 && (c = 'e');
+     'ìíî'.indexOf(c)>-1 && (c = 'i');
+     'òóô'.indexOf(c)>-1 && (c = 'o');
+     'ùúû'.indexOf(c)>-1 && (c = 'u');
+       'ç'.indexOf(c)>-1 && (c = 'c');
+       'ñ'.indexOf(c)>-1 && (c = 'n');
     return c;
   },
 
-  matchChars: function(charQ, charWord) {
-    return this.replaceDiacritics(charQ) === this.replaceDiacritics(charWord);
+  _matchChars: function(charQuery, charWord) {
+    return this._replaceDiacritics(charQuery) === this._replaceDiacritics(charWord);
   },
 
-  matchSearch: function(q, word) {
-
-    q = q.toLowerCase();
+  matchSearch: function(query, word) {
+    query = query.toLowerCase();
     word = word.toLowerCase();
-    for (var i in q) {
-      var charQ = q[i];
+    for (var i in query) {
+      var charQuery = query[i];
       var didFindChar = false;
       for (var j in word) {
         var charWord = word[j];
-        if (this.matchChars(charQ, charWord)) {
+        if (this._matchChars(charQuery, charWord)) {
           didFindChar = true;
           break;
         }
@@ -38,53 +37,94 @@ var util = {
 };
 
 var app = function(_, $) {
-  var eventTemplate = _.template($('[data-js="event-template"]').html());
-  var emptyResultsTemplate = _.template($('[data-js="empty-search-template"]').html());
+  var model = {
+    evts: [],
+    filteredEvts: [],
 
-  var eventList = $('[data-js="event-list"]');
-  var eventSearch = $('[data-js="event-search"]');
+    init: function() {
+      return $.getJSON('./events.json')
+        .done(_.bind(function(data) {
+          this.evts = this.filteredEvts = data;
+        }, this))
+      ;
+    },
 
-  var allEvents = [], filteredEvents = [];
+    getEvts: function() {
+      return this.evts;
+    },
 
-  var getEvents = function(success, error) {
-    $.getJSON('./events.json', success, error);
-  };
+    getFilteredEvts: function() {
+      return this.filteredEvts;
+    },
 
-  var initEvents = function(events) {
-    allEvents = filteredEvents = events;
-  };
-
-  var renderEvents = function(events) {
-    eventList.html(_.reduce(events, function(memo, item) {
-      return memo += eventTemplate(item);
-    }, ''));
-  };
-
-  var renderEmptyResults = function() {
-    eventList.html(emptyResultsTemplate());
-  };
-
-  var initAndRenderEvents = function(events) {
-    initEvents(events);
-    renderEvents(events);
-  };
-
-  var filterEvents = function() {
-    var q = eventSearch.val();
-    filteredEvents = _.filter(allEvents, function(item) {
-      return util.matchSearch(q, item.name);
-    });
-
-    if (filteredEvents.length) {
-      renderEvents(filteredEvents);
-    } else {
-      renderEmptyResults();
+    filterEvts: function(query) {
+      this.filteredEvts = _.filter(this.evts, function(evt) {
+        return util.matchSearch(query, evt.name);
+      });
     }
   };
 
-  eventSearch.on('keyup', _.debounce(filterEvents, 200));
+  var controller = {
+    init: function() {
+      model.init()
+        .done(function(data) {
+          view.init();
+        })
+      ;
+    },
 
-  getEvents(initAndRenderEvents);
+    getEvts: function() {
+      return model.getEvts();
+    },
+
+    getFilteredEvts: function() {
+      return model.getFilteredEvts();
+    },
+
+    filterEvts: function(query) {
+      model.filterEvts(query);
+      view.render();
+    }
+  };
+
+  var view = {
+    templates: {
+      evt: _.template($('[data-js="event-template"]').html()),
+      empty: _.template($('[data-js="empty-search-template"]').html())
+    },
+
+    $els: {
+      list: $('[data-js="event-list"]'),
+      search: $('[data-js="event-search"]')
+    },
+
+    init: function(evts) {
+      this.render();
+      this.bindEvents();
+    },
+
+    bindEvents: function() {
+      this.$els.search.on('keyup', _.debounce(_.bind(this.filterEvts, this), 100));
+    },
+
+    filterEvts: function() {
+      var query = this.$els.search.val();
+      controller.filterEvts(query);
+    },
+
+    render: function() {
+      var evts = controller.getFilteredEvts();
+      if (evts.length) {
+        this.$els.list.html(_.reduce(evts, _.bind(function(acc, evt) {
+          return acc += this.templates.evt(evt);
+        }, this), ''));
+      } else {
+        this.$els.list.html(this.templates.empty());
+      }
+    }
+  };
+
+  controller.init();
 };
 
 $(function() { app(_, Zepto); });
