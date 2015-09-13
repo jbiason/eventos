@@ -1,19 +1,20 @@
-var app = function(_, $) {
-  var matchSearch = function(q, word) {
-    var replaceDiacritics = function(c) {
-      'àáãâ'.indexOf(c)>-1 && (c = 'a');
-      'èéê'.indexOf(c)>-1 && (c = 'e');
-      'ìíî'.indexOf(c)>-1 && (c = 'i');
-      'òóô'.indexOf(c)>-1 && (c = 'o');
-      'ùúû'.indexOf(c)>-1 && (c = 'u');
-      'ç'.indexOf(c)>-1 && (c = 'c');
-      'ñ'.indexOf(c)>-1 && (c = 'n');
-      return c;
-    };
+var util = {
+  replaceDiacritics: function(c) {
+    'àáãâ'.indexOf(c)>-1 && (c = 'a');
+    'èéê'.indexOf(c)>-1 && (c = 'e');
+    'ìíî'.indexOf(c)>-1 && (c = 'i');
+    'òóô'.indexOf(c)>-1 && (c = 'o');
+    'ùúû'.indexOf(c)>-1 && (c = 'u');
+    'ç'.indexOf(c)>-1 && (c = 'c');
+    'ñ'.indexOf(c)>-1 && (c = 'n');
+    return c;
+  },
 
-    var matchChars = function(charQ, charWord) {
-      return replaceDiacritics(charQ) === replaceDiacritics(charWord);
-    };
+  matchChars: function(charQ, charWord) {
+    return this.replaceDiacritics(charQ) === this.replaceDiacritics(charWord);
+  },
+
+  matchSearch: function(q, word) {
 
     q = q.toLowerCase();
     word = word.toLowerCase();
@@ -22,7 +23,7 @@ var app = function(_, $) {
       var didFindChar = false;
       for (var j in word) {
         var charWord = word[j];
-        if (matchChars(charQ, charWord)) {
+        if (this.matchChars(charQ, charWord)) {
           didFindChar = true;
           break;
         }
@@ -33,8 +34,10 @@ var app = function(_, $) {
       word = word.substring(parseInt(j) + 1); // on next iteration, will look in the word hereinafter
     }
     return true;
-  };
+  }
+};
 
+var app = function(_, $) {
   var eventTemplate = _.template($('[data-js="event-template"]').html());
   var emptyResultsTemplate = _.template($('[data-js="empty-search-template"]').html());
 
@@ -69,7 +72,7 @@ var app = function(_, $) {
   var filterEvents = function() {
     var q = eventSearch.val();
     filteredEvents = _.filter(allEvents, function(item) {
-      return matchSearch(q, item.name);
+      return util.matchSearch(q, item.name);
     });
 
     if (filteredEvents.length) {
