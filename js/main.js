@@ -1,4 +1,4 @@
-var App = function() {
+(function(_, $) {
   $.getJSON('./events.json', function(events) {
     var template = _.template($('#template-event').html());
 
@@ -6,6 +6,4 @@ var App = function() {
       return memo += template(item);
     }, ''));
   });
-};
-
-new App();
+})(_, Zepto);
