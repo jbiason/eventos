@@ -33,6 +33,18 @@ var util = {
       word = word.substring(parseInt(j) + 1); // on next iteration, will look in the word hereinafter
     }
     return true;
+  },
+
+  compareArrays: function(a1, a2) {
+    if (a1.length !== a2.length) {
+      return false;
+    }
+    for (var i in a1) {
+      if (a1[i] !== a2[i]) {
+        return false;
+      }
+    }
+    return true;
   }
 };
 
@@ -58,6 +70,10 @@ var app = function(_, $) {
     },
 
     filterEvts: function(query) {
+      if (!query) {
+        this.filteredEvts = this.evts;
+        return;
+      }
       this.filteredEvts = _.filter(this.evts, function(evt) {
         return util.matchSearch(query, evt.name);
       });
@@ -67,7 +83,7 @@ var app = function(_, $) {
   var controller = {
     init: function() {
       model.init()
-        .done(function(data) {
+        .done(function() {
           view.init();
         })
       ;
@@ -82,8 +98,13 @@ var app = function(_, $) {
     },
 
     filterEvts: function(query) {
+      var before = model.getFilteredEvts();
       model.filterEvts(query);
-      view.render();
+      var after = model.getFilteredEvts();
+      var didChange = !util.compareArrays(before, after);
+      if (didChange) {
+        view.render();
+      }
     }
   };
 
