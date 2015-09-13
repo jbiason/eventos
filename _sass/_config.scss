@@ -1,0 +1,25 @@
+// text
+$browser-context: 16;
+
+@function em($pixels, $context: $browser-context) {
+  @return #{$pixels/$context}em;
+}
+
+// colors
+
+$primary-color: #F90E04;
+$black: #000000;
+$white: #FFFFFF;
+
+// grey scale
+
+$scale-50: #FAFAFA;
+$scale-100: #F5F5F5;
+$scale-200: #EEEEEE;
+$scale-300: #E0E0E0;
+$scale-400: #BDBDBD;
+$scale-500: #9E9E9E;
+$scale-600: #757575;
+$scale-700: #616161;
+$scale-800: #424242;
+$scale-900: #212121;

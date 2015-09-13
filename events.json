@@ -1,0 +1,18 @@
+---
+layout: null
+---
+[
+{% for event_hash in site.data.events %}
+{% assign event = event_hash[1] %}
+  {
+    "name": "{{ event.name }}",
+    "date": "{{ event.date }}",
+    "time": "{{ event.time }}",
+    "location": "{{ event.location }}",
+    "price": "{{ event.price }}",
+    "img": "{{ event.img }}",
+    "description": "{{ event.description }}"
+  }
+  {% unless forloop.last %},{% endunless %}
+{% endfor %}
+]
