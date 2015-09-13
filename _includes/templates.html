@@ -1,4 +1,4 @@
-<script type="text/html" id="template-event">
+<script type="text/html" data-js="event-template">
   <div class="ev-event">
     <div class="ev-event__col ev-event__col--info">
       <div class="ev-event__title"><%= name %></div>
@@ -19,5 +19,11 @@
     <div class="ev-event__col ev-event__col--image">
       <img src="<%= img %>" class="ev-event__image">
     </div>
+  </div>
+</script>
+
+<script type="text/html" data-js="empty-search-template">
+  <div>
+    <p>Nenhum resultado :(</p>
   </div>
 </script>
