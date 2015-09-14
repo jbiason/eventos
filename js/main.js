@@ -145,10 +145,6 @@ var app = function(_, $) {
       ;
     },
 
-    getEvts: function() {
-      return this.evts;
-    },
-
     getFilteredEvts: function() {
       return this.filteredEvts;
     },
@@ -167,9 +163,9 @@ var app = function(_, $) {
   };
 
   /*
-    view
+    views
   */
-  var view = {
+  var evtsView = {
     templates: {
       evt:   _.template($('[data-js="evt-template"]').html()),
       empty: _.template($('[data-js="no-results-template"]').html()),
@@ -190,13 +186,16 @@ var app = function(_, $) {
       this.$els.search.on('keyup paste', _.debounce(_.bind(this.filterEvts, this), 100));
     },
 
+    getQuery: function() {
+      return this.$els.search.val();
+    },
+
     filterEvts: function() {
-      var query = this.$els.search.val();
-      controller.filterEvts(query);
+      controller.filterEvts();
     },
 
     render: function() {
-      var evts = controller.getFilteredEvts();
+      var evts = controller.getEvts();
       if (evts.length) {
         this.$els.list.html(_.reduce(evts, _.bind(function(acc, evt) {
           return acc += this.templates.evt(evt);
@@ -218,29 +217,27 @@ var app = function(_, $) {
     init: function() {
       model.init()
         .done(function() {
-          view.init();
+          evtsView.init();
         })
         .fail(function() {
-          view.renderError();
+          evtsView.renderError();
         })
       ;
     },
 
     getEvts: function() {
-      return model.getEvts();
-    },
-
-    getFilteredEvts: function() {
       return model.getFilteredEvts();
     },
 
-    filterEvts: function(query) {
+    filterEvts: function() {
+      var query = evtsView.getQuery();
+
       var before = model.getFilteredEvts();
       model.filterEvts(query);
       var after = model.getFilteredEvts();
       var didChange = !util.compareArrays(before, after);
       if (didChange) {
-        view.render();
+        evtsView.render();
       }
     }
   };
