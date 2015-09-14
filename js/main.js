@@ -45,7 +45,76 @@ var util = {
       }
     }
     return true;
+  },
+
+  split: function(str, c) {
+    c = c || ',';
+    return str.replace(/ /g, '').split(c);
+  },
+
+  dateFromStr: function(str) {
+    var parts = this.split(str, '/');
+    return new Date(parts[2], parseInt(parts[1]) + 1, parts[0]);
+  },
+
+  formatCurrency: function(value) {
+    if (typeof value === 'string') {
+      value = this.parseCurrency(value);
+    }
+    var decimalPlaces = 0,
+      decimalSep = ',',
+      groupSize = 3,
+      groupSep = '.',
+      re = '\\d(?=(\\d{' + (groupSize || 3) + '})+' + (decimalPlaces > 0 ? '\\D' : '$') + ')',
+      num = value.toFixed(Math.max(0, ~~decimalPlaces));
+    return 'R$' + num
+      .replace('.', decimalSep)
+      .replace(new RegExp(re, 'g'), '$&' + groupSep);
+  },
+
+  parseCurrency: function(value) {
+    value = value
+      .replace(/[^0-9,]/g, '')
+      .replace(',', '.');
+    return parseFloat(value);
+  },
+
+  formatDate: function(date) {
+    var d = date.getDate() + '';
+    var m = (date.getMonth() - 1) + '';
+    d = d.length > 1 ? d : '0' + d;
+    m = m.length > 1 ? m : '0' + m;
+
+    return d + '/' + m;
   }
+
+};
+
+var Evt = function(data) {
+  _.extend(this, data);
+
+  this._parseDates = function(str) {
+    var dates = _.map(util.split(str), function(each) {
+      return util.dateFromStr(each);
+    });
+    this.formattedDates = _.map(dates, function(item) {
+      return util.formatDate(item);
+    }).join(' - ');
+  };
+
+  this._parsePrices = function(str) {
+    this.formattedPrices = _.map(util.split(str), function(item) {
+      return util.formatCurrency(item);
+    }).join(' - ');
+  };
+
+  this._parseTags = function(str) {
+    this.tagArray = util.split(str);
+  };
+
+  this._parseDates(data.date);
+  this._parsePrices(data.price);
+  this._parseTags(data.tags);
 };
 
 var app = function(_, $) {
@@ -56,7 +125,9 @@ var app = function(_, $) {
     init: function() {
       return $.getJSON('./events.json')
         .done(_.bind(function(data) {
-          this.evts = this.filteredEvts = data;
+          this.evts = this.filteredEvts = _.map(data, function(evt) {
+            return new Evt(evt);
+          });
         }, this))
       ;
     },
