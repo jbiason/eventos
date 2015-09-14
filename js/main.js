@@ -94,10 +94,10 @@ var Evt = function(data) {
   _.extend(this, data);
 
   this._parseDates = function(str) {
-    var dates = _.map(util.split(str), function(each) {
+    this.dates = _.map(util.split(str), function(each) {
       return util.dateFromStr(each);
     });
-    this.formattedDates = _.map(dates, function(item) {
+    this.formattedDates = _.map(this.dates, function(item) {
       return util.formatDate(item);
     }).join(' - ');
   };
@@ -125,8 +125,11 @@ var app = function(_, $) {
     init: function() {
       return $.getJSON('./events.json')
         .done(_.bind(function(data) {
-          this.evts = this.filteredEvts = _.map(data, function(evt) {
+          var evts = _.map(data, function(evt) {
             return new Evt(evt);
+          });
+          this.evts = this.filteredEvts = _.sortBy(evts, function(item) {
+            return -item.dates[0].valueOf();
           });
         }, this))
       ;
