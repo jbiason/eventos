@@ -186,13 +186,13 @@ var app = function(_, $) {
 
   var view = {
     templates: {
-      evt: _.template($('[data-js="event-template"]').html()),
-      empty: _.template($('[data-js="empty-search-template"]').html())
+      evt: _.template($('[data-js="evt-template"]').html()),
+      empty: _.template($('[data-js="no-results-template"]').html())
     },
 
     $els: {
-      list: $('[data-js="event-list"]'),
-      search: $('[data-js="event-search"]')
+      list: $('[data-js="evt-list"]'),
+      search: $('[data-js="evt-search"]')
     },
 
     init: function(evts) {
@@ -201,7 +201,7 @@ var app = function(_, $) {
     },
 
     bindEvents: function() {
-      this.$els.search.on('keyup', _.debounce(_.bind(this.filterEvts, this), 100));
+      this.$els.search.on('keyup paste', _.debounce(_.bind(this.filterEvts, this), 100));
     },
 
     filterEvts: function() {

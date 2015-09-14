@@ -1,0 +1,43 @@
+<script type="text/html" data-js="evt-template">
+  <div class="ev-event">
+    <div class="ev-event__col ev-event__col--info">
+      <div class="ev-event__title"><%= name %></div>
+      <div class="ev-event__description"><span class="ev-event__label">Descrição do evento:</span><%= description %></div>
+      <div class="u-row">
+        <div class="u-col">
+          <div class="ev-event__price"><span class="ev-event__label">Valor:</span><%= formattedPrices %></div>
+        </div>
+        <div class="u-col">
+          <div class="ev-event__date"><span class="ev-event__label">Data:</span><%= formattedDates %></div>
+        </div>
+        <div class="u-col">
+          <div class="ev-event__time"><span class="ev-event__label">Horário:</span><%= time %></div>
+        </div>
+      </div>
+      <div class="ev-event__location">
+        <span class="ev-event__label">Local:</span>
+        <%= location %>
+        <br/>
+        <%= address %>
+      </div>
+
+      <!-- TODO start -->
+      <div class="">
+        <a href="<%= url %>" target="_blank">+ Mais informações</a>
+      </div>
+
+      <div class="">
+        <ul class="tags">
+          <% _.each(tagArray, function(tag) { %>
+            <li class="tag"><%= tag %></li>
+          <% }); %>
+        </div>
+      </ul>
+      <!-- TODO end -->
+
+    </div>
+    <div class="ev-event__col ev-event__col--image">
+      <img src="<%= img %>" class="ev-event__image">
+    </div>
+  </div>
+</script>
