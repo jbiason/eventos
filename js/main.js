@@ -149,7 +149,9 @@ var app = function(_, $) {
         return;
       }
       this.filteredEvts = _.filter(this.evts, function(evt) {
-        return util.matchSearch(query, evt.name);
+        return util.matchSearch(query, evt.name) || _.any(evt.tagArray, function(tag) {
+          return util.matchSearch(query, tag);
+        });
       });
     }
   };
