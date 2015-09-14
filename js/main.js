@@ -171,12 +171,13 @@ var app = function(_, $) {
   */
   var view = {
     templates: {
-      evt: _.template($('[data-js="evt-template"]').html()),
-      empty: _.template($('[data-js="no-results-template"]').html())
+      evt:   _.template($('[data-js="evt-template"]').html()),
+      empty: _.template($('[data-js="no-results-template"]').html()),
+      error: _.template($('[data-js="data-error-template"]').html())
     },
 
     $els: {
-      list: $('[data-js="evt-list"]'),
+      list:   $('[data-js="evt-list"]'),
       search: $('[data-js="evt-search"]')
     },
 
@@ -203,6 +204,10 @@ var app = function(_, $) {
       } else {
         this.$els.list.html(this.templates.empty());
       }
+    },
+
+    renderError: function() {
+      this.$els.list.html(this.templates.error());
     }
   };
 
@@ -214,6 +219,9 @@ var app = function(_, $) {
       model.init()
         .done(function() {
           view.init();
+        })
+        .fail(function() {
+          view.renderError();
         })
       ;
     },
