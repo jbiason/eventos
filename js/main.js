@@ -200,6 +200,7 @@ var app = function(_, $) {
         this.$els.list.html(_.reduce(evts, _.bind(function(acc, evt) {
           return acc += this.templates.evt(evt);
         }, this), ''));
+        new Layzr();
       } else {
         this.$els.list.html(this.templates.empty());
       }
@@ -245,4 +246,6 @@ var app = function(_, $) {
   controller.init();
 };
 
-$(function() { app(_, Zepto); });
+$(function() {
+  app(_, Zepto);
+});
