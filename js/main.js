@@ -213,7 +213,8 @@ var app = function(_, $) {
         this.$els.list.html(_.reduce(evts, _.bind(function(acc, evt) {
           return acc += this.templates.evt(evt);
         }, this), ''));
-        new Layzr();
+        lazyLoader && lazyLoader._destroy();
+        lazyLoader = new Layzr();
       } else {
         this.$els.list.html(this.templates.empty());
       }
