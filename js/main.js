@@ -1,4 +1,7 @@
 var app = function(_, $) {
+
+  var lazyLoader;
+
   /*
     util
   */
@@ -22,7 +25,7 @@ var app = function(_, $) {
     },
 
     matchSearch: function(query, word) {
-      query = query.toLowerCase();
+      query = query.toLowerCase().replace(/ /g, '');
       word = word.toLowerCase();
       for (var i in query) {
         var charQuery = query[i];
