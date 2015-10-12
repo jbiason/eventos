@@ -192,7 +192,6 @@ var app = function(_, $) {
     },
 
     init: function(evts) {
-      this.render();
       this.bindEvents();
     },
 
