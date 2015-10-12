@@ -181,9 +181,9 @@ var app = function(_, $) {
   */
   var evtsView = {
     templates: {
-      evt:   _.template($('[data-js="evt-template"]').html()),
-      empty: _.template($('[data-js="no-results-template"]').html()),
-      error: _.template($('[data-js="data-error-template"]').html())
+      evt:   _.template($('[data-js="template-evt"]').html()),
+      empty: _.template($('[data-js="template-no-results"]').html()),
+      error: _.template($('[data-js="template-data-error"]').html())
     },
 
     $els: {
@@ -227,7 +227,7 @@ var app = function(_, $) {
 
   var yearsView = {
     templates: {
-      year: _.template($('[data-js="year-template"]').html())
+      year: _.template($('[data-js="template-year"]').html())
     },
 
     $els: {
