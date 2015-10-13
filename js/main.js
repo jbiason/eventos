@@ -94,13 +94,12 @@ var app = function(_, $) {
     */
     dateFromStr: function(str) {
       var parts = this.split(str, '/');
-      console.log('dateFromStr parts', parts);
-      return new Date(parts[2], parseInt(parts[1]) + 1, parts[0]);
+      return new Date(parts[2], parseInt(parts[1]) - 1, parts[0]);
     },
 
     formatDate: function(date) {
       var d = date.getDate() + '';
-      var m = (date.getMonth() - 1) + '';
+      var m = (date.getMonth() + 1) + '';
       d = d.length > 1 ? d : '0' + d;
       m = m.length > 1 ? m : '0' + m;
       return d + '/' + m;
