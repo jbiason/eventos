@@ -125,7 +125,6 @@ var app = function(_, $) {
     this.dates = _.map(util.split(str), function(each) {
       return util.dateFromStr(each);
     });
-    console.log('parseDates', str, this.dates);
     this.formattedDates = _.map(this.dates, function(item) {
       return util.formatDate(item);
     }).join(' - ');
