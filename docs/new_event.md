@@ -14,7 +14,7 @@ Um novo evento é cadastrado criando fazendo um pull request de um arquivo com o
 
 1. Clique no ícone `+` que aparece no canto inferior direito da imagem: ![screen shot 2015-09-13 at 12 38 54 am](https://cloud.githubusercontent.com/assets/4842605/9835112/fddb4d3e-59af-11e5-8d22-5946d2c3d01a.png)
 
-1. Será aberta uma página para criação de um novo arquivo. Dê o nome do arquivo seguindo as [Convenções para nomes de arquivos de eventos](file_naming.md):
+1. Será aberta uma página para criação de um novo arquivo. Dê o nome do arquivo seguindo as [Convenções para nomes de arquivos de eventos](file_naming.md).
 
 1. Preencha os dados do evento no arquivo, consultando um desses recursos:
   - o [Template de novo evento](event_template.yml), para usar um template básico
