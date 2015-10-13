@@ -15,6 +15,10 @@ h1 a {
 
 a {
   color: inherit;
+
+  &:hover {
+    text-decoration: none;
+  }
 }
 
 // search input
@@ -29,7 +33,7 @@ input {
   list-style: none;
   margin: 0;
   overflow: hidden;
-  padding: 0;
+  padding: 20px 0 0 0;
 }
 
 .tags li {
@@ -47,7 +51,6 @@ input {
   position: relative;
   margin: 0 10px 10px 0;
   text-decoration: none;
-  -webkit-transition: color 0.2s;
 }
 
 .tag::before {
@@ -73,15 +76,6 @@ input {
   top: 0;
 }
 
-.tag:hover {
-  background-color: crimson;
-  color: white;
-}
-
-.tag:hover::after {
-  border-left-color: crimson;
-}
-
 // year buttons
 .pure-button {
   font-family: inherit;
@@ -94,6 +88,7 @@ input {
   background-color: #E6E6E6;
   text-decoration: none;
   border-radius: 2px;
+  padding: 15px 30px;
 }
 
 .pure-button-hover,
@@ -172,4 +167,14 @@ a.pure-button-selected {
 .pure-button::-moz-focus-inner {
   padding: 0;
   border: 0;
+}
+
+
+.year-list {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
