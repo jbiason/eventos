@@ -9,7 +9,7 @@ Site para divulgação de eventos de desenvolvimento de software, tecnologia e d
 ## Como contribuir
 
 - [Contribuir com código](https://github.com/CWISoftware/eventos/issues) através de pull request.
-- [Peça uma nova funcionalidade](https://github.com/CWISoftware/eventos/issues/new) (que [não tenha sido pedida ainda](https://github.com/CWISoftware/eventos/issues)).
+- [Reporte um bug ou peça uma nova funcionalidade](https://github.com/CWISoftware/eventos/issues/new) (que [não tenha sido pedida ainda](https://github.com/CWISoftware/eventos/issues)).
 
 ## Docs
 
