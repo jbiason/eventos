@@ -7,8 +7,13 @@
 */
 
 // para colocar link no h1 do site
-a {
+
+h1 a {
   text-decoration: none;
+  color: inherit;
+}
+
+a {
   color: inherit;
 }
 
