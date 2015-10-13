@@ -178,3 +178,13 @@ a.pure-button-selected {
   -moz-transform: translateY(-50%);
   transform: translateY(-50%);
 }
+
+.ev-msg {
+  padding: 30px;
+  margin: 30px 0;
+  background-color: rgba(0,0,0,0.05);
+  border: 1px solid #ddd;
+  text-align: center;
+  font-size: 16px;
+  color: #666;
+}
