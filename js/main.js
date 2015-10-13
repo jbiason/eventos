@@ -1,6 +1,10 @@
 var app = function(_, $) {
 
   var lazyLoader;
+  var textConstants = {
+    UNDEFINED: 'Não definido',
+    FREE: 'Grátis'
+  };
 
   /*
     util
@@ -90,6 +94,7 @@ var app = function(_, $) {
     */
     dateFromStr: function(str) {
       var parts = this.split(str, '/');
+      console.log('dateFromStr parts', parts);
       return new Date(parts[2], parseInt(parts[1]) + 1, parts[0]);
     },
 
@@ -107,37 +112,53 @@ var app = function(_, $) {
   };
 
   /*
-    model
+    event class
   */
   var Evt = function(data) {
     this.init(data);
   };
+
+  Evt.prototype.getYear = function() {
+    return this.dates[0].getFullYear();
+  };
+
   Evt.prototype.parseDates = function(str) {
     this.dates = _.map(util.split(str), function(each) {
       return util.dateFromStr(each);
     });
+    console.log('parseDates', str, this.dates);
     this.formattedDates = _.map(this.dates, function(item) {
       return util.formatDate(item);
     }).join(' - ');
   };
+
   Evt.prototype.parsePrices = function(str) {
+    if (!str) {
+      this.formattedPrices = textConstants.FREE;
+      return;
+    }
     this.formattedPrices = _.map(util.split(str), function(item) {
-      return util.formatCurrency(item);
+      if (isNaN(parseInt(item))) {
+        return textConstants.UNDEFINED;
+      }
+      return item === '0' ? textConstants.FREE : util.formatCurrency(item);
     }).join(' - ');
   };
+
   Evt.prototype.parseTags = function(str) {
-    this.tagArray = util.split(str);
+    this.tagArray = str.length ? util.split(str) : [];
   };
+
   Evt.prototype.init = function(data) {
     _.extend(this, data);
     this.parseDates(data.date);
     this.parsePrices(data.price);
     this.parseTags(data.tags);
   };
-  Evt.prototype.getYear = function() {
-    return this.dates[0].getFullYear();
-  };
 
+  /*
+    model
+  */
   var model = {
     evts: [],
     filteredEvts: [],
