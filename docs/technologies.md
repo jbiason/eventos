@@ -18,5 +18,7 @@ Este projeto usa um custom build do Zepto, feito no [Zepto builder](http://githu
 - callbacks
 - deferred
 - event
+- fx
+- fx_methods
 - ie
 - zepto (core)

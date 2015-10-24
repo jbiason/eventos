@@ -231,6 +231,7 @@ var app = function(_, $) {
 
     render: function() {
       var evts = controller.getEvts();
+      this.$els.list.hide();
       if (evts.length) {
         this.$els.list.html(_.reduce(evts, _.bind(function(acc, evt) {
           return acc += this.templates.evt(evt);
@@ -240,6 +241,7 @@ var app = function(_, $) {
       } else {
         this.$els.list.html(this.templates.empty());
       }
+      this.$els.list.fadeIn(100);
     },
 
     renderError: function() {
@@ -279,10 +281,11 @@ var app = function(_, $) {
           selected: item === selectedYear
         };
       }, this));
+      this.$els.list.hide();
       this.$els.list.html(_.reduce(years, _.bind(function(acc, item) {
         return acc += this.templates.year(item);
       }, this), ''));
-
+      this.$els.list.fadeIn();
       this.$els.list.find('[data-js="year-button"]').on('click', _.bind(this.selectYear, this));
     }
   };
