@@ -1,43 +1,53 @@
 <script type="text/html" data-js="template-evt">
   <div class="ev-event">
     <div class="ev-event__col ev-event__col--info">
-      <div class="ev-event__title"><%= name %></div>
-      <div class="ev-event__description"><span class="ev-event__label">Descrição do evento:</span><%= description %></div>
+      <div class="ev-event__title"><%= evt.name %></div>
+
+      <% if (evt.description) { %>
+      <div class="ev-event__description"><span class="ev-event__label">Descrição do evento:</span><%= evt.description %></div>
+      <% } %>
+
       <div class="u-row">
         <div class="u-col">
-          <div class="ev-event__price"><span class="ev-event__label">Valor:</span><%= formattedPrices %></div>
+          <div class="ev-event__price"><span class="ev-event__label">Valor:</span><%= evt.formattedPrices %></div>
         </div>
         <div class="u-col">
-          <div class="ev-event__date"><span class="ev-event__label">Data:</span><%= formattedDates %></div>
+          <div class="ev-event__date"><span class="ev-event__label">Data:</span><%= evt.formattedDates %></div>
         </div>
         <div class="u-col">
-          <div class="ev-event__time"><span class="ev-event__label">Horário:</span><%= time %></div>
+          <div class="ev-event__time"><span class="ev-event__label">Horário:</span><%= evt.time %></div>
         </div>
       </div>
       <div class="ev-event__location">
         <span class="ev-event__label">Local:</span>
-        <%= location %>
+        <%= evt.location %>
         <br/>
-        <%= address %>
+        <%= evt.address %>
       </div>
 
       <!-- TODO start -->
-      <div class="">
-        <a href="<%= url %>" target="_blank">+ Site do evento</a>
-      </div>
-
-      <div class="">
-        <ul class="tags">
-          <% _.each(tagArray, function(tag) { %>
-            <li class="tag"><%= tag %></li>
-          <% }); %>
+      <% if (evt.url) { %>
+        <div class="">
+          <a href="<%= evt.url %>" target="_blank">+ Site do evento</a>
         </div>
-      </ul>
-      <!-- TODO end -->
+      <% } %>
 
+      <% if (evt.tagArray && evt.tagArray.length > 0) { %>
+        <div class="">
+          <ul class="tags">
+            <% _.each(evt.tagArray, function(tag) { %>
+              <li class="tag"><%= tag %></li>
+            <% }); %>
+          </ul>
+        </div>
+      <% } %>
+      <!-- TODO end -->
     </div>
-    <div class="ev-event__col ev-event__col--image">
-      <img data-layzr="<%= img %>" class="ev-event__image">
-    </div>
+
+    <% if (evt.img) { %>
+      <div class="ev-event__col ev-event__col--image">
+        <img data-layzr="<%= evt.img %>" class="ev-event__image">
+      </div>
+    <% } %>
   </div>
 </script>

@@ -14,7 +14,7 @@ Um novo evento é cadastrado criando fazendo um pull request de um arquivo com o
 
 1. Dê o **nome do arquivo** seguindo as [Convenções para nomes de arquivos de eventos](file_naming.md).
 
-1. Copie o template abaixo e **preencha os dados** do evento no arquivo que você criou. Se usar aspas, devem ser escapadas com `\`:
+1. Copie o template abaixo e **preencha os dados** do evento no arquivo que você criou:
   ```yaml
   # dados obrigatórios
   name: Nome do evento # São colocar o ano do evento no nome.
@@ -22,12 +22,12 @@ Um novo evento é cadastrado criando fazendo um pull request de um arquivo com o
   time: 09:00 - 18:30 # Formato HH:mm Se não souber ainda, coloque "Não definido".
   location: BarraShoppingSul # O nome do lugar.
   address: Av. Diário de Notícias, 300, bairro Cristal, Porto Alegre/RS # O endereço do lugar.
-  
+
   # dados opcionais - se não for informar, apague a linha
   price: 180 # Valor sem centavos. Para evento gratuito, apague essa linha. Para vários valores (lotes), separe por vírgula: 180, 240, 300.
   url: http://sitedoevento.com.br/ # URL do site do evento
   img: http://sitedoevento.com.br/logo.png # URL da imagem do evento. Procure colocar uma imagem de no máximo 50kb.
-  description: Descrição do evento. Um pequeno parágrafo livre. Pode-se colocar mais links em HTML, escapando as aspas: href=\"...\".
+  description: Descrição do evento. Um pequeno parágrafo livre. Pode-se colocar mais links em HTML.
   tags: tag1, tag2, tag3, tag4 # Procure colocar no máximo umas 5, 6 tags, com texto em minúsculo.
   ```
 

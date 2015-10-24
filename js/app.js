@@ -68,6 +68,7 @@ var app = function(_, $) {
       strings
     */
     split: function(str, c) {
+      str = '' + str;
       return str.replace(/ /g, '').split(c || ',');
     },
 
@@ -144,7 +145,7 @@ var app = function(_, $) {
   };
 
   Evt.prototype.parseTags = function(str) {
-    this.tagArray = str.length ? util.split(str) : [];
+    this.tagArray = str && str.length ? util.split(str) : [];
   };
 
   Evt.prototype.init = function(data) {
@@ -234,7 +235,7 @@ var app = function(_, $) {
       this.$els.list.hide();
       if (evts.length) {
         this.$els.list.html(_.reduce(evts, _.bind(function(acc, evt) {
-          return acc += this.templates.evt(evt);
+          return acc += this.templates.evt({evt: evt});
         }, this), ''));
         lazyLoader && lazyLoader._destroy();
         lazyLoader = new Layzr();

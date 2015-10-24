@@ -5,5 +5,5 @@ location: PUC - Prédio 32
 address: Av. Ipiranga, 6681 - Partenon, Porto Alegre-RS
 price: 0
 url: https://msevents.microsoft.com/CUI/EventDetail.aspx?EventID=1032678838&Culture=pt-BR&community=0
-description: Evento sobre interoperabilidade com produtos da Microsoft. Mais informações sobre as trilhas de <a target=\"_blank\" href=\"https://msevents.microsoft.com/CUI/EventDetail.aspx?EventID=1032678838&Culture=pt-BR&community=0\">Dev</a> e <a target=\"_blank\" href=\"https://msevents.microsoft.com/CUI/EventDetail.aspx?EventID=1032678845&Culture=pt-BR&community=0\">Infra</a>.
+description: Evento sobre interoperabilidade com produtos da Microsoft. Mais informações sobre as trilhas de <a target="_blank" href="https://msevents.microsoft.com/CUI/EventDetail.aspx?EventID=1032678838&Culture=pt-BR&community=0">Dev</a> e <a target="_blank" href="https://msevents.microsoft.com/CUI/EventDetail.aspx?EventID=1032678845&Culture=pt-BR&community=0">Infra</a>.
 tags: microsoft, windows, azure
