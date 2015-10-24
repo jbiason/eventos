@@ -299,7 +299,7 @@ var app = function(_, $) {
         .done(_.bind(function() {
           yearsView.init();
           evtsView.init();
-          this.filterEvts(); // apply initial filter by year
+          this.filterEvts(true); // apply initial filter by year
         }, this))
         .fail(function() {
           evtsView.renderError();
@@ -315,7 +315,7 @@ var app = function(_, $) {
       return model.getYears();
     },
 
-    filterEvts: function() {
+    filterEvts: function(forceRender) {
       var filter = {
         query: evtsView.getQuery(),
         year: yearsView.getYear()
@@ -326,7 +326,7 @@ var app = function(_, $) {
       var after = model.getFilteredEvts();
 
       var didChange = !util.compareArrays(before, after);
-      if (didChange) {
+      if (forceRender || didChange) {
         evtsView.render();
       }
     }
