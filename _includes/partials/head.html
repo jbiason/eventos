@@ -9,9 +9,9 @@
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
 
   <style type="text/css">
-    {% capture include_to_scssify %}
-      {% include main.scss %}
+    {% capture inline_scss %}
+      {% include inline.scss %}
     {% endcapture %}
-    {{ include_to_scssify | scssify }}
+    {{ inline_scss | scssify }}
   </style>
 </head>
