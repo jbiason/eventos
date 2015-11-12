@@ -8,6 +8,7 @@
 
 body {
   font-family: Arial, sans-serif;
+  background-color: #e6e6e7;
 }
 
 img {
@@ -34,29 +35,41 @@ h1 {
 }
 
 .ev-header {
-  background: #a36966;
-  background: -moz-radial-gradient(center, ellipse cover, #a36966 0%, #321c28 100%);
-  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #a36966), color-stop(100%, #321c28));
-  background: -webkit-radial-gradient(center, ellipse cover, #a36966 0%, #321c28 100%);
-  background: -o-radial-gradient(center, ellipse cover, #a36966 0%, #321c28 100%);
-  background: -ms-radial-gradient(center, ellipse cover, #a36966 0%, #321c28 100%);
-  background: radial-gradient(ellipse at center, #a36966 0%, #321c28 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a36966', endColorstr='#321c28', GradientType=1 );
+  background-image: url("img/ev-bg.jpg");
   background-position: center top;
   background-size: cover;
   text-align: center;
-  padding: 70px 0;
+  padding: 90px 0 60px;
+  border-bottom: 1px solid #fff;
 
-  &__title {
-   font-size: 36px;
+  .ev-header__title {
+   font-size: 65px;
    color: #fff;
    text-transform: uppercase;
+
+   span {
+    color: #e8ae4c;
+   }
   }
 
-  &__title--bottom {
-    font-size: 18px;
-    color: #fff;
-    padding: 20px;
+  .ev-header__brand {
+    position: absolute;
+    left: 50%;
+    top: 30px;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    transform: translateX(-50%);
+  }
+}
+
+.ev-page-header {
+  text-align: center;
+  
+  .ev-header__title--bottom {
+    text-transform: uppercase;
+    font-size: 14px;
+    color: #444;
+    padding: 30px 0 20px;
   }
 
   .ev-header__search {
@@ -74,6 +87,7 @@ h1 {
   padding: 40px;
   margin: 25px 0;
   border: 1px solid #ddd;
+  background-color: #fff;
   width: 100%;
   transition: all 0.4s ease;
   position: relative;
