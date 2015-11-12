@@ -133,7 +133,7 @@ var app = function(_, $) {
 
   Evt.prototype.parsePrices = function(str) {
     if (!str) {
-      this.formattedPrices = textConstants.FREE;
+      this.formattedPrices = textConstants.UNDEFINED;
       return;
     }
     this.formattedPrices = _.map(util.split(str), function(item) {

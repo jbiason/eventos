@@ -24,7 +24,7 @@ Um novo evento é cadastrado criando fazendo um pull request de um arquivo com o
   address: Av. Diário de Notícias, 300, bairro Cristal, Porto Alegre/RS # O endereço do lugar.
 
   # dados opcionais - se não for informar, apague a linha
-  price: 180 # Valor sem centavos. Para evento gratuito, apague essa linha. Para vários valores (lotes), separe por vírgula: 180, 240, 300.
+  price: 180 # Valor sem centavos. Para evento gratuito, informe 0. Para vários valores (lotes), separe por vírgula: 180, 240, 300. Se não souber ainda, não informe.
   url: http://sitedoevento.com.br/ # URL do site do evento
   img: http://sitedoevento.com.br/logo.png # URL da imagem do evento. Procure colocar uma imagem de no máximo 50kb.
   description: Descrição do evento. Um pequeno parágrafo livre. Pode-se colocar mais links em HTML.
