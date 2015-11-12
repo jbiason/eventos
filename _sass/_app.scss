@@ -7,7 +7,7 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Montserrat', sans-serif;
   background-color: #e6e6e7;
 }
 
@@ -35,8 +35,7 @@ h1 {
 }
 
 .ev-header {
-  background-image: url("img/ev-bg.jpg");
-  background-position: center top;
+  background: #2a2a2b url("img/ev-bg.jpg") center top no-repeat;
   background-size: cover;
   text-align: center;
   padding: 90px 0 60px;
