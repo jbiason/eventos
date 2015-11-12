@@ -85,7 +85,7 @@ input {
   color: rgba(0, 0, 0, 0.80); /* rgba supported */
   border: 1px solid #999;  /*IE 6/7/8*/
   border: none rgba(0, 0, 0, 0);  /*IE9 + everything else*/
-  background-color: #E6E6E6;
+  background-color: #fff;
   text-decoration: none;
   border-radius: 2px;
   padding: 15px 30px;
@@ -177,6 +177,15 @@ a.pure-button-selected {
   -webkit-transform: translateY(-50%);
   -moz-transform: translateY(-50%);
   transform: translateY(-50%);
+
+  @media (max-width: 1170px) {
+    position: absolute;
+    top: 17px;
+    left: 10px;
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    transform: translateY(0);
+  }
 }
 
 .ev-msg {
@@ -187,4 +196,11 @@ a.pure-button-selected {
   text-align: center;
   font-size: 16px;
   color: #666;
+}
+
+.ribbon {
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
