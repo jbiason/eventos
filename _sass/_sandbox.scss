@@ -177,6 +177,15 @@ a.pure-button-selected {
   -webkit-transform: translateY(-50%);
   -moz-transform: translateY(-50%);
   transform: translateY(-50%);
+
+  @media (max-width: 1024px) {
+    position: absolute;
+    top: 17px;
+    left: 10px;
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    transform: translateY(0);
+  }
 }
 
 .ev-msg {
@@ -187,4 +196,11 @@ a.pure-button-selected {
   text-align: center;
   font-size: 16px;
   color: #666;
+}
+
+.ribbon {
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
