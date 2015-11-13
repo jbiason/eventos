@@ -1,0 +1,13 @@
+# dados obrigatórios
+name: TestTalks # São colocar o ano do evento no nome.
+date: 08/12/2015 # Formato dd/MM/yyyy. Para vários dias, separe por vírgula: 28/01/2015, 29/01/2015. Se não souber ainda, coloque "Não definido".
+time: 13:00 - 18:00 # Formato HH:mm Se não souber ainda, coloque "Não definido".
+location: Macro Office # O nome do lugar.
+address: R. Piauí, 183/193 - Porto Alegre - RS # O endereço do lugar.
+
+# dados opcionais - se não for informar, apague a linha
+price: 0 # Valor sem centavos. Para evento gratuito, informe 0. Para vários valores (lotes), separe por vírgula: 180, 240, 300. Se não souber ainda, não informe.
+url: https://cwi.typeform.com/to/iGRNKX # URL do site do evento
+img: http://news.cwi.com.br/equiperenner/testtalks.png # URL da imagem do evento. Procure colocar uma imagem de no máximo 50kb.
+description: Evento interno CWI que promove a troca de conhecimentos e experiências sobre Testes de Software.
+tags: testes, cwi # Procure colocar no máximo umas 5, 6 tags, com texto em minúsculo.
