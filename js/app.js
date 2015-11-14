@@ -108,6 +108,15 @@ var app = function(_, $) {
 
     currentYear: function() {
       return (new Date()).getFullYear();
+    },
+
+    isPast: function(date) {
+      var today = new Date();
+      today.setHours(0);
+      today.setMinutes(0);
+      today.setSeconds(0);
+      today.setMilliseconds(0);
+      return date.valueOf() < today.valueOf();
     }
   };
 
@@ -263,7 +272,7 @@ var app = function(_, $) {
       this.$els.list.hide();
       if (evts.length) {
         this.$els.list.html(_.reduce(evts, _.bind(function(acc, evt) {
-          return acc += this.templates.evt({evt: evt});
+          return acc += this.templates.evt({evt: evt, past: util.isPast(evt.dates[evt.dates.length - 1])});
         }, this), ''));
         lazyLoader && lazyLoader._destroy();
         lazyLoader = new Layzr();

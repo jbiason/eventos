@@ -82,7 +82,7 @@ h1 {
 
 .ev-page-header {
   text-align: center;
-  
+
   .ev-header__title--bottom {
     text-transform: uppercase;
     font-size: 14px;
@@ -120,6 +120,14 @@ h1 {
   &__time,
   &__location {
     padding-bottom: 20px;
+  }
+
+  &.past {
+    opacity: 0.4;
+
+    &:hover {
+      opacity: 1;
+    }
   }
 
   &__title {
