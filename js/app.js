@@ -132,16 +132,19 @@ var app = function(_, $) {
   };
 
   Evt.prototype.parsePrices = function(str) {
-    if (!str) {
+    if (str === undefined) {
       this.formattedPrices = textConstants.UNDEFINED;
       return;
     }
-    this.formattedPrices = _.map(util.split(str), function(item) {
-      if (isNaN(parseInt(item))) {
-        return textConstants.UNDEFINED;
+    this.formattedPrices = _.filter(_.map(util.split(str), function(item) {
+      var price = parseInt(item);
+      if (isNaN(price)) {
+        return undefined;
       }
-      return item === '0' ? textConstants.FREE : util.formatCurrency(item);
-    }).join(' - ');
+      return price === 0 ? textConstants.FREE : util.formatCurrency(price);
+    }, function(item) {
+      return item !== undefined;
+    })).join(' - ');
   };
 
   Evt.prototype.parseTags = function(str) {
