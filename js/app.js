@@ -122,21 +122,12 @@ var app = function(_, $) {
     return this.dates[0].getFullYear();
   };
 
-  Evt.prototype.parseDates = function(str) {
-    this.dates = _.map(util.split(str), function(each) {
-      return util.dateFromStr(each);
-    });
-    this.formattedDates = _.map(this.dates, function(item) {
-      return util.formatDate(item);
-    }).join(' - ');
-  };
-
-  Evt.prototype.parsePrices = function(str) {
-    if (str === undefined) {
+  Evt.prototype.parsePrices = function(value) {
+    if (value === undefined) {
       this.formattedPrices = textConstants.UNDEFINED;
       return;
     }
-    this.formattedPrices = _.filter(_.map(util.split(str), function(item) {
+    this.formattedPrices = _.filter(_.map(util.split(value), function(item) {
       var price = parseInt(item);
       if (isNaN(price)) {
         return undefined;
@@ -147,14 +138,46 @@ var app = function(_, $) {
     })).join(' - ');
   };
 
-  Evt.prototype.parseTags = function(str) {
-    this.tagArray = str && str.length ? util.split(str) : [];
+  Evt.prototype.parseDates = function(value) {
+    this.dates = _.filter(_.map(util.split(value), function(each) {
+      return util.dateFromStr(each);
+    }), function(item) {
+      return !isNaN(item.valueOf());
+    });
+
+    if (this.dates.length === 0) {
+      this.dates = this.formattedDates = undefined;
+      return;
+    }
+
+    this.formattedDates = _.map(this.dates, function(item) {
+      return util.formatDate(item);
+    }).join(' - ');
+  };
+
+  Evt.prototype.parseTime = function(value) {
+    this.formattedTime = value || textConstants.UNDEFINED;
+  };
+
+  Evt.prototype.parseLocation = function(value) {
+    this.formattedLocation = value || textConstants.UNDEFINED;
+  };
+
+  Evt.prototype.parseAddress = function(value) {
+    this.formattedAddress = value || textConstants.UNDEFINED;
+  };
+
+  Evt.prototype.parseTags = function(value) {
+    this.tagArray = (value && value.length) ? util.split(value) : [];
   };
 
   Evt.prototype.init = function(data) {
     _.extend(this, data);
-    this.parseDates(data.date);
     this.parsePrices(data.price);
+    this.parseDates(data.date);
+    this.parseTime(data.time);
+    this.parseLocation(data.location);
+    this.parseAddress(data.address);
     this.parseTags(data.tags);
   };
 
@@ -171,7 +194,9 @@ var app = function(_, $) {
           var evts = _.map(data, function(evt) {
             return new Evt(evt);
           });
-          this.evts = this.filteredEvts = _.sortBy(evts, function(item) {
+          this.evts = this.filteredEvts = _.sortBy(_.filter(evts, function(item) {
+            return item.name !== undefined && item.dates !== undefined;
+          }), function(item) {
             return -item.dates[0].valueOf();
           });
         }, this))

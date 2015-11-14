@@ -4,7 +4,7 @@
       <div class="ev-event__title"><%= evt.name %></div>
 
       <% if (evt.description) { %>
-      <div class="ev-event__description"><span class="ev-event__label">Descrição do evento:</span><%= evt.description %></div>
+        <div class="ev-event__description"><span class="ev-event__label">Descrição do evento:</span><%= evt.description %></div>
       <% } %>
 
       <div class="u-row">
@@ -15,17 +15,16 @@
           <div class="ev-event__date"><span class="ev-event__label">Data:</span><%= evt.formattedDates %></div>
         </div>
         <div class="u-col">
-          <div class="ev-event__time"><span class="ev-event__label">Horário:</span><%= evt.time %></div>
+          <div class="ev-event__time"><span class="ev-event__label">Horário:</span><%= evt.formattedTime %></div>
         </div>
       </div>
       <div class="ev-event__location">
         <span class="ev-event__label">Local:</span>
-        <%= evt.location %>
+        <%= evt.formattedLocation %>
         <br/>
-        <%= evt.address %>
+        <%= evt.formattedAddress %>
       </div>
 
-      <!-- TODO start -->
       <% if (evt.url) { %>
         <div class="">
           <a href="<%= evt.url %>" target="_blank">+ Site do evento</a>
@@ -41,7 +40,6 @@
           </ul>
         </div>
       <% } %>
-      <!-- TODO end -->
     </div>
 
     <% if (evt.img) { %>
