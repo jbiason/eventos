@@ -247,29 +247,14 @@ var app = function(_, $) {
     },
 
     $els: {
-      list:   $('[data-js="evt-list"]'),
-      search: $('[data-js="evt-search"]')
+      list:   $('[data-js="evt-list"]')
     },
 
-    init: function(evts) {
-      this.bindEvents();
-    },
-
-    bindEvents: function() {
-      this.$els.search.on('keyup paste', _.debounce(_.bind(this.search, this), 100));
-    },
-
-    getQuery: function() {
-      return this.$els.search.val();
-    },
-
-    search: function() {
-      controller.filterEvts();
-    },
+    init: _.noop,
 
     render: function() {
       var evts = controller.getEvts();
-      this.$els.list.hide();
+      this.$els.list.hide().empty();
       if (evts.length) {
         this.$els.list.html(_.reduce(evts, _.bind(function(acc, evt) {
           return acc += this.templates.evt({evt: evt, past: util.isPast(evt.dates[evt.dates.length - 1])});
@@ -287,23 +272,33 @@ var app = function(_, $) {
     }
   };
 
-  var yearsView = {
+  var filterView = {
     templates: {
       year: _.template($('[data-js="template-year"]').html())
     },
 
     $els: {
-      list: $('[data-js="year-list"]')
+      years: $('[data-js="year-list"]'),
+      search: $('[data-js="evt-search"]')
     },
 
     init: function(evts) {
       this.year = util.currentYear()
-      this.render();
+      this.renderYears();
+      this.bindEvents();
+    },
+
+    bindEvents: function() {
+      this.$els.search.on('keyup paste', _.debounce(_.bind(this.search, this), 100));
+    },
+
+    search: function() {
+      controller.filterEvts();
     },
 
     selectYear: function(e) {
       this.year = $(e.currentTarget).data('year');
-      this.render();
+      this.renderYears();
       controller.filterEvts();
     },
 
@@ -311,7 +306,11 @@ var app = function(_, $) {
       return this.year;
     },
 
-    render: function() {
+    getQuery: function() {
+      return this.$els.search.val();
+    },
+
+    renderYears: function() {
       var selectedYear = this.getYear();
       var years = _.map(controller.getYears(), _.bind(function(item) {
         return {
@@ -319,12 +318,12 @@ var app = function(_, $) {
           selected: item === selectedYear
         };
       }, this));
-      this.$els.list.hide();
-      this.$els.list.html(_.reduce(years, _.bind(function(acc, item) {
+      this.$els.years.hide().empty();
+      this.$els.years.html(_.reduce(years, _.bind(function(acc, item) {
         return acc += this.templates.year(item);
       }, this), ''));
-      this.$els.list.fadeIn();
-      this.$els.list.find('[data-js="year-button"]').on('click', _.bind(this.selectYear, this));
+      this.$els.years.fadeIn();
+      this.$els.years.find('[data-js="year-button"]').on('click', _.bind(this.selectYear, this));
     }
   };
 
@@ -335,7 +334,7 @@ var app = function(_, $) {
     init: function() {
       model.init()
         .done(_.bind(function() {
-          yearsView.init();
+          filterView.init();
           evtsView.init();
           this.filterEvts(true); // apply initial filter by year
         }, this))
@@ -355,8 +354,8 @@ var app = function(_, $) {
 
     filterEvts: function(forceRender) {
       var filter = {
-        query: evtsView.getQuery(),
-        year: yearsView.getYear()
+        query: filterView.getQuery(),
+        year: filterView.getYear()
       };
 
       var before = model.getFilteredEvts();
