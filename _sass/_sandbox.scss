@@ -187,20 +187,3 @@ a.pure-button-selected {
     transform: translateY(0);
   }
 }
-
-.ev-msg {
-  padding: 30px;
-  margin: 30px 0;
-  background-color: rgba(0,0,0,0.05);
-  border: 1px solid #ddd;
-  text-align: center;
-  font-size: 16px;
-  color: #666;
-}
-
-.ribbon {
-
-  @media (max-width: 768px) {
-    display: none;
-  }
-}

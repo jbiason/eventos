@@ -128,7 +128,21 @@ var app = function(_, $) {
   };
 
   Evt.prototype.getYear = function() {
-    return this.dates[0].getFullYear();
+    if (this.year !== undefined) {
+      return this.year;
+    }
+    this.year = this.dates[0].getFullYear();
+    return this.year;
+  };
+
+  Evt.prototype.getType = function() {
+    return this.type;
+  };
+
+  Evt.prototype.initType = function() {
+    var type = parseInt(this.type);
+    isNaN(type) && (type = 0);
+    this.type = type;
   };
 
   Evt.prototype.parsePrices = function(value) {
@@ -182,6 +196,7 @@ var app = function(_, $) {
 
   Evt.prototype.init = function(data) {
     _.extend(this, data);
+    this.initType(data.type);
     this.parsePrices(data.price);
     this.parseDates(data.date);
     this.parseTime(data.time);
@@ -213,12 +228,22 @@ var app = function(_, $) {
     },
 
     getYears: function() {
-      var currentYear = util.currentYear();
-      return _.sortBy(_.uniq(_.map(this.evts, function(item) {
+      if (this.years) {
+        return this.years;
+      }
+      this.years = _.sortBy(_.uniq(_.map(this.evts, function(item) {
         return item.getYear();
       })), function(item) {
         return -item; // descending sort
       });
+      return this.years;
+    },
+
+    getTypes: function() {
+      return [
+        {type: 0, text: 'Externo'},
+        {type: 1, text: 'Interno'}
+      ];
     },
 
     getFilteredEvts: function() {
@@ -226,10 +251,13 @@ var app = function(_, $) {
     },
 
     filterEvts: function(filter) {
-      var query = filter.query;
+      var type = filter.type;
       var year = filter.year;
+      var query = filter.query;
       this.filteredEvts = _.filter(this.evts, function(evt) {
-        return evt.getYear() === year && (util.matchSearch(query, evt.name) || _.any(evt.tagArray, function(tag) {
+        return (evt.getType() === type)
+            && (evt.getYear() === year)
+            && (util.matchSearch(query, evt.name) || _.any(evt.tagArray, function(tag) {
           return util.matchSearch(query, tag);
         }));
       });
@@ -247,29 +275,14 @@ var app = function(_, $) {
     },
 
     $els: {
-      list:   $('[data-js="evt-list"]'),
-      search: $('[data-js="evt-search"]')
+      list:   $('[data-js="evt-list"]')
     },
 
-    init: function(evts) {
-      this.bindEvents();
-    },
-
-    bindEvents: function() {
-      this.$els.search.on('keyup paste', _.debounce(_.bind(this.search, this), 100));
-    },
-
-    getQuery: function() {
-      return this.$els.search.val();
-    },
-
-    search: function() {
-      controller.filterEvts();
-    },
+    init: _.noop,
 
     render: function() {
       var evts = controller.getEvts();
-      this.$els.list.hide();
+      this.$els.list.hide().empty();
       if (evts.length) {
         this.$els.list.html(_.reduce(evts, _.bind(function(acc, evt) {
           return acc += this.templates.evt({evt: evt, past: util.isPast(evt.dates[evt.dates.length - 1])});
@@ -287,31 +300,59 @@ var app = function(_, $) {
     }
   };
 
-  var yearsView = {
+  var filterView = {
     templates: {
-      year: _.template($('[data-js="template-year"]').html())
+      year: _.template($('[data-js="template-year"]').html()),
+      type: _.template($('[data-js="template-type"]').html()),
+      search: _.template($('[data-js="template-search"]').html())
     },
 
     $els: {
-      list: $('[data-js="year-list"]')
+      years: $('[data-js="year-list"]'),
+      types: $('[data-js="type-list"]'),
+      search: $('[data-js="search"]')
     },
 
     init: function(evts) {
-      this.year = util.currentYear()
-      this.render();
+      // init values
+      this.search = '';
+      this.year = util.currentYear();
+      this.type = controller.getTypes()[0].type;
+      // render filters
+      this.renderSearch();
+      this.renderTypes();
+      this.renderYears();
     },
 
-    selectYear: function(e) {
-      this.year = $(e.currentTarget).data('year');
-      this.render();
+    // search
+    getSearch: function() {
+      return this.search;
+    },
+
+    doSearch: function(e) {
+      this.search = $(e.target).val();
       controller.filterEvts();
     },
 
+    renderSearch: function() {
+      this.$els.search.hide().empty();
+      this.$els.search.html(this.templates.search());
+      this.$els.search.fadeIn(100);
+      this.$els.search.find('input').on('keyup paste', _.debounce(_.bind(this.doSearch, this), 100));
+    },
+
+    // year
     getYear: function() {
       return this.year;
     },
 
-    render: function() {
+    selectYear: function(e) {
+      this.year = $(e.currentTarget).data('year');
+      this.renderYears();
+      controller.filterEvts();
+    },
+
+    renderYears: function() {
       var selectedYear = this.getYear();
       var years = _.map(controller.getYears(), _.bind(function(item) {
         return {
@@ -319,13 +360,43 @@ var app = function(_, $) {
           selected: item === selectedYear
         };
       }, this));
-      this.$els.list.hide();
-      this.$els.list.html(_.reduce(years, _.bind(function(acc, item) {
+      this.$els.years.hide().empty();
+      this.$els.years.html(_.reduce(years, _.bind(function(acc, item) {
         return acc += this.templates.year(item);
       }, this), ''));
-      this.$els.list.fadeIn();
-      this.$els.list.find('[data-js="year-button"]').on('click', _.bind(this.selectYear, this));
+      this.$els.years.fadeIn(100);
+      this.$els.years.find('[data-js="year-button"]').on('click', _.bind(this.selectYear, this));
+    },
+
+    // type
+    getType: function() {
+      return this.type;
+    },
+
+    selectType: function(e) {
+      this.type = $(e.currentTarget).data('type');
+      this.renderTypes();
+      controller.filterEvts();
+    },
+
+    renderTypes: function() {
+      var selectedType = this.getType();
+      var types = _.map(controller.getTypes(), _.bind(function(item) {
+        return {
+          type: item.type,
+          text: item.text,
+          selected: item.type === selectedType
+        };
+      }, this));
+
+      this.$els.types.hide().empty();
+      this.$els.types.html(_.reduce(types, _.bind(function(acc, item) {
+        return acc += this.templates.type(item);
+      }, this), ''));
+      this.$els.types.fadeIn(100);
+      this.$els.types.find('[data-js="type-select"]').on('click', _.bind(this.selectType, this));
     }
+
   };
 
   /*
@@ -335,7 +406,7 @@ var app = function(_, $) {
     init: function() {
       model.init()
         .done(_.bind(function() {
-          yearsView.init();
+          filterView.init();
           evtsView.init();
           this.filterEvts(true); // apply initial filter by year
         }, this))
@@ -353,10 +424,15 @@ var app = function(_, $) {
       return model.getYears();
     },
 
+    getTypes: function() {
+      return model.getTypes();
+    },
+
     filterEvts: function(forceRender) {
       var filter = {
-        query: evtsView.getQuery(),
-        year: yearsView.getYear()
+        query: filterView.getSearch(),
+        year: filterView.getYear(),
+        type: filterView.getType()
       };
 
       var before = model.getFilteredEvts();
