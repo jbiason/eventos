@@ -1,0 +1,13 @@
+# dados obrigatórios
+name: Front in Poa
+date: 05/12/2015
+time: Não definido
+location: Auditório do Senac
+address: Rua Cel. Genuíno, 130 Porto Alegre
+
+# dados opcionais - se não for informar, apague a linha
+price: 75, 100
+url: http://frontinpoa.com.br/2015/
+img: http://www.eventododia.com.br/wp-content/uploads/2014/09/Front2014-600x350.png
+description: Este evento é obrigatório para todo o profissional que se preocupa com a experiência do usuário. Seja você atendimento, publicitário, designer gráfico ou programador, temos a certeza de que você irá aproveitar e aprender algo novo.
+tags: frontend
