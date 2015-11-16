@@ -36,7 +36,7 @@ Um novo evento é cadastrado criando fazendo um pull request de um arquivo com o
 
 1. **Selecione a opção** *Create a new branch*, coloque o nome do evento (mesmo nome do arquivo, sem extensão) e clique em *Propose new file*. Na próxima página, confirme a criação do pull request. ![screen shot 2015-09-13 at 1 19 29 am](https://cloud.githubusercontent.com/assets/4842605/9835221/8647fc94-59b5-11e5-9081-1ad8d55c7689.png)
 
-1. **Feito!** Seu pull request foi submetido! Peça para algum outro membro da organization CWI Software revisar e aprovar, e após isso o evento já estará disponível no site.
+1. **Feito!** Seu pull request foi submetido! Peça para algum outro membro da organization CWI Software revisar e aprovar, e após isso o evento já estará disponível no site. **Não faça o merge você mesmo, espere algum moderador fazer.**
 
 ## Observações
 
