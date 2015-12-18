@@ -1,0 +1,16 @@
+# ATENÇÃO:
+# - `name` e `date` são obrigatórios
+# - se não souber algum dado, apague a linha
+# - apague os comentários (tudo que tem um `#` na frente)
+
+name: QCon São Paulo
+date: 28/03/2016,29/03/2016,30/03/2016,31/03/2016,01/04/2016 
+time: 08:00 - 18:00
+type: 0 
+location: World Trade Center São Paulo 
+address: Avenida das Nações Unidas, 12551, Brooklin Novo, São Paulo 
+price: 995, 1195, 1295, 1395, 1495, 1595, 1695, 1895
+url: http://qconsp.com/
+img: http://qconsp.com/sites/all/themes/qconbs/images/logo2x.png
+description: Conferência Internacional de Desenvolvimento de Software
+tags: arquitetura, bigdata, processo, IoT, Desenvolvimento
