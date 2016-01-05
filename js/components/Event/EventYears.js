@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-export default ({events, selectYear}) => {
+export default ({events, selectedYear, selectYear}) => {
   let getYears = (events) => {
     // uniq
     let obj = {};
@@ -16,10 +16,10 @@ export default ({events, selectYear}) => {
   let yearsButtons = getYears(events).map((year, index) => {
     return (
       <div key={index}>
-        <button className="pure-button" type="button" onClick={() => selectYear(year)}>{year}</button>
+        <button className={"pure-button " + (selectedYear === year ? 'pure-button-disabled' : '')} type="button" onClick={() => selectYear(year)}>{year}</button>
       </div>
     )
-  })
+  });
 
   return (
     <div className="year-list">

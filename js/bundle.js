@@ -19701,9 +19701,9 @@
 
 	var _EventService = __webpack_require__(161);
 
-	var _EventYears = __webpack_require__(180);
+	var _EventFilter = __webpack_require__(183);
 
-	var _EventYears2 = _interopRequireDefault(_EventYears);
+	var _EventFilter2 = _interopRequireDefault(_EventFilter);
 
 	var _EventList = __webpack_require__(181);
 
@@ -19712,6 +19712,10 @@
 	var _util = __webpack_require__(179);
 
 	var _util2 = _interopRequireDefault(_util);
+
+	var _doesMatch = __webpack_require__(185);
+
+	var _doesMatch2 = _interopRequireDefault(_doesMatch);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -19731,6 +19735,7 @@
 
 	    _this.state = {
 	      events: [],
+	      query: '',
 	      filteredEvents: [],
 	      selectedYear: _util2.default.currentYear()
 	    };
@@ -19754,9 +19759,21 @@
 	      var _this3 = this;
 
 	      var events = this.state.events;
+	      var query = this.state.query;
 	      var filteredEvents = events.filter(function (event) {
 	        return event.formattedYear === _this3.state.selectedYear;
 	      });
+
+	      if (query) {
+	        filteredEvents = filteredEvents.filter(function (event) {
+	          return !!(0, _doesMatch2.default)(event.name, query);
+	        });
+	      } else {
+	        events.forEach(function (event) {
+	          delete event.relevance;
+	          delete event.highlightedName;
+	        });
+	      }
 
 	      this.setState({
 	        filteredEvents: filteredEvents
@@ -19770,6 +19787,14 @@
 	      }, this.filterEvents);
 	    }
 	  }, {
+	    key: 'changeSearch',
+	    value: function changeSearch(e) {
+	      var query = e.target.value;
+	      this.setState({
+	        query: query
+	      }, this.filterEvents);
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var _this4 = this;
@@ -19777,9 +19802,17 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'ev-container' },
-	        _react2.default.createElement(_EventYears2.default, { events: this.state.events, selectYear: function selectYear(e) {
+	        _react2.default.createElement(_EventFilter2.default, {
+	          events: this.state.events,
+	          query: this.state.query,
+	          selectedYear: this.state.selectedYear,
+	          selectYear: function selectYear(e) {
 	            return _this4.selectYear(e);
-	          } }),
+	          },
+	          changeSearch: function changeSearch(e) {
+	            return _this4.changeSearch(e);
+	          }
+	        }),
 	        _react2.default.createElement(_EventList2.default, { events: this.state.filteredEvents })
 	      );
 	    }
@@ -19852,6 +19885,10 @@
 	  return formatDateArray(dateStr)[0].getFullYear();
 	}
 
+	function formatIsPast(dateStr) {
+	  return _util2.default.isPast(formatDateArray(dateStr)[0]);
+	}
+
 	function formatTime() {
 	  var timeStr = arguments.length <= 0 || arguments[0] === undefined ? textConstants.UNDEFINED : arguments[0];
 
@@ -19882,6 +19919,7 @@
 	  event.formattedDate = formatDate(event.date);
 	  event.formattedDateArray = formatDateArray(event.date);
 	  event.formattedYear = formatYear(event.date);
+	  event.formattedIsPast = formatIsPast(event.date);
 	  event.formattedTime = formatTime(event.time);
 	  event.formattedLocation = formatLocation(event.location);
 	  event.formattedAddress = formatAddress(event.address);
@@ -19893,7 +19931,6 @@
 	  return _axios2.default.get('./events.json').then(function (_ref) {
 	    var data = _ref.data;
 
-	    console.log('data', data.map(prepareEventData));
 	    return data.map(prepareEventData);
 	  });
 	}
@@ -21066,6 +21103,7 @@
 
 	exports.default = function (_ref) {
 	  var events = _ref.events;
+	  var selectedYear = _ref.selectedYear;
 	  var selectYear = _ref.selectYear;
 
 	  var getYears = function getYears(events) {
@@ -21091,7 +21129,7 @@
 	      { key: index },
 	      _react2.default.createElement(
 	        'button',
-	        { className: 'pure-button', type: 'button', onClick: function onClick() {
+	        { className: "pure-button " + (selectedYear === year ? 'pure-button-disabled' : ''), type: 'button', onClick: function onClick() {
 	            return selectYear(year);
 	          } },
 	        year
@@ -21179,7 +21217,7 @@
 
 	  return _react2.default.createElement(
 	    'div',
-	    { className: 'ev-event {past ? \'past\' : \'\'}' },
+	    { className: "ev-event " + (event.formattedIsPast ? 'past' : '') },
 	    _react2.default.createElement(
 	      'div',
 	      { className: 'ev-event__col ev-event__col--info' },
@@ -21282,6 +21320,362 @@
 	    )
 	  );
 	};
+
+/***/ },
+/* 183 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(158);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	var _EventYears = __webpack_require__(180);
+
+	var _EventYears2 = _interopRequireDefault(_EventYears);
+
+	var _EventSearch = __webpack_require__(184);
+
+	var _EventSearch2 = _interopRequireDefault(_EventSearch);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = function (_ref) {
+	  var events = _ref.events;
+	  var query = _ref.query;
+	  var selectedYear = _ref.selectedYear;
+	  var selectYear = _ref.selectYear;
+	  var changeSearch = _ref.changeSearch;
+
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'ev-page-header' },
+	    _react2.default.createElement(_EventYears2.default, { events: events, selectedYear: selectedYear, selectYear: selectYear }),
+	    _react2.default.createElement(_EventSearch2.default, { query: query, changeSearch: changeSearch })
+	  );
+	};
+
+	// <div class="ev-select-group" data-js="type-list"></div>
+
+/***/ },
+/* 184 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(158);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = function (_ref) {
+	  var query = _ref.query;
+	  var changeSearch = _ref.changeSearch;
+
+	  return _react2.default.createElement('input', {
+	    type: 'text',
+	    className: 'ev-header__search',
+	    'data-js': 'search-input',
+	    placeholder: 'Pesquise por nome ou tag',
+	    defaultValue: query,
+	    onChange: changeSearch,
+	    autofocus: true
+	  });
+	};
+
+/***/ },
+/* 185 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(global) {(function(factory) {
+	  // establish the root object
+	  var root = (typeof self == 'object' && self.self == self && self) ||
+	            (typeof global == 'object' && global.global == global && global);
+
+	  // node.js/commonjs
+	  if (true) {
+	    module.exports = factory(root);
+	  // browser global
+	  } else {
+	    root.doesMatch = factory(root);
+	  }
+
+	}(function(root) {
+	  /*
+	    helpers
+	  */
+	  var Range = function(start, end) {
+	    this.start = start;
+	    this.end = end;
+	  };
+
+	  var MULTIPLIERS = {
+	    MATCH_WHOLE: 4,
+	    MATCH_WORD: 2
+	  };
+
+	  var replaceDiacritics = function(c) {
+	    if ('àáãâ'.indexOf(c)>-1) return 'a';
+	    if ('èéê'.indexOf(c)>-1) return 'e';
+	    if ('ìíî'.indexOf(c)>-1) return 'i';
+	    if ('òóô'.indexOf(c)>-1) return 'o';
+	    if ('ùúû'.indexOf(c)>-1) return 'u';
+	    if ('ç'.indexOf(c)>-1) return 'c';
+	    if ('ñ'.indexOf(c)>-1) return 'n';
+	    return c;
+	  };
+
+	  var prepareString = function(string, options) {
+	    string = string.toLowerCase();
+	    if (!options.replaceDiacritics) {
+	      return string;
+	    }
+	    return string.split('').map(replaceDiacritics).join('');
+	  };
+
+	  /*
+	    validation
+	  */
+	  var validation = function() {
+	    var proto = {
+	      text: function(text) {
+	        if (!isString(text)) {
+	          throw new Error('`text`: expected string');
+	        }
+	      },
+	      query: function(query) {
+	        if (!isString(query)) {
+	          throw new Error('`query`: expected string');
+	        }
+	      },
+	      options: function(options) {
+	        var minWord = options.minWord;
+	        if (minWord !== undefined && typeof minWord !== 'number') {
+	          throw new Error('`minWord`: expected number');
+	        } else if (minWord < 1 || minWord > 10) {
+	          throw new Error('`minWord`: expected number between 1 and 10');
+	        }
+	        if (options.replaceDiacritics !== undefined && typeof options.replaceDiacritics !== 'boolean') {
+	          throw new Error('`replaceDiacritics`: expected boolean');
+	        }
+	        if (options.highlightMatches !== undefined && typeof options.highlightMatches !== 'boolean') {
+	          throw new Error('`highlightMatches`: expected boolean');
+	        }
+	      }
+	    };
+
+	    var isString = function(src) {
+	      return typeof src === 'string';
+	    };
+
+	    return Object.create(proto);
+	  };
+
+	  /*
+	    defaults
+	  */
+	  var applyDefaults = function(options) {
+	    (options.minWord === undefined) && (options.minWord = 3);
+	    (options.replaceDiacritics === undefined) && (options.replaceDiacritics = true);
+	    (options.highlightMatches === undefined) && (options.highlightMatches = false);
+	    (options.highlightStart === undefined) && (options.highlightStart = '<strong>');
+	    (options.highlightEnd === undefined) && (options.highlightEnd = '</strong>');
+	  };
+
+	  /*
+	    match
+	  */
+	  var bestMatch = function(originalText, preparedText, query, options) {
+	    var matches = matching();
+
+	    // whole match
+	    var wholeMatch = matches.whole(originalText, preparedText, query, options);
+	    var wholeRelevance = options.highlightMatches ? wholeMatch.relevance : wholeMatch;
+	    if (wholeRelevance) {
+	      return wholeMatch;
+	    }
+
+	    // words match or lookahead match
+	    var wordsMatch = matches.words(originalText, preparedText, query, options);
+	    var wordsRelevance = options.highlightMatches ? wordsMatch.relevance : wordsMatch;
+	    var lookaheadMatch = matches.lookahead(originalText, preparedText, query, options);
+	    var lookaheadRelevance = options.highlightMatches ? lookaheadMatch.relevance : lookaheadMatch;
+
+	    if (wordsRelevance > lookaheadRelevance) {
+	      return wordsMatch;
+	    } else {
+	      return lookaheadMatch;
+	    }
+	  };
+
+	  var matching = function() {
+	    var matchResult = function(originalText, relevance, highlightRanges, options) {
+	      var highlightText = function(text, start, end, options) {
+	        if (start === -1 && end === -1) return text;
+
+	        return text.slice(0, start)
+	          + options.highlightStart
+	          + text.slice(start, end)
+	          + options.highlightEnd
+	          + text.slice(end)
+	        ;
+	      };
+
+	      var removeUnnecessaryHighlightTokens = function(text, options) {
+	        text = text.replace(new RegExp(options.highlightEnd + ' ' + options.highlightStart, 'g'), ' ');
+	        text = text.replace(new RegExp(options.highlightEnd + options.highlightStart, 'g'));
+	        return text;
+	      };
+
+	      var highlightMatch = function(text, ranges, options) {
+	        ranges.sort(function(r1, r2) {
+	          return r1.start - r2.start;
+	        });
+	        for (var i = 0, size = ranges.length; i < size; i++) {
+	          var compensation = i * (options.highlightStart.length + options.highlightEnd.length);
+	          text = highlightText(text, ranges[i].start + compensation, ranges[i].end + compensation, options);
+	        }
+	        return removeUnnecessaryHighlightTokens(text, options);
+	      };
+
+	      if (!options.highlightMatches) {
+	        return relevance;
+	      }
+	      return {
+	        relevance: relevance,
+	        match: highlightMatch(originalText, highlightRanges, options)
+	      };
+	    };
+
+	    var proto = {
+	      whole: function(originalText, preparedText, query, options) {
+	        var relevance = 0;
+	        var start = preparedText.indexOf(query), end = -1;
+	        if (start > -1) {
+	          end = start + query.length;
+	          relevance = query.length * MULTIPLIERS.MATCH_WHOLE;
+	        }
+
+	        return matchResult(originalText, relevance, [new Range(start, end)], options);
+	      },
+
+	      words: function(originalText, preparedText, query, options) {
+	        var textWords = preparedText.split(' ');
+	        var queryWords = query.split(' ').filter(function(word) {
+	          return word.length >= options.minWord;
+	        });
+
+	        var ranges = [];
+	        var relevance = 0;
+	        var startIndex = 0;
+	        textWords.forEach(function(word) {
+	          if (queryWords.indexOf(word) > -1) {
+	            var start = startIndex, end = start + word.length;
+	            relevance += (word.length * MULTIPLIERS.MATCH_WORD);
+	            ranges.push(new Range(start, end));
+	          }
+	          startIndex += word.length + 1; // `+ 1` because of the space between words
+	        });
+
+	        return matchResult(originalText, relevance, ranges, options);
+	      },
+
+	      lookahead: function(originalText, preparedText, query, options) {
+	        var ranges = [];
+	        var start = 0;
+	        var relevance = 0;
+	        var adjacentChars = 0;
+	        var consumedChars = 0;
+
+	        try {
+	          var isFirstIteration = true;
+	          clearWhitespaces(query).split('').forEach(function(charQuery) {
+	            var j = preparedText.indexOf(charQuery);
+	            var didFindChar = j > -1;
+	            var isAdjacent = j === 0;
+
+	            if (!didFindChar) {
+	              throw new Error();
+	            } else if (isAdjacent) {
+	              adjacentChars++;
+	              relevance += MULTIPLIERS.MATCH_WORD;
+	            } else {
+	              if (!isFirstIteration) {
+	                ranges.push(new Range(start, start + adjacentChars + 1));
+	              }
+	              isFirstIteration = false;
+	              start = j + consumedChars;
+	              adjacentChars = 0;
+	              relevance++;
+	            }
+
+	            consumedChars += j + 1;
+	            // on next iteration, will look in the text hereinafter
+	            preparedText = preparedText.substring(parseInt(j) + 1);
+	          });
+	        } catch (e) {
+	          ranges = [];
+	          relevance = 0;
+	        }
+	        ranges.push(new Range(start, start + adjacentChars + 1));
+
+	        return matchResult(originalText, relevance, ranges, options);
+	      }
+	    };
+
+	    var clearWhitespaces = function(str) {
+	      return str.replace(/ /g, '');
+	    };
+
+	    return Object.create(proto);
+	  };
+
+	  /*
+	    api
+	  */
+	  var doesMatch = function(originalText, query, options) {
+	    options = options || {};
+
+	    // validate
+	    var validate = validation();
+
+	    validate.text(originalText);
+	    validate.query(query);
+	    validate.options(options);
+
+	    // defaults
+	    applyDefaults(options);
+
+	    return bestMatch(
+	      originalText,
+	      prepareString(originalText, options),
+	      prepareString(query, options),
+	      options
+	    );
+	  };
+
+	  return doesMatch;
+	}));
+
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ }
 /******/ ]);

@@ -8,7 +8,7 @@ export default ({event}) => {
   let tags = event.formattedTagArray.map((tag, i) => <li className="tag" key={i}>{tag}</li>);
 
   return (
-    <div className="ev-event {past ? 'past' : ''}">
+    <div className={"ev-event " + (event.formattedIsPast ? 'past' : '')}>
       <div className="ev-event__col ev-event__col--info">
         <div className="ev-event__title">{event.name}</div>
 

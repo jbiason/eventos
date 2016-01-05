@@ -1,4 +1,16 @@
-// <div class="ev-page-header">
-//   <span data-js="search"></span>
-//   <div class="ev-select-group" data-js="type-list"></div>
-// </div>
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+export default ({query, changeSearch}) => {
+  return (
+    <input
+      type="text"
+      className="ev-header__search"
+      data-js="search-input"
+      placeholder="Pesquise por nome ou tag"
+      defaultValue={query}
+      onChange={changeSearch}
+      autofocus
+    />
+  );
+}

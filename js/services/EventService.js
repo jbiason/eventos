@@ -45,6 +45,10 @@ function formatYear(dateStr) {
   return formatDateArray(dateStr)[0].getFullYear();
 }
 
+function formatIsPast(dateStr) {
+  return util.isPast(formatDateArray(dateStr)[0]);
+}
+
 function formatTime(timeStr = textConstants.UNDEFINED) {
   return timeStr;
 }
@@ -67,6 +71,7 @@ function prepareEventData(event) {
   event.formattedDate = formatDate(event.date);
   event.formattedDateArray = formatDateArray(event.date);
   event.formattedYear = formatYear(event.date);
+  event.formattedIsPast= formatIsPast(event.date);
   event.formattedTime = formatTime(event.time);
   event.formattedLocation = formatLocation(event.location);
   event.formattedAddress = formatAddress(event.address);
@@ -77,7 +82,6 @@ function prepareEventData(event) {
 export function getEvents() {
   return axios.get('./events.json')
     .then(({data}) => {
-      console.log('data', data.map(prepareEventData));
       return data.map(prepareEventData);
     })
   ;
