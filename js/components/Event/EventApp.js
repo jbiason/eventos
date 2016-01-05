@@ -13,6 +13,7 @@ export default class EventsApp extends React.Component {
       events: [],
       query: '',
       filteredEvents: [],
+      selectedType: undefined,
       selectedYear: util.currentYear()
     }
   }
@@ -26,10 +27,13 @@ export default class EventsApp extends React.Component {
     ;
   }
   filterEvents() {
+    let year = this.state.selectedYear;
+    let type = this.state.selectedType;
     let events = this.state.events;
     let query = this.state.query;
     let filteredEvents = events
-      .filter(event => event.formattedYear === this.state.selectedYear)
+      .filter(event => event.formattedYear === year)
+      .filter(event => type === undefined ? true : event.formattedType === type)
     ;
 
     if (query) {
@@ -44,9 +48,14 @@ export default class EventsApp extends React.Component {
       filteredEvents: filteredEvents
     });
   }
-  selectYear(selectedYear) {
+  selectYear(year) {
     this.setState({
-      selectedYear: selectedYear
+      selectedYear: year
+    }, this.filterEvents);
+  }
+  selectType(type) {
+    this.setState({
+      selectedType: type
     }, this.filterEvents);
   }
   changeSearch(e) {
@@ -60,10 +69,12 @@ export default class EventsApp extends React.Component {
       <div className="ev-container">
         <EventFilter
           events={this.state.events}
-          query={this.state.query}
           selectedYear={this.state.selectedYear}
           selectYear={(e) => this.selectYear(e)}
+          query={this.state.query}
           changeSearch={(e) => this.changeSearch(e)}
+          selectedType={this.state.selectedType}
+          selectType={(e) => this.selectType(e)}
         />
         <EventList events={this.state.filteredEvents} />
       </div>

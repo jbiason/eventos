@@ -19737,6 +19737,7 @@
 	      events: [],
 	      query: '',
 	      filteredEvents: [],
+	      selectedType: undefined,
 	      selectedYear: _util2.default.currentYear()
 	    };
 	    return _this;
@@ -19756,12 +19757,14 @@
 	  }, {
 	    key: 'filterEvents',
 	    value: function filterEvents() {
-	      var _this3 = this;
-
+	      var year = this.state.selectedYear;
+	      var type = this.state.selectedType;
 	      var events = this.state.events;
 	      var query = this.state.query;
 	      var filteredEvents = events.filter(function (event) {
-	        return event.formattedYear === _this3.state.selectedYear;
+	        return event.formattedYear === year;
+	      }).filter(function (event) {
+	        return type === undefined ? true : event.formattedType === type;
 	      });
 
 	      if (query) {
@@ -19778,9 +19781,16 @@
 	    }
 	  }, {
 	    key: 'selectYear',
-	    value: function selectYear(selectedYear) {
+	    value: function selectYear(year) {
 	      this.setState({
-	        selectedYear: selectedYear
+	        selectedYear: year
+	      }, this.filterEvents);
+	    }
+	  }, {
+	    key: 'selectType',
+	    value: function selectType(type) {
+	      this.setState({
+	        selectedType: type
 	      }, this.filterEvents);
 	    }
 	  }, {
@@ -19794,20 +19804,24 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this4 = this;
+	      var _this3 = this;
 
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'ev-container' },
 	        _react2.default.createElement(_EventFilter2.default, {
 	          events: this.state.events,
-	          query: this.state.query,
 	          selectedYear: this.state.selectedYear,
 	          selectYear: function selectYear(e) {
-	            return _this4.selectYear(e);
+	            return _this3.selectYear(e);
 	          },
+	          query: this.state.query,
 	          changeSearch: function changeSearch(e) {
-	            return _this4.changeSearch(e);
+	            return _this3.changeSearch(e);
+	          },
+	          selectedType: this.state.selectedType,
+	          selectType: function selectType(e) {
+	            return _this3.selectType(e);
 	          }
 	        }),
 	        _react2.default.createElement(_EventList2.default, { events: this.state.filteredEvents })
@@ -21350,24 +21364,29 @@
 
 	var _EventSearch2 = _interopRequireDefault(_EventSearch);
 
+	var _EventTypeRadio = __webpack_require__(187);
+
+	var _EventTypeRadio2 = _interopRequireDefault(_EventTypeRadio);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = function (_ref) {
 	  var events = _ref.events;
-	  var query = _ref.query;
 	  var selectedYear = _ref.selectedYear;
 	  var selectYear = _ref.selectYear;
+	  var query = _ref.query;
 	  var changeSearch = _ref.changeSearch;
+	  var selectedType = _ref.selectedType;
+	  var selectType = _ref.selectType;
 
 	  return _react2.default.createElement(
 	    'div',
 	    { className: 'ev-page-header' },
 	    _react2.default.createElement(_EventYears2.default, { events: events, selectedYear: selectedYear, selectYear: selectYear }),
-	    _react2.default.createElement(_EventSearch2.default, { query: query, changeSearch: changeSearch })
+	    _react2.default.createElement(_EventSearch2.default, { query: query, changeSearch: changeSearch }),
+	    _react2.default.createElement(_EventTypeRadio2.default, { selectedType: selectedType, selectType: selectType })
 	  );
 	};
-
-	// <div class="ev-select-group" data-js="type-list"></div>
 
 /***/ },
 /* 184 */
@@ -21709,6 +21728,66 @@
 	      null,
 	      'Nenhum resultado :('
 	    )
+	  );
+	};
+
+/***/ },
+/* 187 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(158);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	var _EventYears = __webpack_require__(180);
+
+	var _EventYears2 = _interopRequireDefault(_EventYears);
+
+	var _EventSearch = __webpack_require__(184);
+
+	var _EventSearch2 = _interopRequireDefault(_EventSearch);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = function (_ref) {
+	  var selectedType = _ref.selectedType;
+	  var selectType = _ref.selectType;
+
+	  var types = [{ text: 'Todos' }, { type: 0, text: 'Externo' }, { type: 1, text: 'Interno' }];
+
+	  console.log('render EventTypeRadio', selectedType);
+	  var typesRadios = types.map(function (type, i) {
+	    return _react2.default.createElement(
+	      'a',
+	      { href: '#', key: i,
+	        className: "ev-select " + (selectedType === type.type ? 'is-active' : ''),
+	        onClick: function onClick() {
+	          return selectType(type.type);
+	        }
+	      },
+	      _react2.default.createElement('span', { className: 'ev-select__icon' }),
+	      _react2.default.createElement(
+	        'span',
+	        { className: 'ev-select__text' },
+	        type.text
+	      )
+	    );
+	  });
+
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'ev-select-group' },
+	    typesRadios
 	  );
 	};
 
