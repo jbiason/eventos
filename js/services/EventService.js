@@ -83,7 +83,10 @@ export function getEvents() {
   return axios.get('./events.json')
     .then(({data}) => {
       return data
-        .map(prepareEventData)
+        .map((event, index) => {
+          event.id = index;
+          return prepareEventData(event);
+        })
         .sort((e1, e2) => e2.formattedDateArray[0].valueOf() - e1.formattedDateArray[0].valueOf())
       ;
     })

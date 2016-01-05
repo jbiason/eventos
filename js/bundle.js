@@ -20428,7 +20428,10 @@
 	  return _axios2.default.get('./events.json').then(function (_ref) {
 	    var data = _ref.data;
 	
-	    return data.map(prepareEventData).sort(function (e1, e2) {
+	    return data.map(function (event, index) {
+	      event.id = index;
+	      return prepareEventData(event);
+	    }).sort(function (e1, e2) {
 	      return e2.formattedDateArray[0].valueOf() - e1.formattedDateArray[0].valueOf();
 	    });
 	  });
@@ -21886,8 +21889,8 @@
 	exports.default = function (_ref) {
 	  var events = _ref.events;
 	
-	  var result = events.length ? events.map(function (event, i) {
-	    return _react2.default.createElement(_Event2.default, { event: event, key: i });
+	  var result = events.length ? events.map(function (event) {
+	    return _react2.default.createElement(_Event2.default, { event: event, key: event.id });
 	  }) : _react2.default.createElement(_EmptyResult2.default, null);
 	  return _react2.default.createElement(
 	    'div',

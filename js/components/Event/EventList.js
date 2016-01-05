@@ -5,7 +5,7 @@ import EmptyResult from './EmptyResult';
 
 export default ({events}) => {
   let result = events.length
-    ? events.map((event, i) => <Event event={event} key={i}/>)
+    ? events.map((event) => <Event event={event} key={event.id}/>)
     : <EmptyResult />
   ;
   return (
