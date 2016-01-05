@@ -21065,7 +21065,6 @@
 	    date
 	  */
 	  dateFromStr: function dateFromStr(str) {
-	    // console.log('dateFromStr', str)
 	    var parts = util.splitStr(str, '/');
 	    return new Date(parts[2], parseInt(parts[1]) - 1, parts[0]);
 	  },
@@ -21765,7 +21764,6 @@
 
 	  var types = [{ text: 'Todos' }, { type: 0, text: 'Externo' }, { type: 1, text: 'Interno' }];
 
-	  console.log('render EventTypeRadio', selectedType);
 	  var typesRadios = types.map(function (type, i) {
 	    return _react2.default.createElement(
 	      'a',

@@ -39,7 +39,6 @@ var util = {
     date
   */
   dateFromStr: function(str) {
-    // console.log('dateFromStr', str)
     var parts = util.splitStr(str, '/');
     return new Date(parts[2], parseInt(parts[1]) - 1, parts[0]);
   },

@@ -10,7 +10,6 @@ export default ({selectedType, selectType}) => {
     {type: 1, text: 'Interno'}
   ];
 
-  console.log('render EventTypeRadio', selectedType);
   let typesRadios = types.map((type, i) => (
       <a href="#" key={i}
         className={"ev-select " + (selectedType === type.type ? 'is-active' : '')}
