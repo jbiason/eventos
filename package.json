@@ -7,7 +7,10 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "./node_modules/webpack/bin/webpack.js -p",
+    "start": "./node_modules/webpack/bin/webpack.js -wd",
+    "dev": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js"
   },
   "repository": {
     "type": "git",
