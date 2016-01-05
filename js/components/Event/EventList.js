@@ -1,12 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Event from './Event';
+import EmptyResult from './EmptyResult';
 
 export default ({events}) => {
-  let data = events.map((event, i) => <Event event={event} key={i}/>);
+  let result = events.length
+    ? events.map((event, i) => <Event event={event} key={i}/>)
+    : <EmptyResult />
+  ;
   return (
     <div className="ev-events">
-      {data}
+      {result}
     </div>
   );
 }

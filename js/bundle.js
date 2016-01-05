@@ -21165,18 +21165,22 @@
 
 	var _Event2 = _interopRequireDefault(_Event);
 
+	var _EmptyResult = __webpack_require__(186);
+
+	var _EmptyResult2 = _interopRequireDefault(_EmptyResult);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = function (_ref) {
 	  var events = _ref.events;
 
-	  var data = events.map(function (event, i) {
+	  var result = events.length ? events.map(function (event, i) {
 	    return _react2.default.createElement(_Event2.default, { event: event, key: i });
-	  });
+	  }) : _react2.default.createElement(_EmptyResult2.default, null);
 	  return _react2.default.createElement(
 	    'div',
 	    { className: 'ev-events' },
-	    data
+	    result
 	  );
 	};
 
@@ -21675,6 +21679,38 @@
 	}));
 
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+/***/ },
+/* 186 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(158);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = function () {
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'ev-msg' },
+	    _react2.default.createElement(
+	      'p',
+	      null,
+	      'Nenhum resultado :('
+	    )
+	  );
+	};
 
 /***/ }
 /******/ ]);
