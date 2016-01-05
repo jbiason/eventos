@@ -209,6 +209,10 @@ h1 {
       opacity: 0.5;
     }
   }
+
+  .ev-select:last-child {
+    border-right: 0px;
+  }
 }
 
 .ev-select__icon {
@@ -218,6 +222,7 @@ h1 {
   border: 2px solid rgba(0,0,0,0.5);
   vertical-align: -3px;
   position: relative;
+  margin-right: 5px;
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
   border-radius: 20px;

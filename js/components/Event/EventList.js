@@ -9,8 +9,10 @@ export default ({events}) => {
     : <EmptyResult />
   ;
   return (
-    <div className="ev-events">
-      {result}
+    <div className="ev-container">
+      <div className="ev-events">
+        {result}
+        </div>
     </div>
   );
 }

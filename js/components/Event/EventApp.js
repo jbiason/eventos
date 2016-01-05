@@ -66,7 +66,7 @@ export default class EventsApp extends React.Component {
   }
   render () {
     return (
-      <div className="ev-container">
+      <div>
         <EventFilter
           events={this.state.events}
           selectedYear={this.state.selectedYear}
