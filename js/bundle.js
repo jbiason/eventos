@@ -19719,13 +19719,15 @@
 	    return textConstants.UNDEFINED;
 	  }
 
-	  return _util2.default.splitStr(priceStr).map(function (price) {
+	  var priceArray = _util2.default.splitStr(priceStr).map(function (price) {
 	    return parseInt(price);
 	  }).filter(function (price) {
 	    return !isNaN(price);
 	  }).map(function (price) {
-	    return 0 ? textConstants.FREE : _util2.default.formatCurrency(price);
-	  }).join(' - ');
+	    return price === 0 ? textConstants.FREE : _util2.default.formatCurrency(price);
+	  });
+
+	  return _util2.default.simplifyArray(priceArray).join(' - ');
 	}
 
 	function formatDateArray(dateStr) {
@@ -19735,7 +19737,7 @@
 	}
 
 	function formatDate(dateStr) {
-	  return formatDateArray(dateStr).map(_util2.default.formatDate).join(' - ');
+	  return _util2.default.simplifyArray(formatDateArray(dateStr)).map(_util2.default.formatDate).join(' - ');
 	}
 
 	function formatYear(dateStr) {
@@ -20867,6 +20869,16 @@
 	});
 	var util = {
 	  /*
+	    array
+	  */
+	  simplifyArray: function simplifyArray(array) {
+	    if (array.length < 3) {
+	      return array;
+	    }
+	    return [array[0], array[array.length - 1]];
+	  },
+
+	  /*
 	    strings
 	  */
 	  splitStr: function splitStr(str, c) {
@@ -21128,6 +21140,9 @@
 	exports.default = function (_ref) {
 	  var event = _ref.event;
 
+	  var getDescriptionHTML = function getDescriptionHTML(description) {
+	    return { __html: description };
+	  };
 	  var tags = event.formattedTagArray.map(function (tag, i) {
 	    return _react2.default.createElement(
 	      'li',
@@ -21153,9 +21168,9 @@
 	        _react2.default.createElement(
 	          'span',
 	          { className: 'ev-event__label' },
-	          'Descrição do evento:'
+	          'Descrição do evento'
 	        ),
-	        event.description
+	        _react2.default.createElement('span', { dangerouslySetInnerHTML: getDescriptionHTML(event.description) })
 	      ),
 	      _react2.default.createElement(
 	        'div',
@@ -21169,7 +21184,7 @@
 	            _react2.default.createElement(
 	              'span',
 	              { className: 'ev-event__label' },
-	              'Valor:'
+	              'Valor'
 	            ),
 	            event.formattedPrice
 	          )
@@ -21183,7 +21198,7 @@
 	            _react2.default.createElement(
 	              'span',
 	              { className: 'ev-event__label' },
-	              'Data:'
+	              'Data'
 	            ),
 	            event.formattedDate
 	          )
@@ -21197,7 +21212,7 @@
 	            _react2.default.createElement(
 	              'span',
 	              { className: 'ev-event__label' },
-	              'Horário:'
+	              'Horário'
 	            ),
 	            event.formattedTime
 	          )
@@ -21209,7 +21224,7 @@
 	        _react2.default.createElement(
 	          'span',
 	          { className: 'ev-event__label' },
-	          'Local:'
+	          'Local'
 	        ),
 	        event.formattedLocation,
 	        _react2.default.createElement('br', null),
@@ -21220,7 +21235,7 @@
 	        null,
 	        _react2.default.createElement(
 	          'a',
-	          { href: '<%= event.url %>', target: '_blank' },
+	          { href: event.url, target: '_blank' },
 	          '+ Site do evento'
 	        )
 	      ),

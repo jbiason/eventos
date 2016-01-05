@@ -17,10 +17,12 @@ function formatPrice(priceStr) {
     return textConstants.UNDEFINED;
   }
 
-  return util.splitStr(priceStr)
+  var priceArray = util.splitStr(priceStr)
     .map(price => parseInt(price))
     .filter(price => !isNaN(price))
-    .map(price => 0 ? textConstants.FREE : util.formatCurrency(price))
+    .map(price => price === 0 ? textConstants.FREE : util.formatCurrency(price))
+
+  return util.simplifyArray(priceArray)
     .join(' - ')
   ;
 }
@@ -33,7 +35,7 @@ function formatDateArray(dateStr) {
 }
 
 function formatDate(dateStr) {
-  return formatDateArray(dateStr)
+  return util.simplifyArray(formatDateArray(dateStr))
     .map(util.formatDate)
     .join(' - ')
   ;

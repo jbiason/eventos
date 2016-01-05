@@ -1,5 +1,15 @@
 var util = {
   /*
+    array
+  */
+  simplifyArray: function(array) {
+    if (array.length < 3) {
+      return array;
+    }
+    return [array[0], array[array.length - 1]];
+  },
+
+  /*
     strings
   */
   splitStr: function(str, c) {
