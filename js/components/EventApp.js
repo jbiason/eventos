@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import EventList from './EventList';
 import { getEvents } from '../services/EventService';
+import EventYears from './EventYears';
+import EventList from './EventList';
 
 export default class EventsApp extends React.Component {
   constructor() {
@@ -12,16 +13,18 @@ export default class EventsApp extends React.Component {
   }
   componentDidMount() {
     getEvents()
-      .then(({data}) => {
+      .then((events) => {
         this.setState({
-          events: data
+          events: events
         });
       })
     ;
   }
   render () {
     return (
-      <EventList events={this.state.events} />
+      <div className="ev-container">
+        <EventList events={this.state.events} />
+      </div>
     )
   }
 }

@@ -19669,14 +19669,14 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _EventsApp = __webpack_require__(160);
+	var _EventApp = __webpack_require__(160);
 
-	var _EventsApp2 = _interopRequireDefault(_EventsApp);
+	var _EventApp2 = _interopRequireDefault(_EventApp);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = function () {
-	  return _react2.default.createElement(_EventsApp2.default, null);
+	  return _react2.default.createElement(_EventApp2.default, null);
 	};
 
 /***/ },
@@ -19699,11 +19699,15 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
+	var _EventService = __webpack_require__(163);
+
+	var _EventYears = __webpack_require__(181);
+
+	var _EventYears2 = _interopRequireDefault(_EventYears);
+
 	var _EventList = __webpack_require__(161);
 
 	var _EventList2 = _interopRequireDefault(_EventList);
-
-	var _EventService = __webpack_require__(163);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -19732,18 +19736,20 @@
 	    value: function componentDidMount() {
 	      var _this2 = this;
 
-	      (0, _EventService.getEvents)().then(function (_ref) {
-	        var data = _ref.data;
-
+	      (0, _EventService.getEvents)().then(function (events) {
 	        _this2.setState({
-	          events: data
+	          events: events
 	        });
 	      });
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement(_EventList2.default, { events: this.state.events });
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'ev-container' },
+	        _react2.default.createElement(_EventList2.default, { events: this.state.events })
+	      );
 	    }
 	  }]);
 
@@ -19812,10 +19818,120 @@
 	exports.default = function (_ref) {
 	  var event = _ref.event;
 
+	  var tags = undefined;
+	  if (event.tagArray && event.tagArray.length > 0) {
+	    tags = event.tagArray.map(function (tag, i) {
+	      return _react2.default.createElement(
+	        'li',
+	        { className: 'tag', key: i },
+	        tag
+	      );
+	    });
+	  }
+
 	  return _react2.default.createElement(
-	    'h1',
-	    null,
-	    event.name
+	    'div',
+	    { className: 'ev-event {past ? \'past\' : \'\'}' },
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'ev-event__col ev-event__col--info' },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'ev-event__title' },
+	        event.name
+	      ),
+	      event.description && _react2.default.createElement(
+	        'div',
+	        { className: 'ev-event__description' },
+	        _react2.default.createElement(
+	          'span',
+	          { className: 'ev-event__label' },
+	          'Descrição do evento:'
+	        ),
+	        event.description
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'u-row' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'u-col' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'ev-event__price' },
+	            _react2.default.createElement(
+	              'span',
+	              { className: 'ev-event__label' },
+	              'Valor:'
+	            ),
+	            event.formattedPrices
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'u-col' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'ev-event__date' },
+	            _react2.default.createElement(
+	              'span',
+	              { className: 'ev-event__label' },
+	              'Data:'
+	            ),
+	            event.formattedDates
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'u-col' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'ev-event__time' },
+	            _react2.default.createElement(
+	              'span',
+	              { className: 'ev-event__label' },
+	              'Horário:'
+	            ),
+	            event.formattedTime
+	          )
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'ev-event__location' },
+	        _react2.default.createElement(
+	          'span',
+	          { className: 'ev-event__label' },
+	          'Local:'
+	        ),
+	        event.formattedLocation,
+	        _react2.default.createElement('br', null),
+	        event.formattedAddress
+	      ),
+	      event.url && _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'a',
+	          { href: '<%= event.url %>', target: '_blank' },
+	          '+ Site do evento'
+	        )
+	      ),
+	      tags && _react2.default.createElement(
+	        'div',
+	        { className: '' },
+	        _react2.default.createElement(
+	          'ul',
+	          { className: 'tags' },
+	          tags
+	        )
+	      )
+	    ),
+	    event.img && _react2.default.createElement(
+	      'div',
+	      { className: 'ev-event__col ev-event__col--image' },
+	      _react2.default.createElement('img', { src: event.img, className: 'ev-event__image' })
+	    )
 	  );
 	};
 
@@ -19834,10 +19950,92 @@
 
 	var _axios2 = _interopRequireDefault(_axios);
 
+	var _util = __webpack_require__(182);
+
+	var _util2 = _interopRequireDefault(_util);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	var textConstants = {
+	  UNDEFINED: 'Não definido',
+	  FREE: 'Grátis'
+	};
+
+	function formatType(event) {
+	  var type = parseInt(event.type);
+	  isNaN(type) && (type = 0);
+	  event.type = type;
+	}
+
+	function formatPrices(event) {
+	  var val = event.price;
+	  if (val === undefined) {
+	    event.formattedPrices = textConstants.UNDEFINED;
+	    return;
+	  }
+
+	  event.formattedPrices = _util2.default.split(val).map(function (item) {
+	    var price = parseInt(item);
+	    if (isNaN(price)) return undefined;
+	    return price === 0 ? textConstants.FREE : _util2.default.formatCurrency(price);
+	  }).filter(function (item) {
+	    return item !== undefined;
+	  }).join(' - ');
+	}
+
+	function formatDates(event) {
+	  var val = event.date;
+	  event.dates = _util2.default.split(val).map(_util2.default.dateFromStr).filter(function (item) {
+	    return !isNaN(item.valueOf());
+	  });
+
+	  if (event.dates.length === 0) {
+	    event.dates = event.formattedDates = undefined;
+	    return;
+	  }
+
+	  event.formattedDates = event.dates.map(_util2.default.formatDate).join(' - ');
+	}
+
+	function formatTime(event) {
+	  var val = event.time;
+	  event.formattedTime = val || textConstants.UNDEFINED;
+	}
+
+	function formatLocation(event) {
+	  var val = event.location;
+	  event.formattedLocation = val || textConstants.UNDEFINED;
+	}
+
+	function formatAddress(event) {
+	  var val = event.address;
+	  event.formattedAddress = val || textConstants.UNDEFINED;
+	}
+
+	function formatTags(event) {
+	  var val = event.tags;
+	  event.tagArray = val && val.length ? _util2.default.split(val) : [];
+	}
+
+	function prepareEventData(event) {
+	  formatType(event);
+	  formatPrices(event);
+	  formatDates(event);
+	  formatTime(event);
+	  formatLocation(event);
+	  formatAddress(event);
+	  formatTags(event);
+	  return event;
+	}
+
 	function getEvents() {
-	  return _axios2.default.get('./events.json');
+	  return _axios2.default.get('./events.json').then(function (_ref) {
+	    var data = _ref.data;
+
+	    data = data.map(prepareEventData);
+	    console.log('data', data);
+	    return data;
+	  });
 	}
 
 /***/ },
@@ -20906,6 +21104,137 @@
 	  };
 	};
 
+
+/***/ },
+/* 181 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(158);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = function (_ref) {
+	  var events = _ref.events;
+
+	  // let data = events.map((event, i) => <Event event={event} key={i}/>);
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'year-list' },
+	    _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(
+	        'button',
+	        { className: 'pure-button', 'data-js': 'year-button', type: 'button', disabled: true },
+	        '2000'
+	      )
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(
+	        'button',
+	        { className: 'pure-button', 'data-js': 'year-button', type: 'button' },
+	        '2010'
+	      )
+	    )
+	  );
+	};
+
+/***/ },
+/* 182 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var util = {
+	  /*
+	    arrays
+	  */
+	  compareArrays: function compareArrays(a1, a2) {
+	    if (a1.length !== a2.length) {
+	      return false;
+	    }
+	    for (var i in a1) {
+	      if (a1[i] !== a2[i]) {
+	        return false;
+	      }
+	    }
+	    return true;
+	  },
+
+	  /*
+	    strings
+	  */
+	  split: function split(str, c) {
+	    str = '' + str;
+	    return str.replace(/ /g, '').split(c || ',');
+	  },
+
+	  /*
+	    currency
+	  */
+	  formatCurrency: function formatCurrency(value) {
+	    if (typeof value === 'string') {
+	      value = this._parseCurrency(value);
+	    }
+	    var groupSize = 3,
+	        groupSep = '.',
+	        re = '\\d(?=(\\d{' + (groupSize || 3) + '})+' + ')',
+	        num = value.toFixed();
+	    return 'R$' + num.replace(new RegExp(re, 'g'), '$&' + groupSep);
+	  },
+
+	  _parseCurrency: function _parseCurrency(value) {
+	    return parseFloat(value.replace(/[^0-9]/g, ''));
+	  },
+
+	  /*
+	    date
+	  */
+	  dateFromStr: function dateFromStr(str) {
+	    var parts = util.split(str, '/');
+	    return new Date(parts[2], parseInt(parts[1]) - 1, parts[0]);
+	  },
+
+	  formatDate: function formatDate(date) {
+	    var d = date.getDate() + '';
+	    var m = date.getMonth() + 1 + '';
+	    d = d.length > 1 ? d : '0' + d;
+	    m = m.length > 1 ? m : '0' + m;
+	    return d + '/' + m;
+	  },
+
+	  currentYear: function currentYear() {
+	    return new Date().getFullYear();
+	  },
+
+	  isPast: function isPast(date) {
+	    var today = new Date();
+	    today.setHours(0);
+	    today.setMinutes(0);
+	    today.setSeconds(0);
+	    today.setMilliseconds(0);
+	    return date.valueOf() < today.valueOf();
+	  }
+	};
+
+	exports.default = util;
 
 /***/ }
 /******/ ]);

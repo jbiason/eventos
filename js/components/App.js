@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import EventsApp from './EventsApp';
+import EventApp from './EventApp';
 
 export default () => {
   return (
-    <EventsApp />
+    <EventApp />
   )
 }
