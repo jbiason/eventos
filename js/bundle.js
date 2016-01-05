@@ -19766,12 +19766,9 @@
 
 	      if (query) {
 	        filteredEvents = filteredEvents.filter(function (event) {
-	          return !!(0, _doesMatch2.default)(event.name, query);
-	        });
-	      } else {
-	        events.forEach(function (event) {
-	          delete event.relevance;
-	          delete event.highlightedName;
+	          return !!(0, _doesMatch2.default)(event.name, query) || event.formattedTagArray.some(function (tag) {
+	            return !!(0, _doesMatch2.default)(tag, query);
+	          });
 	        });
 	      }
 
@@ -19931,7 +19928,9 @@
 	  return _axios2.default.get('./events.json').then(function (_ref) {
 	    var data = _ref.data;
 
-	    return data.map(prepareEventData);
+	    return data.map(prepareEventData).sort(function (e1, e2) {
+	      return e2.formattedDateArray[0].valueOf() - e1.formattedDateArray[0].valueOf();
+	    });
 	  });
 	}
 

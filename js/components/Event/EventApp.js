@@ -35,14 +35,7 @@ export default class EventsApp extends React.Component {
     if (query) {
       filteredEvents = filteredEvents
         .filter(event => {
-          return !!doesMatch(event.name, query);
-        })
-      ;
-    } else {
-      events
-        .forEach(event => {
-          delete event.relevance;
-          delete event.highlightedName;
+          return !!doesMatch(event.name, query) || event.formattedTagArray.some(tag => !!doesMatch(tag, query));
         })
       ;
     }
