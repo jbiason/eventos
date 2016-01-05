@@ -1,14 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { getEvents } from '../services/EventService';
+import { getEvents } from '../../services/EventService';
 import EventYears from './EventYears';
 import EventList from './EventList';
+import util from '../../util/util';
 
 export default class EventsApp extends React.Component {
   constructor() {
     super();
     this.state = {
-      events: []
+      events: [],
+      selectedYear: util.currentYear()
     }
   }
   componentDidMount() {
@@ -23,6 +25,7 @@ export default class EventsApp extends React.Component {
   render () {
     return (
       <div className="ev-container">
+        <EventYears events={this.state.events} />
         <EventList events={this.state.events} />
       </div>
     )

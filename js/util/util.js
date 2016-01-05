@@ -1,23 +1,8 @@
 var util = {
   /*
-    arrays
-  */
-  compareArrays: function(a1, a2) {
-    if (a1.length !== a2.length) {
-      return false;
-    }
-    for (var i in a1) {
-      if (a1[i] !== a2[i]) {
-        return false;
-      }
-    }
-    return true;
-  },
-
-  /*
     strings
   */
-  split: function(str, c) {
+  splitStr: function(str, c) {
     str = '' + str;
     return str.replace(/ /g, '').split(c || ',');
   },
@@ -27,7 +12,7 @@ var util = {
   */
   formatCurrency: function(value) {
     if (typeof value === 'string') {
-      value = this._parseCurrency(value);
+      value = this.parseCurrency(value);
     }
     var groupSize = 3,
       groupSep = '.',
@@ -36,7 +21,7 @@ var util = {
     return 'R$' + num.replace(new RegExp(re, 'g'), '$&' + groupSep);
   },
 
-  _parseCurrency: function(value) {
+  parseCurrency: function(value) {
     return parseFloat(value.replace(/[^0-9]/g, ''));
   },
 
@@ -44,7 +29,8 @@ var util = {
     date
   */
   dateFromStr: function(str) {
-    var parts = util.split(str, '/');
+    // console.log('dateFromStr', str)
+    var parts = util.splitStr(str, '/');
     return new Date(parts[2], parseInt(parts[1]) - 1, parts[0]);
   },
 

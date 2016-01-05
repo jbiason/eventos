@@ -19669,7 +19669,7 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _EventApp = __webpack_require__(160);
+	var _EventApp = __webpack_require__(187);
 
 	var _EventApp2 = _interopRequireDefault(_EventApp);
 
@@ -19680,262 +19680,9 @@
 	};
 
 /***/ },
-/* 160 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactDom = __webpack_require__(158);
-
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-
-	var _EventService = __webpack_require__(163);
-
-	var _EventYears = __webpack_require__(181);
-
-	var _EventYears2 = _interopRequireDefault(_EventYears);
-
-	var _EventList = __webpack_require__(161);
-
-	var _EventList2 = _interopRequireDefault(_EventList);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var EventsApp = (function (_React$Component) {
-	  _inherits(EventsApp, _React$Component);
-
-	  function EventsApp() {
-	    _classCallCheck(this, EventsApp);
-
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(EventsApp).call(this));
-
-	    _this.state = {
-	      events: []
-	    };
-	    return _this;
-	  }
-
-	  _createClass(EventsApp, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      var _this2 = this;
-
-	      (0, _EventService.getEvents)().then(function (events) {
-	        _this2.setState({
-	          events: events
-	        });
-	      });
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'ev-container' },
-	        _react2.default.createElement(_EventList2.default, { events: this.state.events })
-	      );
-	    }
-	  }]);
-
-	  return EventsApp;
-	})(_react2.default.Component);
-
-	exports.default = EventsApp;
-
-/***/ },
-/* 161 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactDom = __webpack_require__(158);
-
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-
-	var _Event = __webpack_require__(162);
-
-	var _Event2 = _interopRequireDefault(_Event);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = function (_ref) {
-	  var events = _ref.events;
-
-	  var data = events.map(function (event, i) {
-	    return _react2.default.createElement(_Event2.default, { event: event, key: i });
-	  });
-	  return _react2.default.createElement(
-	    'div',
-	    { className: 'ev-events' },
-	    data
-	  );
-	};
-
-/***/ },
-/* 162 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactDom = __webpack_require__(158);
-
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = function (_ref) {
-	  var event = _ref.event;
-
-	  var tags = undefined;
-	  if (event.tagArray && event.tagArray.length > 0) {
-	    tags = event.tagArray.map(function (tag, i) {
-	      return _react2.default.createElement(
-	        'li',
-	        { className: 'tag', key: i },
-	        tag
-	      );
-	    });
-	  }
-
-	  return _react2.default.createElement(
-	    'div',
-	    { className: 'ev-event {past ? \'past\' : \'\'}' },
-	    _react2.default.createElement(
-	      'div',
-	      { className: 'ev-event__col ev-event__col--info' },
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'ev-event__title' },
-	        event.name
-	      ),
-	      event.description && _react2.default.createElement(
-	        'div',
-	        { className: 'ev-event__description' },
-	        _react2.default.createElement(
-	          'span',
-	          { className: 'ev-event__label' },
-	          'Descrição do evento:'
-	        ),
-	        event.description
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'u-row' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'u-col' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'ev-event__price' },
-	            _react2.default.createElement(
-	              'span',
-	              { className: 'ev-event__label' },
-	              'Valor:'
-	            ),
-	            event.formattedPrices
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'u-col' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'ev-event__date' },
-	            _react2.default.createElement(
-	              'span',
-	              { className: 'ev-event__label' },
-	              'Data:'
-	            ),
-	            event.formattedDates
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'u-col' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'ev-event__time' },
-	            _react2.default.createElement(
-	              'span',
-	              { className: 'ev-event__label' },
-	              'Horário:'
-	            ),
-	            event.formattedTime
-	          )
-	        )
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'ev-event__location' },
-	        _react2.default.createElement(
-	          'span',
-	          { className: 'ev-event__label' },
-	          'Local:'
-	        ),
-	        event.formattedLocation,
-	        _react2.default.createElement('br', null),
-	        event.formattedAddress
-	      ),
-	      event.url && _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(
-	          'a',
-	          { href: '<%= event.url %>', target: '_blank' },
-	          '+ Site do evento'
-	        )
-	      ),
-	      tags && _react2.default.createElement(
-	        'div',
-	        { className: '' },
-	        _react2.default.createElement(
-	          'ul',
-	          { className: 'tags' },
-	          tags
-	        )
-	      )
-	    ),
-	    event.img && _react2.default.createElement(
-	      'div',
-	      { className: 'ev-event__col ev-event__col--image' },
-	      _react2.default.createElement('img', { src: event.img, className: 'ev-event__image' })
-	    )
-	  );
-	};
-
-/***/ },
+/* 160 */,
+/* 161 */,
+/* 162 */,
 /* 163 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -19961,70 +19708,74 @@
 	  FREE: 'Grátis'
 	};
 
-	function formatType(event) {
-	  var type = parseInt(event.type);
+	function formatType(typeStr) {
+	  var type = parseInt(typeStr);
 	  isNaN(type) && (type = 0);
-	  event.type = type;
+	  return type;
 	}
 
-	function formatPrices(event) {
-	  var val = event.price;
-	  if (val === undefined) {
-	    event.formattedPrices = textConstants.UNDEFINED;
-	    return;
+	function formatPrice(priceStr) {
+	  if (priceStr === undefined) {
+	    return textConstants.UNDEFINED;
 	  }
 
-	  event.formattedPrices = _util2.default.split(val).map(function (item) {
-	    var price = parseInt(item);
-	    if (isNaN(price)) return undefined;
-	    return price === 0 ? textConstants.FREE : _util2.default.formatCurrency(price);
-	  }).filter(function (item) {
-	    return item !== undefined;
+	  return _util2.default.splitStr(priceStr).map(function (price) {
+	    return parseInt(price);
+	  }).filter(function (price) {
+	    return !isNaN(price);
+	  }).map(function (price) {
+	    return 0 ? textConstants.FREE : _util2.default.formatCurrency(price);
 	  }).join(' - ');
 	}
 
-	function formatDates(event) {
-	  var val = event.date;
-	  event.dates = _util2.default.split(val).map(_util2.default.dateFromStr).filter(function (item) {
+	function formatDateArray(dateStr) {
+	  return _util2.default.splitStr(dateStr).map(_util2.default.dateFromStr).filter(function (item) {
 	    return !isNaN(item.valueOf());
 	  });
-
-	  if (event.dates.length === 0) {
-	    event.dates = event.formattedDates = undefined;
-	    return;
-	  }
-
-	  event.formattedDates = event.dates.map(_util2.default.formatDate).join(' - ');
 	}
 
-	function formatTime(event) {
-	  var val = event.time;
-	  event.formattedTime = val || textConstants.UNDEFINED;
+	function formatDate(dateStr) {
+	  return formatDateArray(dateStr).map(_util2.default.formatDate).join(' - ');
 	}
 
-	function formatLocation(event) {
-	  var val = event.location;
-	  event.formattedLocation = val || textConstants.UNDEFINED;
+	function formatYear(dateStr) {
+	  return formatDateArray(dateStr)[0].getFullYear();
 	}
 
-	function formatAddress(event) {
-	  var val = event.address;
-	  event.formattedAddress = val || textConstants.UNDEFINED;
+	function formatTime() {
+	  var timeStr = arguments.length <= 0 || arguments[0] === undefined ? textConstants.UNDEFINED : arguments[0];
+
+	  return timeStr;
 	}
 
-	function formatTags(event) {
-	  var val = event.tags;
-	  event.tagArray = val && val.length ? _util2.default.split(val) : [];
+	function formatLocation() {
+	  var locationStr = arguments.length <= 0 || arguments[0] === undefined ? textConstants.UNDEFINED : arguments[0];
+
+	  return locationStr;
+	}
+
+	function formatAddress() {
+	  var addressStr = arguments.length <= 0 || arguments[0] === undefined ? textConstants.UNDEFINED : arguments[0];
+
+	  return addressStr;
+	}
+
+	function formatTagsArray() {
+	  var tagsStr = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
+
+	  return tagsStr.length ? _util2.default.splitStr(tagsStr) : [];
 	}
 
 	function prepareEventData(event) {
-	  formatType(event);
-	  formatPrices(event);
-	  formatDates(event);
-	  formatTime(event);
-	  formatLocation(event);
-	  formatAddress(event);
-	  formatTags(event);
+	  event.formattedType = formatType(event.type);
+	  event.formattedPrice = formatPrice(event.price);
+	  event.formattedDate = formatDate(event.date);
+	  event.formattedDateArray = formatDateArray(event.date);
+	  event.formattedYear = formatYear(event.date);
+	  event.formattedTime = formatTime(event.time);
+	  event.formattedLocation = formatLocation(event.location);
+	  event.formattedAddress = formatAddress(event.address);
+	  event.formattedTagArray = formatTagsArray(event.tags);
 	  return event;
 	}
 
@@ -20032,9 +19783,8 @@
 	  return _axios2.default.get('./events.json').then(function (_ref) {
 	    var data = _ref.data;
 
-	    data = data.map(prepareEventData);
-	    console.log('data', data);
-	    return data;
+	    console.log('data', data.map(prepareEventData));
+	    return data.map(prepareEventData);
 	  });
 	}
 
@@ -21106,54 +20856,7 @@
 
 
 /***/ },
-/* 181 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactDom = __webpack_require__(158);
-
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = function (_ref) {
-	  var events = _ref.events;
-
-	  // let data = events.map((event, i) => <Event event={event} key={i}/>);
-	  return _react2.default.createElement(
-	    'div',
-	    { className: 'year-list' },
-	    _react2.default.createElement(
-	      'div',
-	      null,
-	      _react2.default.createElement(
-	        'button',
-	        { className: 'pure-button', 'data-js': 'year-button', type: 'button', disabled: true },
-	        '2000'
-	      )
-	    ),
-	    _react2.default.createElement(
-	      'div',
-	      null,
-	      _react2.default.createElement(
-	        'button',
-	        { className: 'pure-button', 'data-js': 'year-button', type: 'button' },
-	        '2010'
-	      )
-	    )
-	  );
-	};
-
-/***/ },
+/* 181 */,
 /* 182 */
 /***/ function(module, exports) {
 
@@ -21164,24 +20867,9 @@
 	});
 	var util = {
 	  /*
-	    arrays
-	  */
-	  compareArrays: function compareArrays(a1, a2) {
-	    if (a1.length !== a2.length) {
-	      return false;
-	    }
-	    for (var i in a1) {
-	      if (a1[i] !== a2[i]) {
-	        return false;
-	      }
-	    }
-	    return true;
-	  },
-
-	  /*
 	    strings
 	  */
-	  split: function split(str, c) {
+	  splitStr: function splitStr(str, c) {
 	    str = '' + str;
 	    return str.replace(/ /g, '').split(c || ',');
 	  },
@@ -21191,7 +20879,7 @@
 	  */
 	  formatCurrency: function formatCurrency(value) {
 	    if (typeof value === 'string') {
-	      value = this._parseCurrency(value);
+	      value = this.parseCurrency(value);
 	    }
 	    var groupSize = 3,
 	        groupSep = '.',
@@ -21200,7 +20888,7 @@
 	    return 'R$' + num.replace(new RegExp(re, 'g'), '$&' + groupSep);
 	  },
 
-	  _parseCurrency: function _parseCurrency(value) {
+	  parseCurrency: function parseCurrency(value) {
 	    return parseFloat(value.replace(/[^0-9]/g, ''));
 	  },
 
@@ -21208,7 +20896,8 @@
 	    date
 	  */
 	  dateFromStr: function dateFromStr(str) {
-	    var parts = util.split(str, '/');
+	    // console.log('dateFromStr', str)
+	    var parts = util.splitStr(str, '/');
 	    return new Date(parts[2], parseInt(parts[1]) - 1, parts[0]);
 	  },
 
@@ -21235,6 +20924,323 @@
 	};
 
 	exports.default = util;
+
+/***/ },
+/* 183 */,
+/* 184 */,
+/* 185 */,
+/* 186 */,
+/* 187 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(158);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	var _EventService = __webpack_require__(163);
+
+	var _EventYears = __webpack_require__(188);
+
+	var _EventYears2 = _interopRequireDefault(_EventYears);
+
+	var _EventList = __webpack_require__(189);
+
+	var _EventList2 = _interopRequireDefault(_EventList);
+
+	var _util = __webpack_require__(182);
+
+	var _util2 = _interopRequireDefault(_util);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var EventsApp = (function (_React$Component) {
+	  _inherits(EventsApp, _React$Component);
+
+	  function EventsApp() {
+	    _classCallCheck(this, EventsApp);
+
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(EventsApp).call(this));
+
+	    _this.state = {
+	      events: [],
+	      selectedYear: _util2.default.currentYear()
+	    };
+	    return _this;
+	  }
+
+	  _createClass(EventsApp, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var _this2 = this;
+
+	      (0, _EventService.getEvents)().then(function (events) {
+	        _this2.setState({
+	          events: events
+	        });
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'ev-container' },
+	        _react2.default.createElement(_EventYears2.default, { events: this.state.events }),
+	        _react2.default.createElement(_EventList2.default, { events: this.state.events })
+	      );
+	    }
+	  }]);
+
+	  return EventsApp;
+	})(_react2.default.Component);
+
+	exports.default = EventsApp;
+
+/***/ },
+/* 188 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(158);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = function (_ref) {
+	  var events = _ref.events;
+
+	  // // let data = events.map((event, i) => <Event event={event} key={i}/>);
+	  // let years =       _.sortBy(_.uniq(_.map(this.evts, function(item) {
+	  //         return item.getYear();
+	  //       })), function(item) {
+	  //         return -item; // descending sort
+	  //       });
+
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'year-list' },
+	    _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(
+	        'button',
+	        { className: 'pure-button', 'data-js': 'year-button', type: 'button', disabled: true },
+	        '2000'
+	      )
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(
+	        'button',
+	        { className: 'pure-button', 'data-js': 'year-button', type: 'button' },
+	        '2010'
+	      )
+	    )
+	  );
+	};
+
+/***/ },
+/* 189 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(158);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	var _Event = __webpack_require__(190);
+
+	var _Event2 = _interopRequireDefault(_Event);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = function (_ref) {
+	  var events = _ref.events;
+
+	  var data = events.map(function (event, i) {
+	    return _react2.default.createElement(_Event2.default, { event: event, key: i });
+	  });
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'ev-events' },
+	    data
+	  );
+	};
+
+/***/ },
+/* 190 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(158);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = function (_ref) {
+	  var event = _ref.event;
+
+	  var tags = event.formattedTagArray.map(function (tag, i) {
+	    return _react2.default.createElement(
+	      'li',
+	      { className: 'tag', key: i },
+	      tag
+	    );
+	  });
+
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'ev-event {past ? \'past\' : \'\'}' },
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'ev-event__col ev-event__col--info' },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'ev-event__title' },
+	        event.name
+	      ),
+	      event.description && _react2.default.createElement(
+	        'div',
+	        { className: 'ev-event__description' },
+	        _react2.default.createElement(
+	          'span',
+	          { className: 'ev-event__label' },
+	          'Descrição do evento:'
+	        ),
+	        event.description
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'u-row' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'u-col' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'ev-event__price' },
+	            _react2.default.createElement(
+	              'span',
+	              { className: 'ev-event__label' },
+	              'Valor:'
+	            ),
+	            event.formattedPrice
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'u-col' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'ev-event__date' },
+	            _react2.default.createElement(
+	              'span',
+	              { className: 'ev-event__label' },
+	              'Data:'
+	            ),
+	            event.formattedDate
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'u-col' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'ev-event__time' },
+	            _react2.default.createElement(
+	              'span',
+	              { className: 'ev-event__label' },
+	              'Horário:'
+	            ),
+	            event.formattedTime
+	          )
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'ev-event__location' },
+	        _react2.default.createElement(
+	          'span',
+	          { className: 'ev-event__label' },
+	          'Local:'
+	        ),
+	        event.formattedLocation,
+	        _react2.default.createElement('br', null),
+	        event.formattedAddress
+	      ),
+	      event.url && _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'a',
+	          { href: '<%= event.url %>', target: '_blank' },
+	          '+ Site do evento'
+	        )
+	      ),
+	      tags.length && _react2.default.createElement(
+	        'div',
+	        { className: '' },
+	        _react2.default.createElement(
+	          'ul',
+	          { className: 'tags' },
+	          tags
+	        )
+	      )
+	    ),
+	    event.img && _react2.default.createElement(
+	      'div',
+	      { className: 'ev-event__col ev-event__col--image' },
+	      _react2.default.createElement('img', { src: event.img, className: 'ev-event__image' })
+	    )
+	  );
+	};
 
 /***/ }
 /******/ ]);

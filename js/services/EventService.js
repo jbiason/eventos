@@ -6,85 +6,77 @@ let textConstants = {
   FREE: 'Grátis'
 };
 
-function formatType(event) {
-  let type = parseInt(event.type);
+function formatType(typeStr) {
+  let type = parseInt(typeStr);
   isNaN(type) && (type = 0);
-  event.type = type;
+  return type;
 }
 
-function formatPrices(event) {
-  let val = event.price;
-  if (val === undefined) {
-    event.formattedPrices = textConstants.UNDEFINED;
-    return;
+function formatPrice(priceStr) {
+  if (priceStr === undefined) {
+    return textConstants.UNDEFINED;
   }
 
-  event.formattedPrices = util.split(val)
-    .map(item => {
-      let price = parseInt(item);
-      if (isNaN(price)) return undefined;
-      return price === 0 ? textConstants.FREE : util.formatCurrency(price);
-    })
-    .filter(item => item !== undefined)
+  return util.splitStr(priceStr)
+    .map(price => parseInt(price))
+    .filter(price => !isNaN(price))
+    .map(price => 0 ? textConstants.FREE : util.formatCurrency(price))
     .join(' - ')
   ;
 }
 
-function formatDates(event) {
-  let val = event.date;
-  event.dates = util.split(val)
+function formatDateArray(dateStr) {
+  return util.splitStr(dateStr)
     .map(util.dateFromStr)
     .filter(item => !isNaN(item.valueOf()))
   ;
+}
 
-  if (event.dates.length === 0) {
-    event.dates = event.formattedDates = undefined;
-    return;
-  }
-
-  event.formattedDates = event.dates
+function formatDate(dateStr) {
+  return formatDateArray(dateStr)
     .map(util.formatDate)
     .join(' - ')
   ;
 }
 
-function formatTime(event) {
-  let val = event.time;
-  event.formattedTime = val || textConstants.UNDEFINED;
+function formatYear(dateStr) {
+  return formatDateArray(dateStr)[0].getFullYear();
 }
 
-function formatLocation(event) {
-  let val = event.location;
-  event.formattedLocation = val || textConstants.UNDEFINED;
+function formatTime(timeStr = textConstants.UNDEFINED) {
+  return timeStr;
 }
 
-function formatAddress(event) {
-  let val = event.address;
-  event.formattedAddress = val || textConstants.UNDEFINED;
+function formatLocation(locationStr = textConstants.UNDEFINED) {
+  return locationStr;
 }
 
-function formatTags(event) {
-  let val = event.tags;
-  event.tagArray = (val && val.length) ? util.split(val) : [];
+function formatAddress(addressStr = textConstants.UNDEFINED) {
+  return addressStr;
+}
+
+function formatTagsArray(tagsStr = '') {
+  return tagsStr.length ? util.splitStr(tagsStr) : [];
 }
 
 function prepareEventData(event) {
-  formatType(event);
-  formatPrices(event);
-  formatDates(event);
-  formatTime(event);
-  formatLocation(event);
-  formatAddress(event);
-  formatTags(event);
+  event.formattedType = formatType(event.type);
+  event.formattedPrice = formatPrice(event.price);
+  event.formattedDate = formatDate(event.date);
+  event.formattedDateArray = formatDateArray(event.date);
+  event.formattedYear = formatYear(event.date);
+  event.formattedTime = formatTime(event.time);
+  event.formattedLocation = formatLocation(event.location);
+  event.formattedAddress = formatAddress(event.address);
+  event.formattedTagArray = formatTagsArray(event.tags);
   return event;
 }
 
 export function getEvents() {
   return axios.get('./events.json')
     .then(({data}) => {
-      data = data.map(prepareEventData);
-      console.log('data', data);
-      return data;
+      console.log('data', data.map(prepareEventData));
+      return data.map(prepareEventData);
     })
   ;
 }
