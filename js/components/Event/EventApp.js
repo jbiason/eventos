@@ -10,6 +10,7 @@ export default class EventsApp extends React.Component {
     super();
     this.state = {
       events: [],
+      filteredEvents: [],
       selectedYear: util.currentYear()
     }
   }
@@ -18,15 +19,30 @@ export default class EventsApp extends React.Component {
       .then((events) => {
         this.setState({
           events: events
-        });
+        }, this.filterEvents);
       })
     ;
+  }
+  filterEvents() {
+    let events = this.state.events;
+    let filteredEvents = events
+      .filter(event => event.formattedYear === this.state.selectedYear)
+    ;
+
+    this.setState({
+      filteredEvents: filteredEvents
+    });
+  }
+  selectYear(selectedYear) {
+    this.setState({
+      selectedYear: selectedYear
+    }, this.filterEvents);
   }
   render () {
     return (
       <div className="ev-container">
-        <EventYears events={this.state.events} />
-        <EventList events={this.state.events} />
+        <EventYears events={this.state.events} selectYear={(e) => this.selectYear(e)}/>
+        <EventList events={this.state.filteredEvents} />
       </div>
     )
   }

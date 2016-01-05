@@ -19669,7 +19669,7 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _EventApp = __webpack_require__(187);
+	var _EventApp = __webpack_require__(160);
 
 	var _EventApp2 = _interopRequireDefault(_EventApp);
 
@@ -19680,10 +19680,118 @@
 	};
 
 /***/ },
-/* 160 */,
-/* 161 */,
-/* 162 */,
-/* 163 */
+/* 160 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(158);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	var _EventService = __webpack_require__(161);
+
+	var _EventYears = __webpack_require__(180);
+
+	var _EventYears2 = _interopRequireDefault(_EventYears);
+
+	var _EventList = __webpack_require__(181);
+
+	var _EventList2 = _interopRequireDefault(_EventList);
+
+	var _util = __webpack_require__(179);
+
+	var _util2 = _interopRequireDefault(_util);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var EventsApp = (function (_React$Component) {
+	  _inherits(EventsApp, _React$Component);
+
+	  function EventsApp() {
+	    _classCallCheck(this, EventsApp);
+
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(EventsApp).call(this));
+
+	    _this.state = {
+	      events: [],
+	      filteredEvents: [],
+	      selectedYear: _util2.default.currentYear()
+	    };
+	    return _this;
+	  }
+
+	  _createClass(EventsApp, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var _this2 = this;
+
+	      (0, _EventService.getEvents)().then(function (events) {
+	        _this2.setState({
+	          events: events
+	        }, _this2.filterEvents);
+	      });
+	    }
+	  }, {
+	    key: 'filterEvents',
+	    value: function filterEvents() {
+	      var _this3 = this;
+
+	      var events = this.state.events;
+	      var filteredEvents = events.filter(function (event) {
+	        return event.formattedYear === _this3.state.selectedYear;
+	      });
+
+	      this.setState({
+	        filteredEvents: filteredEvents
+	      });
+	    }
+	  }, {
+	    key: 'selectYear',
+	    value: function selectYear(selectedYear) {
+	      this.setState({
+	        selectedYear: selectedYear
+	      }, this.filterEvents);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this4 = this;
+
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'ev-container' },
+	        _react2.default.createElement(_EventYears2.default, { events: this.state.events, selectYear: function selectYear(e) {
+	            return _this4.selectYear(e);
+	          } }),
+	        _react2.default.createElement(_EventList2.default, { events: this.state.filteredEvents })
+	      );
+	    }
+	  }]);
+
+	  return EventsApp;
+	})(_react2.default.Component);
+
+	exports.default = EventsApp;
+
+/***/ },
+/* 161 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -19693,11 +19801,11 @@
 	});
 	exports.getEvents = getEvents;
 
-	var _axios = __webpack_require__(164);
+	var _axios = __webpack_require__(162);
 
 	var _axios2 = _interopRequireDefault(_axios);
 
-	var _util = __webpack_require__(182);
+	var _util = __webpack_require__(179);
 
 	var _util2 = _interopRequireDefault(_util);
 
@@ -19791,24 +19899,24 @@
 	}
 
 /***/ },
-/* 164 */
+/* 162 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(165);
+	module.exports = __webpack_require__(163);
 
 /***/ },
-/* 165 */
+/* 163 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var defaults = __webpack_require__(166);
-	var utils = __webpack_require__(167);
-	var dispatchRequest = __webpack_require__(168);
-	var InterceptorManager = __webpack_require__(176);
-	var isAbsoluteURL = __webpack_require__(177);
-	var combineURLs = __webpack_require__(178);
-	var bind = __webpack_require__(179);
+	var defaults = __webpack_require__(164);
+	var utils = __webpack_require__(165);
+	var dispatchRequest = __webpack_require__(166);
+	var InterceptorManager = __webpack_require__(174);
+	var isAbsoluteURL = __webpack_require__(175);
+	var combineURLs = __webpack_require__(176);
+	var bind = __webpack_require__(177);
 
 	function Axios(defaultConfig) {
 	  this.defaultConfig = utils.merge({
@@ -19876,7 +19984,7 @@
 	axios.all = function all(promises) {
 	  return Promise.all(promises);
 	};
-	axios.spread = __webpack_require__(180);
+	axios.spread = __webpack_require__(178);
 
 	// Expose interceptors
 	axios.interceptors = defaultInstance.interceptors;
@@ -19907,12 +20015,12 @@
 
 
 /***/ },
-/* 166 */
+/* 164 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(167);
+	var utils = __webpack_require__(165);
 
 	var PROTECTION_PREFIX = /^\)\]\}',?\n/;
 	var DEFAULT_CONTENT_TYPE = {
@@ -19976,7 +20084,7 @@
 
 
 /***/ },
-/* 167 */
+/* 165 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -20222,7 +20330,7 @@
 
 
 /***/ },
-/* 168 */
+/* 166 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -20239,10 +20347,10 @@
 	    try {
 	      if ((typeof XMLHttpRequest !== 'undefined') || (typeof ActiveXObject !== 'undefined')) {
 	        // For browsers use XHR adapter
-	        __webpack_require__(169)(resolve, reject, config);
+	        __webpack_require__(167)(resolve, reject, config);
 	      } else if (typeof process !== 'undefined') {
 	        // For node use HTTP adapter
-	        __webpack_require__(169)(resolve, reject, config);
+	        __webpack_require__(167)(resolve, reject, config);
 	      }
 	    } catch (e) {
 	      reject(e);
@@ -20254,20 +20362,20 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 169 */
+/* 167 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	/*global ActiveXObject:true*/
 
-	var defaults = __webpack_require__(166);
-	var utils = __webpack_require__(167);
-	var buildURL = __webpack_require__(170);
-	var parseHeaders = __webpack_require__(171);
-	var transformData = __webpack_require__(172);
-	var isURLSameOrigin = __webpack_require__(173);
-	var btoa = window.btoa || __webpack_require__(174);
+	var defaults = __webpack_require__(164);
+	var utils = __webpack_require__(165);
+	var buildURL = __webpack_require__(168);
+	var parseHeaders = __webpack_require__(169);
+	var transformData = __webpack_require__(170);
+	var isURLSameOrigin = __webpack_require__(171);
+	var btoa = window.btoa || __webpack_require__(172);
 
 	module.exports = function xhrAdapter(resolve, reject, config) {
 	  // Transform request data
@@ -20344,7 +20452,7 @@
 	  // This is only done if running in a standard browser environment.
 	  // Specifically not if we're in a web worker, or react-native.
 	  if (utils.isStandardBrowserEnv()) {
-	    var cookies = __webpack_require__(175);
+	    var cookies = __webpack_require__(173);
 
 	    // Add xsrf header
 	    var xsrfValue =  config.withCredentials || isURLSameOrigin(config.url) ?
@@ -20395,12 +20503,12 @@
 
 
 /***/ },
-/* 170 */
+/* 168 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(167);
+	var utils = __webpack_require__(165);
 
 	function encode(val) {
 	  return encodeURIComponent(val).
@@ -20468,12 +20576,12 @@
 
 
 /***/ },
-/* 171 */
+/* 169 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(167);
+	var utils = __webpack_require__(165);
 
 	/**
 	 * Parse headers into an object
@@ -20511,12 +20619,12 @@
 
 
 /***/ },
-/* 172 */
+/* 170 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(167);
+	var utils = __webpack_require__(165);
 
 	/**
 	 * Transform the data for a request or a response
@@ -20537,12 +20645,12 @@
 
 
 /***/ },
-/* 173 */
+/* 171 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(167);
+	var utils = __webpack_require__(165);
 
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -20611,7 +20719,7 @@
 
 
 /***/ },
-/* 174 */
+/* 172 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -20653,12 +20761,12 @@
 
 
 /***/ },
-/* 175 */
+/* 173 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(167);
+	var utils = __webpack_require__(165);
 
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -20712,12 +20820,12 @@
 
 
 /***/ },
-/* 176 */
+/* 174 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var utils = __webpack_require__(167);
+	var utils = __webpack_require__(165);
 
 	function InterceptorManager() {
 	  this.handlers = [];
@@ -20770,7 +20878,7 @@
 
 
 /***/ },
-/* 177 */
+/* 175 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -20790,7 +20898,7 @@
 
 
 /***/ },
-/* 178 */
+/* 176 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -20808,7 +20916,7 @@
 
 
 /***/ },
-/* 179 */
+/* 177 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -20825,7 +20933,7 @@
 
 
 /***/ },
-/* 180 */
+/* 178 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -20858,8 +20966,7 @@
 
 
 /***/ },
-/* 181 */,
-/* 182 */
+/* 179 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -20938,96 +21045,7 @@
 	exports.default = util;
 
 /***/ },
-/* 183 */,
-/* 184 */,
-/* 185 */,
-/* 186 */,
-/* 187 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactDom = __webpack_require__(158);
-
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-
-	var _EventService = __webpack_require__(163);
-
-	var _EventYears = __webpack_require__(188);
-
-	var _EventYears2 = _interopRequireDefault(_EventYears);
-
-	var _EventList = __webpack_require__(189);
-
-	var _EventList2 = _interopRequireDefault(_EventList);
-
-	var _util = __webpack_require__(182);
-
-	var _util2 = _interopRequireDefault(_util);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var EventsApp = (function (_React$Component) {
-	  _inherits(EventsApp, _React$Component);
-
-	  function EventsApp() {
-	    _classCallCheck(this, EventsApp);
-
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(EventsApp).call(this));
-
-	    _this.state = {
-	      events: [],
-	      selectedYear: _util2.default.currentYear()
-	    };
-	    return _this;
-	  }
-
-	  _createClass(EventsApp, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      var _this2 = this;
-
-	      (0, _EventService.getEvents)().then(function (events) {
-	        _this2.setState({
-	          events: events
-	        });
-	      });
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'ev-container' },
-	        _react2.default.createElement(_EventYears2.default, { events: this.state.events }),
-	        _react2.default.createElement(_EventList2.default, { events: this.state.events })
-	      );
-	    }
-	  }]);
-
-	  return EventsApp;
-	})(_react2.default.Component);
-
-	exports.default = EventsApp;
-
-/***/ },
-/* 188 */
+/* 180 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21048,40 +21066,48 @@
 
 	exports.default = function (_ref) {
 	  var events = _ref.events;
+	  var selectYear = _ref.selectYear;
 
-	  // // let data = events.map((event, i) => <Event event={event} key={i}/>);
-	  // let years =       _.sortBy(_.uniq(_.map(this.evts, function(item) {
-	  //         return item.getYear();
-	  //       })), function(item) {
-	  //         return -item; // descending sort
-	  //       });
+	  var getYears = function getYears(events) {
+	    // uniq
+	    var obj = {};
+	    events.map(function (event) {
+	      return event.formattedYear;
+	    }).forEach(function (year) {
+	      return obj[year] = year;
+	    });
+	    var years = [];
+	    for (var i in obj) {
+	      years.push(obj[i]);
+	    }
+	    return years.sort(function (e1, e2) {
+	      return parseInt(e2) - parseInt(e1);
+	    });
+	  };
+
+	  var yearsButtons = getYears(events).map(function (year, index) {
+	    return _react2.default.createElement(
+	      'div',
+	      { key: index },
+	      _react2.default.createElement(
+	        'button',
+	        { className: 'pure-button', type: 'button', onClick: function onClick() {
+	            return selectYear(year);
+	          } },
+	        year
+	      )
+	    );
+	  });
 
 	  return _react2.default.createElement(
 	    'div',
 	    { className: 'year-list' },
-	    _react2.default.createElement(
-	      'div',
-	      null,
-	      _react2.default.createElement(
-	        'button',
-	        { className: 'pure-button', 'data-js': 'year-button', type: 'button', disabled: true },
-	        '2000'
-	      )
-	    ),
-	    _react2.default.createElement(
-	      'div',
-	      null,
-	      _react2.default.createElement(
-	        'button',
-	        { className: 'pure-button', 'data-js': 'year-button', type: 'button' },
-	        '2010'
-	      )
-	    )
+	    yearsButtons
 	  );
 	};
 
 /***/ },
-/* 189 */
+/* 181 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21098,7 +21124,7 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _Event = __webpack_require__(190);
+	var _Event = __webpack_require__(182);
 
 	var _Event2 = _interopRequireDefault(_Event);
 
@@ -21118,7 +21144,7 @@
 	};
 
 /***/ },
-/* 190 */
+/* 182 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
