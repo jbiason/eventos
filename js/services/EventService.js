@@ -1,14 +1,16 @@
 import axios from 'axios';
 import util from '../util/util';
 
-let textConstants = {
+const textConstants = {
   UNDEFINED: 'Não definido',
-  FREE: 'Grátis'
+  FREE: 'Grátis',
 };
 
 function formatType(typeStr) {
-  let type = parseInt(typeStr);
-  isNaN(type) && (type = 0);
+  const type = parseInt(typeStr);
+  if (isNaN(type)) {
+    return 0;
+  }
   return type;
 }
 
@@ -17,10 +19,11 @@ function formatPrice(priceStr) {
     return textConstants.UNDEFINED;
   }
 
-  var priceArray = util.splitStr(priceStr)
-    .map(price => parseInt(price))
+  const priceArray = util.splitStr(priceStr)
+    .map(parseInt)
     .filter(price => !isNaN(price))
     .map(price => price === 0 ? textConstants.FREE : util.formatCurrency(price))
+  ;
 
   return util.simplifyArray(priceArray)
     .join(' - ')
@@ -71,7 +74,7 @@ function prepareEventData(event) {
   event.formattedDate = formatDate(event.date);
   event.formattedDateArray = formatDateArray(event.date);
   event.formattedYear = formatYear(event.date);
-  event.formattedIsPast= formatIsPast(event.date);
+  event.formattedIsPast = formatIsPast(event.date);
   event.formattedTime = formatTime(event.time);
   event.formattedLocation = formatLocation(event.location);
   event.formattedAddress = formatAddress(event.address);

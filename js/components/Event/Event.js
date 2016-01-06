@@ -1,14 +1,13 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 export default ({event}) => {
-  let getDescriptionHTML = (description) => {
+  const getDescriptionHTML = (description) => {
     return {__html: description};
-  }
-  let tags = event.formattedTagArray.map((tag, i) => <li className="tag" key={i}>{tag}</li>);
+  };
+  const tags = event.formattedTagArray.map((tag, i) => <li className="tag" key={i}>{tag}</li>);
 
   return (
-    <div className={"ev-event " + (event.formattedIsPast ? 'past' : '')}>
+    <div className={'ev-event ' + (event.formattedIsPast ? 'past' : '')}>
       <div className="ev-event__col ev-event__col--info">
         <div className="ev-event__title">{event.name}</div>
 
@@ -44,5 +43,5 @@ export default ({event}) => {
 
       {event.img && <div className="ev-event__col ev-event__col--image"><img src={event.img} className="ev-event__image" /></div>}
     </div>
-  )
-}
+  );
+};

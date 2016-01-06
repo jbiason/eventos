@@ -1,10 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Event from './Event';
 import EventEmptyResult from './EventEmptyResult';
 
 export default ({events}) => {
-  let result = events.length
+  const result = events.length
     ? events.map((event) => <Event event={event} key={event.id}/>)
     : <EventEmptyResult />
   ;
@@ -15,4 +14,4 @@ export default ({events}) => {
         </div>
     </div>
   );
-}
+};

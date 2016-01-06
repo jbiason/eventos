@@ -1,10 +1,9 @@
 import React, {PropTypes} from 'react';
-import ReactDOM from 'react-dom';
 import EventYears from './EventYears';
 import EventSearch from './EventSearch';
 import EventTypeRadio from './EventTypeRadio';
 
-let Event = ({events, selectedYear, selectYear, query, changeSearch, selectedType, selectType}) => {
+const Event = ({events, selectedYear, selectYear, query, changeSearch, selectedType, selectType}) => {
   return (
     <div className="ev-page-header">
       <EventYears events={events} selectedYear={selectedYear} selectYear={selectYear} />
@@ -12,7 +11,7 @@ let Event = ({events, selectedYear, selectYear, query, changeSearch, selectedTyp
       <EventTypeRadio selectedType={selectedType} selectType={selectType} />
     </div>
   );
-}
+};
 
 Event.propTypes = {
   events: PropTypes.array,
@@ -21,7 +20,7 @@ Event.propTypes = {
   query: PropTypes.string,
   changeSearch: PropTypes.func,
   selectedType: PropTypes.number,
-  selectType: PropTypes.func
+  selectType: PropTypes.func,
 };
 
 export default Event;

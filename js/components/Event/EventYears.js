@@ -1,24 +1,23 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
-let EventYears = ({events, selectedYear, selectYear}) => {
-  let getYears = (events) => {
+const EventYears = ({events, selectedYear, selectYear}) => {
+  const getYears = (evts) => {
     // uniq
-    let obj = {};
-    events.map(event => event.formattedYear).forEach(year => obj[year] = year);
-    let years = [];
-    for (var i in obj) {
+    const obj = {};
+    evts.map(event => event.formattedYear).forEach(year => obj[year] = year);
+    const years = [];
+    for (const i in obj) {
       years.push(obj[i]);
     }
     return years.sort((e1, e2) => parseInt(e2) - parseInt(e1));
-  }
+  };
 
-  let yearsButtons = getYears(events).map((year, index) => {
+  const yearsButtons = getYears(events).map((year, index) => {
     return (
       <div key={index}>
-        <button className={"pure-button " + (selectedYear === year ? 'pure-button-disabled' : '')} type="button" onClick={() => selectYear(year)}>{year}</button>
+        <button className={'pure-button ' + (selectedYear === year ? 'pure-button-disabled' : '')} type="button" onClick={() => selectYear(year)}>{year}</button>
       </div>
-    )
+    );
   });
 
   return (
@@ -26,6 +25,6 @@ let EventYears = ({events, selectedYear, selectYear}) => {
       {yearsButtons}
     </div>
   );
-}
+};
 
 export default EventYears;

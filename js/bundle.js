@@ -20145,10 +20145,6 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactDom = __webpack_require__(/*! react-dom */ 158);
-	
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-	
 	var _EventApp = __webpack_require__(/*! ./Event/EventApp */ 160);
 	
 	var _EventApp2 = _interopRequireDefault(_EventApp);
@@ -20178,10 +20174,6 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactDom = __webpack_require__(/*! react-dom */ 158);
-	
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-	
 	var _EventService = __webpack_require__(/*! ../../services/EventService */ 161);
 	
 	var _EventFilter = __webpack_require__(/*! ./EventFilter */ 180);
@@ -20200,7 +20192,7 @@
 	
 	var _doesMatch2 = _interopRequireDefault(_doesMatch);
 	
-	var _reactLoader = __webpack_require__(/*! react-loader */ 190);
+	var _reactLoader = __webpack_require__(/*! react-loader */ 188);
 	
 	var _reactLoader2 = _interopRequireDefault(_reactLoader);
 	
@@ -20248,53 +20240,6 @@
 	      });
 	    }
 	  }, {
-	    key: 'filterEvents',
-	    value: function filterEvents() {
-	      var year = this.state.selectedYear;
-	      var type = this.state.selectedType;
-	      var events = this.state.events;
-	      var query = this.state.query;
-	      var filteredEvents = events.filter(function (event) {
-	        return event.formattedYear === year;
-	      }).filter(function (event) {
-	        return type === undefined ? true : event.formattedType === type;
-	      });
-	
-	      if (query) {
-	        filteredEvents = filteredEvents.filter(function (event) {
-	          return !!(0, _doesMatch2.default)(event.name, query) || event.formattedTagArray.some(function (tag) {
-	            return !!(0, _doesMatch2.default)(tag, query);
-	          });
-	        });
-	      }
-	
-	      this.setState({
-	        filteredEvents: filteredEvents
-	      });
-	    }
-	  }, {
-	    key: 'selectYear',
-	    value: function selectYear(year) {
-	      this.setState({
-	        selectedYear: year
-	      }, this.filterEvents);
-	    }
-	  }, {
-	    key: 'selectType',
-	    value: function selectType(type) {
-	      this.setState({
-	        selectedType: type
-	      }, this.filterEvents);
-	    }
-	  }, {
-	    key: 'changeSearch',
-	    value: function changeSearch(e) {
-	      var query = e.target.value;
-	      this.setState({
-	        query: query
-	      }, this.filterEvents);
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var _this3 = this;
@@ -20323,6 +20268,53 @@
 	          _react2.default.createElement(_EventList2.default, { events: this.state.filteredEvents })
 	        )
 	      );
+	    }
+	  }, {
+	    key: 'selectYear',
+	    value: function selectYear(year) {
+	      this.setState({
+	        selectedYear: year
+	      }, this.filterEvents);
+	    }
+	  }, {
+	    key: 'selectType',
+	    value: function selectType(type) {
+	      this.setState({
+	        selectedType: type
+	      }, this.filterEvents);
+	    }
+	  }, {
+	    key: 'changeSearch',
+	    value: function changeSearch(e) {
+	      var query = e.target.value;
+	      this.setState({
+	        query: query
+	      }, this.filterEvents);
+	    }
+	  }, {
+	    key: 'filterEvents',
+	    value: function filterEvents() {
+	      var year = this.state.selectedYear;
+	      var type = this.state.selectedType;
+	      var events = this.state.events;
+	      var query = this.state.query;
+	      var filteredEvents = events.filter(function (event) {
+	        return event.formattedYear === year;
+	      }).filter(function (event) {
+	        return type === undefined ? true : event.formattedType === type;
+	      });
+	
+	      if (query) {
+	        filteredEvents = filteredEvents.filter(function (event) {
+	          return !!(0, _doesMatch2.default)(event.name, query) || event.formattedTagArray.some(function (tag) {
+	            return !!(0, _doesMatch2.default)(tag, query);
+	          });
+	        });
+	      }
+	
+	      this.setState({
+	        filteredEvents: filteredEvents
+	      });
 	    }
 	  }]);
 	
@@ -20362,7 +20354,9 @@
 	
 	function formatType(typeStr) {
 	  var type = parseInt(typeStr);
-	  isNaN(type) && (type = 0);
+	  if (isNaN(type)) {
+	    return 0;
+	  }
 	  return type;
 	}
 	
@@ -20371,9 +20365,7 @@
 	    return textConstants.UNDEFINED;
 	  }
 	
-	  var priceArray = _util2.default.splitStr(priceStr).map(function (price) {
-	    return parseInt(price);
-	  }).filter(function (price) {
+	  var priceArray = _util2.default.splitStr(priceStr).map(parseInt).filter(function (price) {
 	    return !isNaN(price);
 	  }).map(function (price) {
 	    return price === 0 ? textConstants.FREE : _util2.default.formatCurrency(price);
@@ -21585,6 +21577,7 @@
 	  /*
 	    array
 	  */
+	
 	  simplifyArray: function simplifyArray(array) {
 	    if (array.length < 3) {
 	      return array;
@@ -21595,8 +21588,8 @@
 	  /*
 	    strings
 	  */
-	  splitStr: function splitStr(str, c) {
-	    str = '' + str;
+	  splitStr: function splitStr(val, c) {
+	    var str = '' + val;
 	    return str.replace(/ /g, '').split(c || ',');
 	  },
 	
@@ -21604,16 +21597,16 @@
 	    currency
 	  */
 	  formatCurrency: function formatCurrency(value) {
+	    var numVal = value;
 	    if (typeof value === 'string') {
-	      value = this.parseCurrency(value);
+	      numVal = this.parseCurrency(numVal);
 	    }
-	    var groupSize = 3,
-	        groupSep = '.',
-	        re = '\\d(?=(\\d{' + (groupSize || 3) + '})+' + ')',
-	        num = value.toFixed();
+	    var groupSize = 3;
+	    var groupSep = '.';
+	    var re = '\\d(?=(\\d{' + (groupSize || 3) + '})+' + ')';
+	    var num = value.toFixed();
 	    return 'R$' + num.replace(new RegExp(re, 'g'), '$&' + groupSep);
 	  },
-	
 	  parseCurrency: function parseCurrency(value) {
 	    return parseFloat(value.replace(/[^0-9]/g, ''));
 	  },
@@ -21625,7 +21618,6 @@
 	    var parts = util.splitStr(str, '/');
 	    return new Date(parts[2], parseInt(parts[1]) - 1, parts[0]);
 	  },
-	
 	  formatDate: function formatDate(date) {
 	    var d = date.getDate() + '';
 	    var m = date.getMonth() + 1 + '';
@@ -21633,11 +21625,9 @@
 	    m = m.length > 1 ? m : '0' + m;
 	    return d + '/' + m;
 	  },
-	
 	  currentYear: function currentYear() {
 	    return new Date().getFullYear();
 	  },
-	
 	  isPast: function isPast(date) {
 	    var today = new Date();
 	    today.setHours(0);
@@ -21666,10 +21656,6 @@
 	var _react = __webpack_require__(/*! react */ 1);
 	
 	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactDom = __webpack_require__(/*! react-dom */ 158);
-	
-	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
 	var _EventYears = __webpack_require__(/*! ./EventYears */ 181);
 	
@@ -21732,10 +21718,6 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactDom = __webpack_require__(/*! react-dom */ 158);
-	
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var EventYears = function EventYears(_ref) {
@@ -21743,10 +21725,10 @@
 	  var selectedYear = _ref.selectedYear;
 	  var selectYear = _ref.selectYear;
 	
-	  var getYears = function getYears(events) {
+	  var getYears = function getYears(evts) {
 	    // uniq
 	    var obj = {};
-	    events.map(function (event) {
+	    evts.map(function (event) {
 	      return event.formattedYear;
 	    }).forEach(function (year) {
 	      return obj[year] = year;
@@ -21766,7 +21748,7 @@
 	      { key: index },
 	      _react2.default.createElement(
 	        'button',
-	        { className: "pure-button " + (selectedYear === year ? 'pure-button-disabled' : ''), type: 'button', onClick: function onClick() {
+	        { className: 'pure-button ' + (selectedYear === year ? 'pure-button-disabled' : ''), type: 'button', onClick: function onClick() {
 	            return selectYear(year);
 	          } },
 	        year
@@ -21790,7 +21772,7 @@
   \********************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -21800,24 +21782,20 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactDom = __webpack_require__(/*! react-dom */ 158);
-	
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = function (_ref) {
 	  var query = _ref.query;
 	  var changeSearch = _ref.changeSearch;
 	
-	  return _react2.default.createElement('input', {
-	    type: 'text',
-	    className: 'ev-header__search',
-	    'data-js': 'search-input',
-	    placeholder: 'Pesquise por nome ou tag',
+	  return _react2.default.createElement("input", {
+	    type: "text",
+	    className: "ev-header__search",
+	    "data-js": "search-input",
+	    placeholder: "Pesquise por nome ou tag",
 	    defaultValue: query,
 	    onChange: changeSearch,
-	    autofocus: true
+	    autoFocus: true
 	  });
 	};
 
@@ -21838,18 +21816,6 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactDom = __webpack_require__(/*! react-dom */ 158);
-	
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-	
-	var _EventYears = __webpack_require__(/*! ./EventYears */ 181);
-	
-	var _EventYears2 = _interopRequireDefault(_EventYears);
-	
-	var _EventSearch = __webpack_require__(/*! ./EventSearch */ 182);
-	
-	var _EventSearch2 = _interopRequireDefault(_EventSearch);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = function (_ref) {
@@ -21862,7 +21828,7 @@
 	    return _react2.default.createElement(
 	      'a',
 	      { href: '#', key: i,
-	        className: "ev-select " + (selectedType === type.type ? 'is-active' : ''),
+	        className: 'ev-select ' + (selectedType === type.type ? 'is-active' : ''),
 	        onClick: function onClick() {
 	          return selectType(type.type);
 	        }
@@ -21900,15 +21866,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactDom = __webpack_require__(/*! react-dom */ 158);
-	
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-	
 	var _Event = __webpack_require__(/*! ./Event */ 185);
 	
 	var _Event2 = _interopRequireDefault(_Event);
 	
-	var _EventEmptyResult = __webpack_require__(/*! ./EventEmptyResult */ 188);
+	var _EventEmptyResult = __webpack_require__(/*! ./EventEmptyResult */ 186);
 	
 	var _EventEmptyResult2 = _interopRequireDefault(_EventEmptyResult);
 	
@@ -21948,10 +21910,6 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactDom = __webpack_require__(/*! react-dom */ 158);
-	
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = function (_ref) {
@@ -21970,7 +21928,7 @@
 	
 	  return _react2.default.createElement(
 	    'div',
-	    { className: "ev-event " + (event.formattedIsPast ? 'past' : '') },
+	    { className: 'ev-event ' + (event.formattedIsPast ? 'past' : '') },
 	    _react2.default.createElement(
 	      'div',
 	      { className: 'ev-event__col ev-event__col--info' },
@@ -22075,7 +22033,48 @@
 	};
 
 /***/ },
-/* 186 */,
+/* 186 */
+/*!*************************************************!*\
+  !*** ./js/components/Event/EventEmptyResult.js ***!
+  \*************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = function () {
+	  return _react2.default.createElement(
+	    "div",
+	    { className: "ev-msg" },
+	    _react2.default.createElement(
+	      "p",
+	      null,
+	      "Nenhum resultado :("
+	    ),
+	    _react2.default.createElement(
+	      "p",
+	      null,
+	      "Não encontrou o evento que procurava? Você pode ",
+	      _react2.default.createElement(
+	        "a",
+	        { href: "https://github.com/CWISoftware/eventos/blob/gh-pages/docs/new_event.md", target: "_blank" },
+	        "cadastrá-lo aqui"
+	      ),
+	      "!"
+	    )
+	  );
+	};
+
+/***/ },
 /* 187 */
 /*!****************************************!*\
   !*** ./~/does-match/src/does-match.js ***!
@@ -22356,53 +22355,6 @@
 
 /***/ },
 /* 188 */
-/*!*************************************************!*\
-  !*** ./js/components/Event/EventEmptyResult.js ***!
-  \*************************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactDom = __webpack_require__(/*! react-dom */ 158);
-	
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	exports.default = function () {
-	  return _react2.default.createElement(
-	    'div',
-	    { className: 'ev-msg' },
-	    _react2.default.createElement(
-	      'p',
-	      null,
-	      'Nenhum resultado :('
-	    ),
-	    _react2.default.createElement(
-	      'p',
-	      null,
-	      'Não encontrou o evento que procurava? Você pode ',
-	      _react2.default.createElement(
-	        'a',
-	        { href: 'https://github.com/CWISoftware/eventos/blob/gh-pages/docs/new_event.md', target: '_blank' },
-	        'cadastrá-lo aqui'
-	      ),
-	      '!'
-	    )
-	  );
-	};
-
-/***/ },
-/* 189 */,
-/* 190 */
 /*!********************************************!*\
   !*** ./~/react-loader/lib/react-loader.js ***!
   \********************************************/
@@ -22411,7 +22363,7 @@
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (root, factory) {
 	
 	  if (true) {
-	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! react */ 1), __webpack_require__(/*! react-dom */ 158), __webpack_require__(/*! spin.js */ 191)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! react */ 1), __webpack_require__(/*! react-dom */ 158), __webpack_require__(/*! spin.js */ 189)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	  } else if (typeof module === 'object' && typeof module.exports === 'object') {
 	    module.exports = factory(require('react'), require('react-dom'), require('spin.js'));
 	  } else {
@@ -22519,7 +22471,7 @@
 
 
 /***/ },
-/* 191 */
+/* 189 */
 /*!***************************!*\
   !*** ./~/spin.js/spin.js ***!
   \***************************/

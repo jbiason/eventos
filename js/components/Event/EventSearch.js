@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 export default ({query, changeSearch}) => {
   return (
@@ -10,7 +9,7 @@ export default ({query, changeSearch}) => {
       placeholder="Pesquise por nome ou tag"
       defaultValue={query}
       onChange={changeSearch}
-      autofocus
+      autoFocus
     />
   );
-}
+};
