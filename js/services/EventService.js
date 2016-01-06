@@ -19,27 +19,27 @@ function formatPrice(priceStr) {
     return textConstants.UNDEFINED;
   }
 
-  const priceArray = util.splitStr(priceStr)
+  const priceArray = util.strSplit(priceStr)
     .map(parseInt)
     .filter(price => !isNaN(price))
-    .map(price => price === 0 ? textConstants.FREE : util.formatCurrency(price))
+    .map(price => price === 0 ? textConstants.FREE : util.currencyFormat(price))
   ;
 
-  return util.simplifyArray(priceArray)
+  return util.arraySimplify(priceArray)
     .join(' - ')
   ;
 }
 
 function formatDateArray(dateStr) {
-  return util.splitStr(dateStr)
+  return util.strSplit(dateStr)
     .map(util.dateFromStr)
     .filter(item => !isNaN(item.valueOf()))
   ;
 }
 
 function formatDate(dateStr) {
-  return util.simplifyArray(formatDateArray(dateStr))
-    .map(util.formatDate)
+  return util.arraySimplify(formatDateArray(dateStr))
+    .map(util.dateToStr)
     .join(' - ')
   ;
 }
@@ -65,7 +65,7 @@ function formatAddress(addressStr = textConstants.UNDEFINED) {
 }
 
 function formatTagsArray(tagsStr = '') {
-  return tagsStr.length ? util.splitStr(tagsStr) : [];
+  return tagsStr.length ? util.strSplit(tagsStr) : [];
 }
 
 function prepareEventData(event) {

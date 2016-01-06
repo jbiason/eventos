@@ -1,18 +1,10 @@
 import React from 'react';
+import util from '../../util/util';
 
 const EventYears = ({events, selectedYear, selectYear}) => {
-  const getYears = (evts) => {
-    // uniq
-    const obj = {};
-    evts.map(event => event.formattedYear).forEach(year => obj[year] = year);
-    const years = [];
-    for (const i in obj) {
-      years.push(obj[i]);
-    }
-    return years.sort((e1, e2) => parseInt(e2) - parseInt(e1));
-  };
-
-  const yearsButtons = getYears(events).map((year, index) => {
+  const years = util.arrayUniq(events.map(event => event.formattedYear))
+    .sort((e1, e2) => parseInt(e2) - parseInt(e1));
+  const yearsButtons = years.map((year, index) => {
     return (
       <div key={index}>
         <button className={'pure-button ' + (selectedYear === year ? 'pure-button-disabled' : '')} type="button" onClick={() => selectYear(year)}>{year}</button>

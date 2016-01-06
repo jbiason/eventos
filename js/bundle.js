@@ -20365,23 +20365,23 @@
 	    return textConstants.UNDEFINED;
 	  }
 	
-	  var priceArray = _util2.default.splitStr(priceStr).map(parseInt).filter(function (price) {
+	  var priceArray = _util2.default.strSplit(priceStr).map(parseInt).filter(function (price) {
 	    return !isNaN(price);
 	  }).map(function (price) {
-	    return price === 0 ? textConstants.FREE : _util2.default.formatCurrency(price);
+	    return price === 0 ? textConstants.FREE : _util2.default.currencyFormat(price);
 	  });
 	
-	  return _util2.default.simplifyArray(priceArray).join(' - ');
+	  return _util2.default.arraySimplify(priceArray).join(' - ');
 	}
 	
 	function formatDateArray(dateStr) {
-	  return _util2.default.splitStr(dateStr).map(_util2.default.dateFromStr).filter(function (item) {
+	  return _util2.default.strSplit(dateStr).map(_util2.default.dateFromStr).filter(function (item) {
 	    return !isNaN(item.valueOf());
 	  });
 	}
 	
 	function formatDate(dateStr) {
-	  return _util2.default.simplifyArray(formatDateArray(dateStr)).map(_util2.default.formatDate).join(' - ');
+	  return _util2.default.arraySimplify(formatDateArray(dateStr)).map(_util2.default.dateToStr).join(' - ');
 	}
 	
 	function formatYear(dateStr) {
@@ -20413,7 +20413,7 @@
 	function formatTagsArray() {
 	  var tagsStr = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
 	
-	  return tagsStr.length ? _util2.default.splitStr(tagsStr) : [];
+	  return tagsStr.length ? _util2.default.strSplit(tagsStr) : [];
 	}
 	
 	function prepareEventData(event) {
@@ -21578,17 +21578,26 @@
 	    array
 	  */
 	
-	  simplifyArray: function simplifyArray(array) {
+	  arraySimplify: function arraySimplify(array) {
 	    if (array.length < 3) {
 	      return array;
 	    }
 	    return [array[0], array[array.length - 1]];
 	  },
+	  arrayUniq: function arrayUniq(array) {
+	    var result = [];
+	    for (var i = 0; i < array.length; i++) {
+	      if (result.indexOf(array[i]) === -1) {
+	        result.push(array[i]);
+	      }
+	    }
+	    return result;
+	  },
 	
 	  /*
 	    strings
 	  */
-	  splitStr: function splitStr(val, c) {
+	  strSplit: function strSplit(val, c) {
 	    var str = '' + val;
 	    return str.replace(/ /g, '').split(c || ',');
 	  },
@@ -21596,10 +21605,10 @@
 	  /*
 	    currency
 	  */
-	  formatCurrency: function formatCurrency(value) {
+	  currencyFormat: function currencyFormat(value) {
 	    var numVal = value;
 	    if (typeof value === 'string') {
-	      numVal = this.parseCurrency(numVal);
+	      numVal = this.currencyParse(numVal);
 	    }
 	    var groupSize = 3;
 	    var groupSep = '.';
@@ -21607,7 +21616,7 @@
 	    var num = value.toFixed();
 	    return 'R$' + num.replace(new RegExp(re, 'g'), '$&' + groupSep);
 	  },
-	  parseCurrency: function parseCurrency(value) {
+	  currencyParse: function currencyParse(value) {
 	    return parseFloat(value.replace(/[^0-9]/g, ''));
 	  },
 	
@@ -21615,10 +21624,10 @@
 	    date
 	  */
 	  dateFromStr: function dateFromStr(str) {
-	    var parts = util.splitStr(str, '/');
+	    var parts = util.strSplit(str, '/');
 	    return new Date(parts[2], parseInt(parts[1]) - 1, parts[0]);
 	  },
-	  formatDate: function formatDate(date) {
+	  dateToStr: function dateToStr(date) {
 	    var d = date.getDate() + '';
 	    var m = date.getMonth() + 1 + '';
 	    d = d.length > 1 ? d : '0' + d;
@@ -21718,6 +21727,10 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _util = __webpack_require__(/*! ../../util/util */ 179);
+	
+	var _util2 = _interopRequireDefault(_util);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var EventYears = function EventYears(_ref) {
@@ -21725,24 +21738,12 @@
 	  var selectedYear = _ref.selectedYear;
 	  var selectYear = _ref.selectYear;
 	
-	  var getYears = function getYears(evts) {
-	    // uniq
-	    var obj = {};
-	    evts.map(function (event) {
-	      return event.formattedYear;
-	    }).forEach(function (year) {
-	      return obj[year] = year;
-	    });
-	    var years = [];
-	    for (var i in obj) {
-	      years.push(obj[i]);
-	    }
-	    return years.sort(function (e1, e2) {
-	      return parseInt(e2) - parseInt(e1);
-	    });
-	  };
-	
-	  var yearsButtons = getYears(events).map(function (year, index) {
+	  var years = _util2.default.arrayUniq(events.map(function (event) {
+	    return event.formattedYear;
+	  })).sort(function (e1, e2) {
+	    return parseInt(e2) - parseInt(e1);
+	  });
+	  var yearsButtons = years.map(function (year, index) {
 	    return _react2.default.createElement(
 	      'div',
 	      { key: index },
