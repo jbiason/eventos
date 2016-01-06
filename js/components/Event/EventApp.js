@@ -5,24 +5,32 @@ import EventFilter from './EventFilter';
 import EventList from './EventList';
 import util from '../../util/util';
 import doesMatch from 'does-match';
+import Loader from 'react-loader';
 
 export default class EventsApp extends React.Component {
   constructor() {
     super();
     this.state = {
       events: [],
-      query: '',
       filteredEvents: [],
-      selectedType: undefined,
-      selectedYear: util.currentYear()
+      loaded: false,
+      selectedYear: util.currentYear(),
+      query: '',
+      selectedType: undefined
     }
   }
   componentDidMount() {
     getEvents()
-      .then((events) => {
+      .then(events => {
         this.setState({
+          loaded: true,
           events: events
         }, this.filterEvents);
+      })
+      .catch(() => {
+        this.setState({
+          loaded: true
+        });
       })
     ;
   }
@@ -67,16 +75,18 @@ export default class EventsApp extends React.Component {
   render () {
     return (
       <div>
-        <EventFilter
-          events={this.state.events}
-          selectedYear={this.state.selectedYear}
-          selectYear={(e) => this.selectYear(e)}
-          query={this.state.query}
-          changeSearch={(e) => this.changeSearch(e)}
-          selectedType={this.state.selectedType}
-          selectType={(e) => this.selectType(e)}
-        />
-        <EventList events={this.state.filteredEvents} />
+        <Loader loaded={this.state.loaded}>
+          <EventFilter
+            events={this.state.events}
+            selectedYear={this.state.selectedYear}
+            selectYear={(e) => this.selectYear(e)}
+            query={this.state.query}
+            changeSearch={(e) => this.changeSearch(e)}
+            selectedType={this.state.selectedType}
+            selectType={(e) => this.selectType(e)}
+          />
+          <EventList events={this.state.filteredEvents} />
+        </Loader>
       </div>
     )
   }
