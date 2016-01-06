@@ -21685,7 +21685,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	exports.default = function (_ref) {
+	var Event = function Event(_ref) {
 	  var events = _ref.events;
 	  var selectedYear = _ref.selectedYear;
 	  var selectYear = _ref.selectYear;
@@ -21702,6 +21702,18 @@
 	    _react2.default.createElement(_EventTypeRadio2.default, { selectedType: selectedType, selectType: selectType })
 	  );
 	};
+	
+	Event.propTypes = {
+	  events: _react.PropTypes.array,
+	  selectedYear: _react.PropTypes.number,
+	  selectYear: _react.PropTypes.func,
+	  query: _react.PropTypes.string,
+	  changeSearch: _react.PropTypes.func,
+	  selectedType: _react.PropTypes.number,
+	  selectType: _react.PropTypes.func
+	};
+	
+	exports.default = Event;
 
 /***/ },
 /* 181 */
@@ -21726,7 +21738,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	exports.default = function (_ref) {
+	var EventYears = function EventYears(_ref) {
 	  var events = _ref.events;
 	  var selectedYear = _ref.selectedYear;
 	  var selectYear = _ref.selectYear;
@@ -21768,6 +21780,8 @@
 	    yearsButtons
 	  );
 	};
+	
+	exports.default = EventYears;
 
 /***/ },
 /* 182 */
@@ -22371,6 +22385,17 @@
 	      'p',
 	      null,
 	      'Nenhum resultado :('
+	    ),
+	    _react2.default.createElement(
+	      'p',
+	      null,
+	      'Não encontrou o evento que procurava? Você pode ',
+	      _react2.default.createElement(
+	        'a',
+	        { href: 'https://github.com/CWISoftware/eventos/blob/gh-pages/docs/new_event.md', target: '_blank' },
+	        'cadastrá-lo aqui'
+	      ),
+	      '!'
 	    )
 	  );
 	};

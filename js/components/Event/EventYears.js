@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-export default ({events, selectedYear, selectYear}) => {
+let EventYears = ({events, selectedYear, selectYear}) => {
   let getYears = (events) => {
     // uniq
     let obj = {};
@@ -27,3 +27,5 @@ export default ({events, selectedYear, selectYear}) => {
     </div>
   );
 }
+
+export default EventYears;
