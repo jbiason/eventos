@@ -6,7 +6,7 @@ import util from '../../util/util';
 import doesMatch from 'does-match';
 import Loader from 'react-loader';
 
-export default class EventsApp extends React.Component {
+export default class EventApp extends React.Component {
   constructor() {
     super();
     this.state = {

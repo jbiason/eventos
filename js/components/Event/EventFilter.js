@@ -14,13 +14,13 @@ const Event = ({events, selectedYear, selectYear, query, changeSearch, selectedT
 };
 
 Event.propTypes = {
-  events: PropTypes.array,
-  selectedYear: PropTypes.number,
-  selectYear: PropTypes.func,
-  query: PropTypes.string,
-  changeSearch: PropTypes.func,
+  events: PropTypes.array.isRequired,
+  selectedYear: PropTypes.number.isRequired,
+  selectYear: PropTypes.func.isRequired,
+  query: PropTypes.string.isRequired,
+  changeSearch: PropTypes.func.isRequired,
   selectedType: PropTypes.number,
-  selectType: PropTypes.func,
+  selectType: PropTypes.func.isRequired,
 };
 
 export default Event;

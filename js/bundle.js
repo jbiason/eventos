@@ -20204,13 +20204,13 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var EventsApp = (function (_React$Component) {
-	  _inherits(EventsApp, _React$Component);
+	var EventApp = (function (_React$Component) {
+	  _inherits(EventApp, _React$Component);
 	
-	  function EventsApp() {
-	    _classCallCheck(this, EventsApp);
+	  function EventApp() {
+	    _classCallCheck(this, EventApp);
 	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(EventsApp).call(this));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(EventApp).call(this));
 	
 	    _this.state = {
 	      events: [],
@@ -20223,7 +20223,7 @@
 	    return _this;
 	  }
 	
-	  _createClass(EventsApp, [{
+	  _createClass(EventApp, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      var _this2 = this;
@@ -20318,10 +20318,10 @@
 	    }
 	  }]);
 	
-	  return EventsApp;
+	  return EventApp;
 	})(_react2.default.Component);
 	
-	exports.default = EventsApp;
+	exports.default = EventApp;
 
 /***/ },
 /* 161 */
@@ -21699,13 +21699,13 @@
 	};
 	
 	Event.propTypes = {
-	  events: _react.PropTypes.array,
-	  selectedYear: _react.PropTypes.number,
-	  selectYear: _react.PropTypes.func,
-	  query: _react.PropTypes.string,
-	  changeSearch: _react.PropTypes.func,
+	  events: _react.PropTypes.array.isRequired,
+	  selectedYear: _react.PropTypes.number.isRequired,
+	  selectYear: _react.PropTypes.func.isRequired,
+	  query: _react.PropTypes.string.isRequired,
+	  changeSearch: _react.PropTypes.func.isRequired,
 	  selectedType: _react.PropTypes.number,
-	  selectType: _react.PropTypes.func
+	  selectType: _react.PropTypes.func.isRequired
 	};
 	
 	exports.default = Event;
@@ -21913,7 +21913,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	exports.default = function (_ref) {
+	var Event = function Event(_ref) {
 	  var event = _ref.event;
 	
 	  var getDescriptionHTML = function getDescriptionHTML(description) {
@@ -22032,6 +22032,12 @@
 	    )
 	  );
 	};
+	
+	Event.propTypes = {
+	  event: _react.PropTypes.object.isRequired
+	};
+	
+	exports.default = Event;
 
 /***/ },
 /* 186 */

@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 
-export default ({event}) => {
+const Event = ({event}) => {
   const getDescriptionHTML = (description) => {
     return {__html: description};
   };
@@ -45,3 +45,9 @@ export default ({event}) => {
     </div>
   );
 };
+
+Event.propTypes = {
+  event: PropTypes.object.isRequired,
+};
+
+export default Event;
