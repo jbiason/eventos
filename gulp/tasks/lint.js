@@ -12,16 +12,9 @@ const linterStream = (glob) => {
   ;
 };
 
-gulp.task('lint:build', () => {
-  return linterStream(config.buildGlob);
-});
+gulp.task('lint:build', () => linterStream(config.buildGlob));
+gulp.task('lint:config', () => linterStream(config.configGlob));
+gulp.task('lint:scripts', () => linterStream(config.scriptsGlob));
+gulp.task('lint:tests', () => linterStream(config.testsGlob));
 
-gulp.task('lint:scripts', () => {
-  return linterStream(config.scriptsGlob);
-});
-
-gulp.task('lint:tests', () => {
-  return linterStream(config.testsGlob);
-});
-
-gulp.task('lint', ['lint:build', 'lint:scripts', 'lint:tests']);
+gulp.task('lint', ['lint:build', 'lint:config', 'lint:scripts', 'lint:tests']);
