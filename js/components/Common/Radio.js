@@ -5,7 +5,7 @@ const Radio = ({text, val}) => {
     <a href="#"
       className="ev-select"
       >
-      <span className="ev-select__icon"></span>
+      <span className="ev-select__icon">{val}</span>
       <span className="ev-select__text">{text}</span>
     </a>
   );
