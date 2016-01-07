@@ -4,7 +4,7 @@ import eslint from 'gulp-eslint';
 import config from '../config';
 import env from '../env';
 
-const linterStream = (glob, config) => {
+const linterStream = (glob) => {
   return gulp.src(glob)
   .pipe(eslint())
   .pipe(eslint.format())
