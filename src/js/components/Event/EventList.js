@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import Event from './Event';
 import EventEmptyResult from './EventEmptyResult';
 
-export default ({events}) => {
+const EventList = ({events}) => {
   const result = events.length
     ? events.map((event) => <Event event={event} key={event.id}/>)
     : <EventEmptyResult />
@@ -15,3 +15,9 @@ export default ({events}) => {
     </div>
   );
 };
+
+EventList.propTypes = {
+  events: PropTypes.array.isRequired,
+};
+
+export default EventList;

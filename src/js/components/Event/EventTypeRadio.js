@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 
-export default ({selectedType, selectType}) => {
+const EventTypeRadio = ({selectedType, selectType}) => {
   const types = [
     {text: 'Todos'},
     {type: 0, text: 'Externo'},
@@ -24,3 +24,10 @@ export default ({selectedType, selectType}) => {
     </div>
   );
 };
+
+EventTypeRadio.propTypes = {
+  selectedType: PropTypes.number.isRequired,
+  selectType: PropTypes.func.isRequired,
+};
+
+export default EventTypeRadio;

@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 
-export default ({query, changeSearch}) => {
+const EventSearch = ({query, changeSearch}) => {
   return (
     <input
       type="text"
@@ -13,3 +13,10 @@ export default ({query, changeSearch}) => {
     />
   );
 };
+
+EventSearch.propTypes = {
+  query: PropTypes.string.isRequired,
+  changeSearch: PropTypes.func.isRequired,
+};
+
+export default EventSearch;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import util from '../../util/util';
 
 const EventYears = ({events, selectedYear, selectYear}) => {
@@ -17,6 +17,12 @@ const EventYears = ({events, selectedYear, selectYear}) => {
       {yearsButtons}
     </div>
   );
+};
+
+EventYears.propTypes = {
+  events: PropTypes.array.isRequired,
+  selectedYear: PropTypes.number.isRequired,
+  selectYear: PropTypes.func.isRequired,
 };
 
 export default EventYears;
