@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   entry: './src/js/entry.js',
   output: {
     filename: './src/js/bundle.js'
@@ -11,5 +11,6 @@ module.exports = {
         loader: 'babel'
       }
     ]
-  }
-}
+  },
+  plugins: [],
+};

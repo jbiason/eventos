@@ -1,5 +1,5 @@
 import gulp from 'gulp';
-import util from 'gulp-util';
+import gutil from 'gulp-util';
 import mocha from 'gulp-mocha';
 import config from '../config';
 import env from '../env';
