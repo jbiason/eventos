@@ -23,6 +23,11 @@
     "url": "https://github.com/CWISoftware/eventos/issues"
   },
   "homepage": "https://github.com/CWISoftware/eventos#readme",
+  "config": {
+    "ghooks": {
+      "pre-commit": "gulp lint"
+    }
+  },
   "dependencies": {
     "axios": "0.8.1",
     "does-match": "1.0.0",
@@ -44,6 +49,7 @@
     "eslint-config-defaults": "7.1.1",
     "eslint-plugin-filenames": "0.2.0",
     "eslint-plugin-react": "3.14.0",
+    "ghooks": "1.0.3",
     "gulp": "3.9.0",
     "gulp-eslint": "1.1.1",
     "mocha": "2.3.4",
