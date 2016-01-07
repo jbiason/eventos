@@ -4,12 +4,12 @@ import gulp from 'gulp';
 import eslint from 'gulp-eslint';
 
 let config = {
-  scriptsDir: ['js/**/*.js', '!js/bundle.js'],
+  scriptsGlob: ['js/**/*.js', '!js/bundle.js'],
   lintFile: '.eslintrc.js'
-}
+};
 
 gulp.task('lint', () => {
-  gulp.src(config.scriptsDir)
+  gulp.src(config.scriptsGlob)
     .pipe(eslint({
       configFile: config.lintFile
     }))
@@ -18,5 +18,5 @@ gulp.task('lint', () => {
 });
 
 gulp.task('dev', ['lint'], () => {
-  gulp.watch(config.scriptsDir, ['lint']);
+  gulp.watch(config.scriptsGlob, ['lint']);
 });

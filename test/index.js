@@ -6,3 +6,5 @@ import './components/Event/Event';
 // import './components/Event/EventSearch';
 // import './components/Event/EventTypeRadio';
 // import './components/Event/EventYears';
+
+import './components/Common/Radio';
