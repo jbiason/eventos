@@ -9,9 +9,10 @@
   "scripts": {
     "test": "./node_modules/gulp/bin/gulp.js test",
     "lint": "./node_modules/gulp/bin/gulp.js lint",
-    "qa": "./node_modules/gulp/bin/gulp.js qa",
     "ci": "./node_modules/gulp/bin/gulp.js ci",
-    "build": "./node_modules/gulp/bin/gulp.js build",
+    "qa": "./node_modules/gulp/bin/gulp.js qa",
+    "build-prod": "./node_modules/gulp/bin/gulp.js build-prod",
+    "build-dev": "./node_modules/gulp/bin/gulp.js build-dev",
     "dev": "./node_modules/gulp/bin/gulp.js dev",
     "start": "npm run dev"
   },
@@ -27,7 +28,7 @@
   "homepage": "https://github.com/CWISoftware/eventos#readme",
   "config": {
     "ghooks": {
-      "pre-commit": "if gulp pre-commit --env pre-commit; then git add dist; else (exit 1); fi"
+      "pre-commit": "if ./node_modules/gulp/bin/gulp.js pre-commit --env pre-commit; then git add dist; else printf '\npre-commit error: fix the test and/or lint errors and commit again\n\n'; (exit 1); fi"
     }
   },
   "dependencies": {
