@@ -6,12 +6,20 @@ baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://eventos.cwi.com.br" # the base hostname & protocol for your site
 github_username: CWISoftware
 exclude: [
-  node_modules,
-  package.json,
-  npm-debug.log,
-  scss,
-  README.md,
+  # folders
+  config,
   docs,
+  gulp,
+  node_modules,
+  scss,
+  src,
+  test,
+
+  # files
+  gulpfile.babel.js,
+  npm-debug.log,
+  package.json,
+  README.md,
   webpack.config.js
 ]
 
