@@ -7,11 +7,10 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "mocha --compilers js:babel-register",
-    "test-watch": "mocha --compilers js:babel-register -w",
-    "build": "./node_modules/webpack/bin/webpack.js -p",
-    "start": "./node_modules/webpack/bin/webpack.js -wd",
-    "dev": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js"
+    "test": "./node_modules/mocha/bin/mocha --compilers js:babel-register",
+    "build": "./node_modules/gulp/bin/gulp.js build",
+    "dev": "./node_modules/gulp/bin/gulp.js dev",
+    "start": "npm run dev"
   },
   "repository": {
     "type": "git",

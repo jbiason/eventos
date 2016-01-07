@@ -4,4 +4,5 @@ import requireDir from 'require-dir';
 requireDir('./tasks');
 
 gulp.task('dev', ['lint', 'test', 'webpack:dev', 'watch']);
-gulp.task('pre-commit', ['lint', 'test', 'webpack:build']);
+gulp.task('build', ['webpack:build'])
+gulp.task('pre-commit', ['lint', 'test', 'build']);
