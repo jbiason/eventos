@@ -3,5 +3,6 @@ import { shallow } from 'enzyme';
 import EventFilter from '../../../js/components/Event/EventFilter';
 
 it('should work', () => {
-  const eventFilter = shallow(<EventFilter />)
+  const wrapper = shallow(<EventFilter />);
+  console.log(wrapper);
 });

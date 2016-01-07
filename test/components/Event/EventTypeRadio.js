@@ -3,5 +3,6 @@ import { shallow } from 'enzyme';
 import EventTypeRadio from '../../../js/components/Event/EventTypeRadio';
 
 it('should work', () => {
-  const eventTypeRadio = shallow(<EventTypeRadio />)
+  const wrapper = shallow(<EventTypeRadio />);
+  console.log(wrapper);
 });

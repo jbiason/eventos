@@ -7,7 +7,7 @@ import mocha from 'gulp-mocha';
 
 const config = {
   scriptsGlob: ['js/**/*.js', '!js/bundle.js'],
-  lintFile: '.eslintrc.js',
+  testsGlob: 'test/**/*.js',
   testFile: 'test/index.js',
 };
 
@@ -17,13 +17,23 @@ const env = {
   }
 };
 
-gulp.task('lint', () => {
+gulp.task('lint:scripts', () => {
   return gulp.src(config.scriptsGlob)
-  .pipe(eslint({configFile: config.lintFile}))
+  .pipe(eslint())
   .pipe(eslint.format())
   .pipe(env.isPreCommit() ? eslint.failAfterError() : util.noop())
   ;
 });
+
+gulp.task('lint:tests', () => {
+  return gulp.src(config.testsGlob)
+  .pipe(eslint())
+  .pipe(eslint.format())
+  .pipe(env.isPreCommit() ? eslint.failAfterError() : util.noop())
+  ;
+});
+
+gulp.task('lint', ['lint:scripts', 'lint:tests']);
 
 gulp.task('test', () => {
   return gulp.src(config.testFile, {read: false})
@@ -37,7 +47,8 @@ gulp.task('test', () => {
 });
 
 gulp.task('watch', () => {
-  gulp.watch(config.scriptsGlob, ['lint']);
+  gulp.watch(config.testsGlob, ['lint:tests']);
+  gulp.watch(config.scriptsGlob, ['lint:scripts']);
   gulp.watch(config.scriptsGlob, ['test']);
 });
 

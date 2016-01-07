@@ -3,5 +3,6 @@ import { shallow } from 'enzyme';
 import EventApp from '../../../js/components/Event/EventApp';
 
 it('should work', () => {
-  const eventApp = shallow(<EventApp />)
+  const wrapper = shallow(<EventApp />);
+  console.log(wrapper);
 });

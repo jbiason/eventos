@@ -3,5 +3,6 @@ import { shallow } from 'enzyme';
 import EventYears from '../../../js/components/Event/EventYears';
 
 it('should work', () => {
-  const eventYears = shallow(<EventYears />)
+  const wrapper = shallow(<EventYears />);
+  console.log(wrapper);
 });
