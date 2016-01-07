@@ -8,3 +8,4 @@ script: gulp ci
 branches:
   only:
     - gh-pages
+    - /./
