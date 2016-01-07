@@ -7,7 +7,7 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha --compilers js:babel-register",
+    "test": "./node_modules/mocha/bin/mocha",
     "build": "./node_modules/gulp/bin/gulp.js build",
     "dev": "./node_modules/gulp/bin/gulp.js dev",
     "start": "npm run dev"
