@@ -1,5 +1,5 @@
 import './components/Event/Event';
-import './components/Event/EventApp';
+// import './components/Event/EventApp';
 // import './components/Event/EventEmptyResult';
 // import './components/Event/EventFilter';
 // import './components/Event/EventList';
