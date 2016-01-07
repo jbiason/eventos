@@ -9,12 +9,6 @@ const linterStream = (glob) => {
   .pipe(eslint())
   .pipe(eslint.format())
   .pipe(env.isPreCommit() ? eslint.failAfterError() : gutil.noop())
-  .on('error', () => {
-    if (env.isPreCommit()) {
-      console.error('### lint.js process.exit(1);');
-      process.exit(1);
-    }
-  })
   ;
 };
 

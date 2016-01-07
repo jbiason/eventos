@@ -24,7 +24,7 @@
   "homepage": "https://github.com/CWISoftware/eventos#readme",
   "config": {
     "ghooks": {
-      "pre-commit": "gulp pre-commit --env pre-commit; git add -A;"
+      "pre-commit": "if gulp pre-commit --env pre-commit; then git add -A; else (exit 1); fi"
     }
   },
   "dependencies": {
