@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
-import Radio from '../../../js/components/Common/Radio';
+import Radio from '../../../src/js/components/Common/Radio';
 
 it('should render radio', () => {
   const wrapper = shallow(<Radio />);

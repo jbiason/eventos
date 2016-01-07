@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
-import Event from '../../../js/components/Event/Event';
+import Event from '../../../src/js/components/Event/Event';
 
 const eventData = {
   name: 'Evento teste',
