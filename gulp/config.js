@@ -7,5 +7,6 @@ export default {
   testFile: 'test/index.js',
 
   // dest
-  imgDest: 'dist/img',
+  destDir: 'dist',
+  imgDestDir: 'dist/img',
 };
