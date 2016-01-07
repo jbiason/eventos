@@ -1,5 +1,7 @@
 # Tecnologias utilizadas
 
+**[Edit 07/01/2016] Esta documentação está desatualizada e será atualizada em breve**
+
 Jekyll, Sass, Zepto, Underscore.
 
 Esse projeto é um site estático gerado com Jekyll e está hospedado no Github como gh-pages. Optou-se por essa abordagem por facilidade de desenvolvimento e de manutenção dos eventos, que será feita através de pull requests no próprio Github.
