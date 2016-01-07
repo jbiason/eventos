@@ -9,6 +9,7 @@ gulp.task('test', () => {
   .pipe(mocha())
   .on('error', (e) => {
     if (env.isPreCommit()) {
+      console.error('### test.js process.exit(1);');
       process.exit(1);
     }
   })
