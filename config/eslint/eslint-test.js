@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   'extends': 'defaults/configurations/walmart/es6-react-test.js',
   'rules': {
     'radix': 0,
