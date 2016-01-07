@@ -2,7 +2,7 @@ import gulp from 'gulp';
 import config from '../config';
 
 gulp.task('copy:img', () => {
-  gulp.src(config.imgGlob)
+  return gulp.src(config.imgGlob)
   .pipe(gulp.dest(config.imgDestDir))
   ;
 });
