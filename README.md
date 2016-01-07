@@ -1,4 +1,4 @@
-# [CWI Eventos](http://cwisoftware.github.io/eventos/)
+# [CWI Eventos](http://cwisoftware.github.io/eventos/) [![Build Status](https://travis-ci.org/CWISoftware/eventos.svg?branch=gh-pages)](https://travis-ci.org/CWISoftware/eventos)
 
 Site para divulgação de eventos de desenvolvimento de software, tecnologia e design.
 
