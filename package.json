@@ -7,7 +7,10 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha",
+    "test": "./node_modules/gulp/bin/gulp.js test",
+    "lint": "./node_modules/gulp/bin/gulp.js lint",
+    "qa": "./node_modules/gulp/bin/gulp.js qa",
+    "ci": "./node_modules/gulp/bin/gulp.js ci",
     "build": "./node_modules/gulp/bin/gulp.js build",
     "dev": "./node_modules/gulp/bin/gulp.js dev",
     "start": "npm run dev"
