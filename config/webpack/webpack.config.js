@@ -1,7 +1,7 @@
 export default {
   entry: './src/js/entry.js',
   output: {
-    filename: './src/js/bundle.js'
+    filename: './dist/js/bundle.js'
   },
   module: {
     loaders: [

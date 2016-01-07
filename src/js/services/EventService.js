@@ -83,7 +83,7 @@ function prepareEventData(event) {
 }
 
 export function getEvents() {
-  return axios.get('./events.json')
+  return axios.get('./data/events.json')
     .then(({data}) => {
       return data
         .map((event, index) => {
