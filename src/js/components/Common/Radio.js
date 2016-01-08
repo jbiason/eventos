@@ -13,7 +13,7 @@ const Radio = ({text, val}) => {
 
 Radio.propTypes = {
   text: PropTypes.string.isRequired,
-  val: PropTypes.string.isRequired,
+  val: PropTypes.node.isRequired,
 };
 
 export default Radio;

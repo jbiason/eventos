@@ -3,7 +3,7 @@ import EventYears from './EventYears';
 import EventSearch from './EventSearch';
 import EventTypeRadio from './EventTypeRadio';
 
-const Event = ({events, selectedYear, selectYear, query, changeSearch, selectedType, selectType}) => {
+const EventFilter = ({events, selectedYear, selectYear, query, changeSearch, selectedType, selectType}) => {
   return (
     <div className="ev-page-header">
       <EventYears events={events} selectedYear={selectedYear} selectYear={selectYear} />
@@ -13,7 +13,7 @@ const Event = ({events, selectedYear, selectYear, query, changeSearch, selectedT
   );
 };
 
-Event.propTypes = {
+EventFilter.propTypes = {
   events: PropTypes.array.isRequired,
   selectedYear: PropTypes.number.isRequired,
   selectYear: PropTypes.func.isRequired,
@@ -23,4 +23,4 @@ Event.propTypes = {
   selectType: PropTypes.func.isRequired,
 };
 
-export default Event;
+export default EventFilter;
