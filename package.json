@@ -14,7 +14,11 @@
     "build-prod": "./node_modules/gulp/bin/gulp.js build-prod",
     "build-dev": "./node_modules/gulp/bin/gulp.js build-dev",
     "dev": "./node_modules/gulp/bin/gulp.js dev",
-    "start": "npm run dev"
+    "start": "npm run dev",
+
+    "coverage": "./node_modules/babel-cli/bin/babel-node.js ./node_modules/istanbul/lib/cli cover node_modules/mocha/bin/_mocha test/index.js",
+    "check-coverage": "./node_modules/istanbul/lib/cli.js check-coverage --statements 5 --branches 5 --functions 5 --lines 5",
+    "report-coverage": "cat ./coverage/lcov.info | ./node_modules/codecov.io/bin/codecov.io.js"
   },
   "repository": {
     "type": "git",
@@ -40,6 +44,7 @@
   },
   "devDependencies": {
     "babel": "6.3.26",
+    "babel-cli": "6.4.0",
     "babel-core": "6.3.26",
     "babel-eslint": "4.1.6",
     "babel-loader": "6.2.1",
@@ -48,6 +53,7 @@
     "babel-register": "6.3.13",
     "chai": "3.4.1",
     "clone": "1.0.2",
+    "codecov.io": "0.1.6",
     "del": "2.2.0",
     "enzyme": "1.2.0",
     "eslint": "1.10.3",
@@ -59,6 +65,7 @@
     "gulp-eslint": "1.1.1",
     "gulp-mocha": "2.2.0",
     "gulp-util": "3.0.7",
+    "istanbul": "^1.0.0-alpha",
     "mocha": "2.3.4",
     "react-addons-test-utils": "0.14.5",
     "require-dir": "0.3.0",
