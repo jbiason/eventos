@@ -2,7 +2,12 @@ language: node_js
 node_js:
   - "4.1"
   - "0.12"
-script: npm run ci
+script:
+  - npm run ci
+  - npm run coverage
+  - npm run check-coverage
+after_success:
+  - npm run report-coverage
 
 # whitelist
 branches:
