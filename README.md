@@ -1,4 +1,9 @@
-# [CWI Eventos](http://cwisoftware.github.io/eventos/) [![Build Status](https://travis-ci.org/CWISoftware/eventos.svg?branch=gh-pages)](https://travis-ci.org/CWISoftware/eventos)
+# [CWI Eventos](http://cwisoftware.github.io/eventos/)
+
+[![travis build](https://img.shields.io/travis/CWISoftware/eventos.svg?branch=gh-pages)](https://travis-ci.org/CWISoftware/eventos)
+[![Dependencies status](https://img.shields.io/david/rafaeleyng/does-match.svg)](https://david-dm.org/rafaeleyng/does-match#info=dependencies)
+[![Dev Dependencies status](https://img.shields.io/david/dev/rafaeleyng/does-match.svg)](https://david-dm.org/rafaeleyng/does-match#info=devDependencies)
+[![MIT License](https://img.shields.io/npm/l/does-match.svg)](http://opensource.org/licenses/MIT)
 
 Site para divulgação de eventos de desenvolvimento de software, tecnologia e design.
 
@@ -16,3 +21,7 @@ Site para divulgação de eventos de desenvolvimento de software, tecnologia e d
 
 - [Instalação do ambiente](/docs/instalation.md)
 - [Tecnologias utilizadas](/docs/technologies.md)
+
+## Licença
+
+MIT
