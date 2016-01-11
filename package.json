@@ -9,7 +9,7 @@
   "scripts": {
     "test": "./node_modules/gulp/bin/gulp.js test",
     "lint": "./node_modules/gulp/bin/gulp.js lint",
-    "ci": "./node_modules/gulp/bin/gulp.js ci",
+    "ci": "./node_modules/gulp/bin/gulp.js ci; npm run coverage; npm run check-coverage",
     "qa": "./node_modules/gulp/bin/gulp.js qa",
     "build-prod": "./node_modules/gulp/bin/gulp.js build-prod",
     "build-dev": "./node_modules/gulp/bin/gulp.js build-dev",
