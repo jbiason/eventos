@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 import { getEvents } from '../../src/js/services/EventService'
 import { useInterceptors, ejectInterceptors } from '../axiosMock'
-import mockData from '../data/EventData'
+import mockData from '../data/EventsData'
 import clone from 'clone'
 
 describe('EventService', () => {
