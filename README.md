@@ -20,7 +20,7 @@ Site para divulgação de eventos de desenvolvimento de software, tecnologia e d
 
 ## Docs
 
-- [Instalação do ambiente](/docs/instalation.md)
+- [Ambiente](/docs/environment.md)
 - [Tecnologias utilizadas](/docs/technologies.md)
 
 ## Licença
