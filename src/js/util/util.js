@@ -32,13 +32,13 @@ const util = {
   */
   currencyFormat(value) {
     let numVal = value
-    if (typeof value === 'string') {
+    if (typeof numVal === 'string') {
       numVal = this.currencyParse(numVal)
     }
     const groupSize = 3
     const groupSep = '.'
     const re = '\\d(?=(\\d{' + (groupSize || 3) + '})+' + ')'
-    const num = value.toFixed()
+    const num = numVal.toFixed()
     return 'R$' + num.replace(new RegExp(re, 'g'), '$&' + groupSep)
   },
 

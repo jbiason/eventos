@@ -68,6 +68,11 @@ describe('currencyFormat', () => {
     expect(util.currencyFormat(12)).to.equal('R$12')
     expect(util.currencyFormat(123)).to.equal('R$123')
     expect(util.currencyFormat(1234)).to.equal('R$1.234')
+
+    expect(util.currencyFormat('1')).to.equal('R$1')
+    expect(util.currencyFormat('12')).to.equal('R$12')
+    expect(util.currencyFormat('123')).to.equal('R$123')
+    expect(util.currencyFormat('1234')).to.equal('R$1.234')
   })
 })
 
