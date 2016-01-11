@@ -1,10 +1,10 @@
-import React, {PropTypes} from 'react';
+import React, {PropTypes} from 'react'
 
 const Event = ({event}) => {
   const getDescriptionHTML = (description) => {
-    return {__html: description};
-  };
-  const tags = event.formattedTagArray.map((tag, i) => <li className="tag" key={i}>{tag}</li>);
+    return {__html: description}
+  }
+  const tags = event.formattedTagArray.map((tag, i) => <li className="tag" key={i}>{tag}</li>)
 
   return (
     <div className={'ev-event ' + (event.formattedIsPast ? 'past' : '')}>
@@ -45,11 +45,11 @@ const Event = ({event}) => {
 
       {event.img && <div className="ev-event__col ev-event__col--image"><img src={event.img} className="ev-event__image" /></div>}
     </div>
-  );
-};
+  )
+}
 
 Event.propTypes = {
   event: PropTypes.object.isRequired,
-};
+}
 
-export default Event;
+export default Event

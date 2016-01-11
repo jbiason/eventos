@@ -1,7 +1,7 @@
-import React, {PropTypes} from 'react';
-import EventYears from './EventYears';
-import EventSearch from './EventSearch';
-import EventTypeRadio from './EventTypeRadio';
+import React, {PropTypes} from 'react'
+import EventYears from './EventYears'
+import EventSearch from './EventSearch'
+import EventTypeRadio from './EventTypeRadio'
 
 const EventFilter = ({events, selectedYear, selectYear, query, changeSearch, selectedType, selectType}) => {
   return (
@@ -10,8 +10,8 @@ const EventFilter = ({events, selectedYear, selectYear, query, changeSearch, sel
       <EventSearch query={query} changeSearch={changeSearch} />
       <EventTypeRadio selectedType={selectedType} selectType={selectType} />
     </div>
-  );
-};
+  )
+}
 
 EventFilter.propTypes = {
   events: PropTypes.array.isRequired,
@@ -21,6 +21,6 @@ EventFilter.propTypes = {
   changeSearch: PropTypes.func.isRequired,
   selectedType: PropTypes.number,
   selectType: PropTypes.func.isRequired,
-};
+}
 
-export default EventFilter;
+export default EventFilter

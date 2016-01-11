@@ -1,7 +1,7 @@
-import React from 'react';
-import { shallow } from 'enzyme';
-import { expect } from 'chai';
-import EventFilter from '../../../src/js/components/Event/EventFilter';
+import React from 'react'
+import { shallow } from 'enzyme'
+import { expect } from 'chai'
+import EventFilter from '../../../src/js/components/Event/EventFilter'
 
 describe('EventFilter', () => {
   it('should work', () => {
@@ -15,7 +15,7 @@ describe('EventFilter', () => {
         selectedType={1}
         selectType={() => {}}
       />
-    );
-    expect(wrapper.find('.not_implemented')).to.have.length(0);
-  });
-});
+    )
+    expect(wrapper.find('.not_implemented')).to.have.length(0)
+  })
+})

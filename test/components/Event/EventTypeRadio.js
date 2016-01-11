@@ -1,7 +1,7 @@
-import React from 'react';
-import { shallow } from 'enzyme';
-import { expect } from 'chai';
-import EventTypeRadio from '../../../src/js/components/Event/EventTypeRadio';
+import React from 'react'
+import { shallow } from 'enzyme'
+import { expect } from 'chai'
+import EventTypeRadio from '../../../src/js/components/Event/EventTypeRadio'
 
 describe('EventTypeRadio', () => {
   it('should work', () => {
@@ -10,7 +10,7 @@ describe('EventTypeRadio', () => {
         selectedType={1}
         selectType={() => {}}
       />
-    );
-    expect(wrapper.find('.not_implemented')).to.have.length(0);
-  });
-});
+    )
+    expect(wrapper.find('.not_implemented')).to.have.length(0)
+  })
+})

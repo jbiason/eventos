@@ -1,6 +1,6 @@
-import clone from 'clone';
-import webpackConfig from './webpack.config';
+import clone from 'clone'
+import webpackConfig from './webpack.config'
 
-const config = clone(webpackConfig);
+const config = clone(webpackConfig)
 
-export default config;
+export default config

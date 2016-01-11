@@ -1,4 +1,4 @@
-import React, {PropTypes} from 'react';
+import React, {PropTypes} from 'react'
 
 const EventSearch = ({query, changeSearch}) => {
   return (
@@ -11,12 +11,12 @@ const EventSearch = ({query, changeSearch}) => {
       onChange={changeSearch}
       autoFocus
     />
-  );
-};
+  )
+}
 
 EventSearch.propTypes = {
   query: PropTypes.string.isRequired,
   changeSearch: PropTypes.func.isRequired,
-};
+}
 
-export default EventSearch;
+export default EventSearch

@@ -1,13 +1,13 @@
-import requireDir from 'require-dir';
+import requireDir from 'require-dir'
 
 describe('components', () => {
-  requireDir('./components', {recurse: true});
-});
+  requireDir('./components', {recurse: true})
+})
 
 describe('util', () => {
-  requireDir('./util', {recurse: true});
-});
+  requireDir('./util', {recurse: true})
+})
 
 describe('services', () => {
-  requireDir('./services', {recurse: true});
-});
+  requireDir('./services', {recurse: true})
+})

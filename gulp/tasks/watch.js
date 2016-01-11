@@ -1,15 +1,15 @@
-import gulp from 'gulp';
-import config from '../config';
+import gulp from 'gulp'
+import config from '../config'
 
 gulp.task('watch', () => {
   // test
-  gulp.watch(config.testsGlob, ['test']);
-  gulp.watch(config.scriptsGlob, ['test']);
+  gulp.watch(config.testsGlob, ['test'])
+  gulp.watch(config.scriptsGlob, ['test'])
   // lint
-  gulp.watch(config.buildGlob, ['lint:build']);
-  gulp.watch(config.configGlob, ['lint:config']);
-  gulp.watch(config.testsGlob, ['lint:tests']);
-  gulp.watch(config.scriptsGlob, ['lint:scripts']);
+  gulp.watch(config.buildGlob, ['lint:build'])
+  gulp.watch(config.configGlob, ['lint:config'])
+  gulp.watch(config.testsGlob, ['lint:tests'])
+  gulp.watch(config.scriptsGlob, ['lint:scripts'])
   // bundle
-  gulp.watch(config.scriptsGlob, ['webpack:dev']);
-});
+  gulp.watch(config.scriptsGlob, ['webpack:dev'])
+})

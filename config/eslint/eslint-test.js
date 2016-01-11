@@ -7,5 +7,6 @@ export default {
     'comma-dangle': [2, 'always-multiline'],
     'max-params': [2, 4],
     'no-unused-expressions': [0],
+    'semi': [2, 'never'],
   },
-};
+}

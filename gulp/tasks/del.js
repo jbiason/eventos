@@ -1,7 +1,7 @@
-import gulp from 'gulp';
-import config from '../config';
-import del from 'del';
+import gulp from 'gulp'
+import config from '../config'
+import del from 'del'
 
 gulp.task('del', () => {
-  del.sync(config.destDir);
-});
+  del.sync(config.destDir)
+})

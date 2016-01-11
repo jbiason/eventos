@@ -1,1 +1,1 @@
-import './gulp';
+import './gulp'

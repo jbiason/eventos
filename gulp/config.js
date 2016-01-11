@@ -9,4 +9,4 @@ export default {
   // dest
   destDir: 'dist',
   imgDestDir: 'dist/img',
-};
+}

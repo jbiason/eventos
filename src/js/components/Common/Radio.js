@@ -1,4 +1,4 @@
-import React, {PropTypes} from 'react';
+import React, {PropTypes} from 'react'
 
 const Radio = ({text, val}) => {
   return (
@@ -8,12 +8,12 @@ const Radio = ({text, val}) => {
       <span className="ev-select__icon">{val}</span>
       <span className="ev-select__text">{text}</span>
     </a>
-  );
-};
+  )
+}
 
 Radio.propTypes = {
   text: PropTypes.string.isRequired,
   val: PropTypes.node.isRequired,
-};
+}
 
-export default Radio;
+export default Radio

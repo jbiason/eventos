@@ -1,11 +1,11 @@
-import React, {PropTypes} from 'react';
+import React, {PropTypes} from 'react'
 
 const EventTypeRadio = ({selectedType, selectType}) => {
   const types = [
     {text: 'Todos'},
     {type: 0, text: 'Externo'},
     {type: 1, text: 'Interno'},
-  ];
+  ]
 
   const typesRadios = types.map((type, i) => (
       <a href="#" key={i}
@@ -16,17 +16,17 @@ const EventTypeRadio = ({selectedType, selectType}) => {
         <span className="ev-select__text">{type.text}</span>
       </a>
     )
-  );
+  )
 
   return (
     <div className="ev-select-group">
       {typesRadios}
     </div>
-  );
-};
+  )
+}
 
 EventTypeRadio.propTypes = {
   selectType: PropTypes.func.isRequired,
-};
+}
 
-export default EventTypeRadio;
+export default EventTypeRadio
