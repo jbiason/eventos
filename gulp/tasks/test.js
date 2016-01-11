@@ -5,7 +5,7 @@ import env from '../env';
 
 gulp.task('test', () => {
   return gulp.src(config.testFile, {read: false})
-  .pipe(mocha())
+  .pipe(mocha({reporter: 'nyan'}))
   .on('error', () => {
     if (env.isPreCommit()) {
       process.exit(1);

@@ -1,7 +1,13 @@
+import requireDir from 'require-dir';
+
 describe('components', () => {
-  require('./components');
+  requireDir('./components', {recurse: true});
 });
 
 describe('util', () => {
-  require('./util/util.js');
+  requireDir('./util', {recurse: true});
+});
+
+describe('services', () => {
+  requireDir('./services', {recurse: true});
 });
