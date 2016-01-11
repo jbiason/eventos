@@ -20,7 +20,7 @@ function formatPrice(priceStr) {
   }
 
   const priceArray = util.strSplit(priceStr)
-    .map(parseInt)
+    .map(price => parseInt(price))
     .filter(price => !isNaN(price))
     .map(price => price === 0 ? textConstants.FREE : util.currencyFormat(price))
   ;

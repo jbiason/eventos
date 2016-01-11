@@ -2,7 +2,6 @@ import React from 'react';
 import { getEvents } from '../../services/EventService';
 import EventFilter from './EventFilter';
 import EventList from './EventList';
-import util from '../../util/util';
 import doesMatch from 'does-match';
 import Loader from 'react-loader';
 
@@ -13,7 +12,7 @@ export default class EventApp extends React.Component {
       events: [],
       filteredEvents: [],
       loaded: false,
-      selectedYear: util.currentYear(),
+      selectedYear: (new Date()).getFullYear(),
       query: '',
       selectedType: undefined,
     };

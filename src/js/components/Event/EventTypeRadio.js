@@ -26,7 +26,6 @@ const EventTypeRadio = ({selectedType, selectType}) => {
 };
 
 EventTypeRadio.propTypes = {
-  selectedType: PropTypes.number.isRequired,
   selectType: PropTypes.func.isRequired,
 };
 

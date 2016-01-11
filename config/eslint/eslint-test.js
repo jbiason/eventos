@@ -5,5 +5,7 @@ export default {
     'quotes': [2, 'single'],
     'filenames/filenames': 0,
     'comma-dangle': [2, 'always-multiline'],
+    'max-params': [2, 4],
+    'no-unused-expressions': [0],
   },
 };

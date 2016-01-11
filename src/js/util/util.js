@@ -62,10 +62,6 @@ const util = {
     return d + '/' + m;
   },
 
-  currentYear() {
-    return (new Date()).getFullYear();
-  },
-
   isPast(date) {
     const today = new Date();
     today.setHours(0);

@@ -20,7 +20,9 @@ const Event = ({event}) => {
 
         <div className="u-row">
           <div className="u-col">
-            <div className="ev-event__price"><span className="ev-event__label">Valor</span>{event.formattedPrice}</div>
+            <div className="ev-event__price">
+              <span className="ev-event__label">Valor</span>{event.formattedPrice}
+            </div>
           </div>
           <div className="u-col">
             <div className="ev-event__date"><span className="ev-event__label">Data</span>{event.formattedDate}</div>

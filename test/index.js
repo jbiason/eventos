@@ -3,5 +3,5 @@ describe('components', () => {
 });
 
 describe('util', () => {
-  require('./util');
+  require('./util/util.js');
 });
