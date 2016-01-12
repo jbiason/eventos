@@ -2,6 +2,7 @@ export default {
   entry: './src/js/entry.js',
   output: {
     filename: './dist/js/bundle.js',
+    sourceMapFilename: './dist/js/bundle.map.js',
   },
   module: {
     loaders: [
