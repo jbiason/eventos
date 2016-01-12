@@ -18,7 +18,8 @@
 
     "coverage": "./node_modules/babel-cli/bin/babel-node.js ./node_modules/istanbul/lib/cli cover node_modules/mocha/bin/_mocha test/index.js",
     "check-coverage": "./node_modules/istanbul/lib/cli.js check-coverage --statements 5 --branches 5 --functions 5 --lines 5",
-    "report-coverage": "cat ./coverage/lcov.info | ./node_modules/codecov.io/bin/codecov.io.js"
+    "report-coverage": "cat ./coverage/lcov.info | ./node_modules/codecov.io/bin/codecov.io.js",
+    "report-coverage-codeclimate": "CODECLIMATE_REPO_TOKEN=32bbec6cb2d66cdbeffdad10c0fc10ad47afdadab393e0d6d2cade42a4cb90a0 ./node_modules/codeclimate-test-reporter/bin/codeclimate.js < ./coverage/lcov.info"
   },
   "repository": {
     "type": "git",
@@ -53,6 +54,7 @@
     "babel-register": "6.3.13",
     "chai": "3.4.1",
     "clone": "1.0.2",
+    "codeclimate-test-reporter": "0.1.1",
     "codecov.io": "0.1.6",
     "del": "2.2.0",
     "enzyme": "1.2.0",

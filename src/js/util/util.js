@@ -37,7 +37,7 @@ const util = {
     }
     const groupSize = 3
     const groupSep = '.'
-    const re = '\\d(?=(\\d{' + (groupSize || 3) + '})+' + ')'
+    const re = '\\d(?=(\\d{' + (groupSize || 3) + '})+)'
     const num = numVal.toFixed()
     return 'R$' + num.replace(new RegExp(re, 'g'), '$&' + groupSep)
   },

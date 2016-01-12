@@ -1,3 +1,8 @@
 engines:
   eslint:
-    enabled: false
+    enabled: true
+    checks:
+      comma-dangle:
+        enabled: false
+      radix:
+        enabled: false
