@@ -4,8 +4,11 @@ node_js:
   - "0.12"
 script:
   - npm run ci
+  - npm run coverage
+  - npm run check-coverage
 after_success:
-  - npm run report-coverage
+  - npm run report-coverage-codecov
+  - npm run report-coverage-codeclimate
 addons:
   code_climate:
     repo_token: 32bbec6cb2d66cdbeffdad10c0fc10ad47afdadab393e0d6d2cade42a4cb90a0
