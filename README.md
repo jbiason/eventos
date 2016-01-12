@@ -1,6 +1,8 @@
 # [CWI Eventos](http://cwisoftware.github.io/eventos/)
 
 [![travis build](https://img.shields.io/travis/CWISoftware/eventos.svg?branch=gh-pages)](https://travis-ci.org/CWISoftware/eventos)
+[![Code Climate](https://img.shields.io/codeclimate/github/CWISoftware/eventos.svg)](https://codeclimate.com/github/CWISoftware/eventos)
+[![Issue Count](https://codeclimate.com/github/CWISoftware/eventos/badges/issue_count.svg)](https://codeclimate.com/github/CWISoftware/eventos)
 [![codecov coverage](https://img.shields.io/codecov/c/github/CWISoftware/eventos.svg?style=flat-square)](https://codecov.io/github/CWISoftware/eventos)
 [![Dependencies status](https://img.shields.io/david/rafaeleyng/does-match.svg)](https://david-dm.org/rafaeleyng/does-match#info=dependencies)
 [![Dev Dependencies status](https://img.shields.io/david/dev/rafaeleyng/does-match.svg)](https://david-dm.org/rafaeleyng/does-match#info=devDependencies)
