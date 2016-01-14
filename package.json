@@ -7,19 +7,18 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "./node_modules/gulp/bin/gulp.js test",
-    "lint": "./node_modules/gulp/bin/gulp.js lint",
-    "ci": "./node_modules/gulp/bin/gulp.js ci; npm run coverage; npm run check-coverage",
-    "qa": "./node_modules/gulp/bin/gulp.js qa",
-    "build-prod": "./node_modules/gulp/bin/gulp.js build-prod",
-    "build-dev": "./node_modules/gulp/bin/gulp.js build-dev",
-    "dev": "./node_modules/gulp/bin/gulp.js dev",
+    "test": "gulp test",
+    "lint": "gulp lint",
+    "ci": "gulp ci; npm run coverage; npm run check-coverage",
+    "qa": "gulp qa",
+    "build-prod": "gulp build-prod",
+    "build-dev": "gulp build-dev",
+    "dev": "gulp dev",
     "start": "npm run dev",
 
-    "coverage": "./node_modules/babel-cli/bin/babel-node.js ./node_modules/istanbul/lib/cli cover node_modules/mocha/bin/_mocha test/index.js",
-    "check-coverage": "./node_modules/istanbul/lib/cli.js check-coverage --statements 5 --branches 5 --functions 5 --lines 5",
-    "report-coverage-codecov": "cat ./coverage/lcov.info | ./node_modules/codecov.io/bin/codecov.io.js",
-    "report-coverage-codeclimate": "./node_modules/codeclimate-test-reporter/bin/codeclimate.js < ./coverage/lcov.info"
+    "coverage": "babel-node ./node_modules/istanbul/lib/cli cover _mocha test/index.js",
+    "check-coverage": "istanbul check-coverage --statements 70 --branches 70 --functions 70 --lines 70",
+    "report-coverage-codecov": "cat ./coverage/lcov.info | codecov"
   },
   "repository": {
     "type": "git",
