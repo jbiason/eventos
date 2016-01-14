@@ -17,8 +17,8 @@
     "start": "npm run dev",
     "coverage": "babel-node ./node_modules/istanbul/lib/cli cover _mocha test/index.js",
     "check-coverage": "istanbul check-coverage --statements 70 --branches 70 --functions 70 --lines 70",
-    "report-coverage": "npm run report-coverage-codecov",
-    "report-coverage-codecov": "cat ./coverage/lcov.info | codecov"
+    "report-coverage": "npm run report-coverage-coveralls",
+    "report-coverage-coveralls": "cat ./coverage/lcov.info | coveralls"
   },
   "repository": {
     "type": "git",
@@ -54,7 +54,7 @@
     "chai": "3.4.1",
     "clone": "1.0.2",
     "codeclimate-test-reporter": "0.1.1",
-    "codecov.io": "0.1.6",
+    "coveralls": "2.11.6",
     "del": "2.2.0",
     "enzyme": "1.2.0",
     "eslint": "1.10.3",
@@ -68,6 +68,7 @@
     "gulp-util": "3.0.7",
     "istanbul": "^1.0.0-alpha",
     "mocha": "2.3.4",
+    "mocha-lcov-reporter": "1.0.0",
     "react-addons-test-utils": "0.14.5",
     "require-dir": "0.3.0",
     "webpack": "1.12.9",

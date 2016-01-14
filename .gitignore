@@ -3,4 +3,5 @@ _site
 node_modules
 npm-debug.log
 coverage
+.coveralls.yml
 src/js/bundle.js.map

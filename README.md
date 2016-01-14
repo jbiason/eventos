@@ -1,7 +1,7 @@
 # [CWI Eventos](http://cwisoftware.github.io/eventos/)
 
 [![travis build](https://img.shields.io/travis/CWISoftware/eventos.svg?branch=gh-pages)](https://travis-ci.org/CWISoftware/eventos)
-[![codecov coverage](https://img.shields.io/codecov/c/github/CWISoftware/eventos.svg)](https://codecov.io/github/CWISoftware/eventos)
+[![coveralls coverage](https://coveralls.io/repos/CWISoftware/eventos/badge.svg?branch=gh-pages&service=github)](https://coveralls.io/github/CWISoftware/eventos?branch=gh-pages)
 [![Dependencies status](https://img.shields.io/david/rafaeleyng/does-match.svg)](https://david-dm.org/rafaeleyng/does-match#info=dependencies)
 [![Dev Dependencies status](https://img.shields.io/david/dev/rafaeleyng/does-match.svg)](https://david-dm.org/rafaeleyng/does-match#info=devDependencies)
 [![MIT License](https://img.shields.io/npm/l/does-match.svg)](http://opensource.org/licenses/MIT)
