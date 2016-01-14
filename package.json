@@ -15,9 +15,9 @@
     "build-dev": "gulp build-dev",
     "dev": "gulp dev",
     "start": "npm run dev",
-
     "coverage": "babel-node ./node_modules/istanbul/lib/cli cover _mocha test/index.js",
     "check-coverage": "istanbul check-coverage --statements 70 --branches 70 --functions 70 --lines 70",
+    "report-coverage": "npm run report-coverage-codecov",
     "report-coverage-codecov": "cat ./coverage/lcov.info | codecov"
   },
   "repository": {
