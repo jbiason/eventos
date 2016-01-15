@@ -19,17 +19,17 @@ export default class EventApp extends React.Component {
   }
   componentDidMount() {
     getEvents()
-      .then(events => {
-        this.setState({
-          loaded: true,
-          events: events,
-        }, this.filterEvents)
+    .then(events => {
+      this.setState({
+        loaded: true,
+        events: events,
+      }, this.filterEvents)
+    })
+    .catch(() => {
+      this.setState({
+        loaded: true,
       })
-      .catch(() => {
-        this.setState({
-          loaded: true,
-        })
-      })
+    })
   }
   render() {
     return (
@@ -66,20 +66,35 @@ export default class EventApp extends React.Component {
     }, this.filterEvents)
   }
   filterEvents() {
+    const relevanceKey = '_relevance'
+    const matchedTextKey = '_matchedText'
     const year = this.state.selectedYear
     const type = this.state.selectedType
-    const events = this.state.events
     const query = this.state.query
-    let filteredEvents = events
-      .filter(event => event.formattedYear === year)
-      .filter(event => type === undefined ? true : event.formattedType === type)
 
+    let filteredEvents = this.state.events
+    .filter(event => event.formattedYear === year)
+    .filter(event => type === undefined ? true : event.formattedType === type)
+
+    filteredEvents.forEach(event => {
+      delete event[relevanceKey]
+      delete event[matchedTextKey]
+    })
 
     if (query) {
       filteredEvents = filteredEvents
-        .filter(event => {
-          return !!doesMatch(event.name, query) || event.formattedTagArray.some(tag => !!doesMatch(tag, query))
+      .filter(event => {
+        let bestResult = doesMatch(event.name, query, {highlightMatches: true})
+        event.formattedTagArray.forEach(tag => {
+          const tagResult = doesMatch(tag, query, {highlightMatches: true})
+          if (tagResult.relevance > bestResult.relevance) {
+            bestResult = tagResult
+          }
         })
+        event[relevanceKey] = bestResult.relevance
+        return !!bestResult.relevance
+      })
+      .sort((e1, e2) => e2[relevanceKey] - e1[relevanceKey])
     }
 
     this.setState({

@@ -4,4 +4,4 @@ node_modules
 npm-debug.log
 coverage
 .coveralls.yml
-src/js/bundle.js.map
+dist/js/bundle.js.map
