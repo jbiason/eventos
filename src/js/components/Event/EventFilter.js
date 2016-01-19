@@ -1,9 +1,9 @@
-import React, {PropTypes} from 'react'
+import React, { PropTypes } from 'react'
 import EventYears from './EventYears'
 import EventSearch from './EventSearch'
 import EventTypeRadio from './EventTypeRadio'
 
-const EventFilter = ({events, selectedYear, selectYear, query, changeSearch, selectedType, selectType}) => {
+const EventFilter = ({ events, selectedYear, selectYear, query, changeSearch, selectedType, selectType }) => {
   return (
     <div className="ev-page-header">
       <EventYears events={events} selectedYear={selectedYear} selectYear={selectYear} />

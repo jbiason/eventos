@@ -80,7 +80,7 @@ function prepareEventData(event) {
 
 export function getEvents() {
   return axios.get('./data/events.json')
-  .then(({data}) => {
+  .then(({ data }) => {
     return data
     .map((event, index) => {
       event.id = index

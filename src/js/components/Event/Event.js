@@ -1,8 +1,8 @@
-import React, {PropTypes} from 'react'
+import React, { PropTypes } from 'react'
 
-const Event = ({event}) => {
+const Event = ({ event }) => {
   const getDescriptionHTML = (description) => {
-    return {__html: description}
+    return { __html: description }
   }
   const tags = event.formattedTagArray.map((tag, i) => <li className="tag" key={i}>{tag}</li>)
 

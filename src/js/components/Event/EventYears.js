@@ -1,7 +1,7 @@
-import React, {PropTypes} from 'react'
+import React, { PropTypes } from 'react'
 import util from '../../util/util'
 
-const EventYears = ({events, selectedYear, selectYear}) => {
+const EventYears = ({ events, selectedYear, selectYear }) => {
   const years = util.arrayUniq(events.map(event => event.formattedYear))
   .sort((e1, e2) => parseInt(e2) - parseInt(e1))
 

@@ -1,6 +1,6 @@
-import React, {PropTypes} from 'react'
+import React, { PropTypes } from 'react'
 
-const EventSearch = ({query, changeSearch}) => {
+const EventSearch = ({ query, changeSearch }) => {
   return (
     <input
       type="text"

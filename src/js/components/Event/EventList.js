@@ -1,8 +1,8 @@
-import React, {PropTypes} from 'react'
+import React, { PropTypes } from 'react'
 import Event from './Event'
 import EventEmptyResult from './EventEmptyResult'
 
-const EventList = ({events}) => {
+const EventList = ({ events }) => {
   const result = events.length
     ? events.map((event) => <Event event={event} key={event.id}/>)
     : <EventEmptyResult />

@@ -22,7 +22,7 @@ export default class EventApp extends React.Component {
     .then(events => {
       this.setState({
         loaded: true,
-        events: events,
+        events,
       }, this.filterEvents)
     })
     .catch(() => {
@@ -30,24 +30,6 @@ export default class EventApp extends React.Component {
         loaded: true,
       })
     })
-  }
-  render() {
-    return (
-      <div>
-        <Loader loaded={this.state.loaded}>
-          <EventFilter
-            events={this.state.events}
-            selectedYear={this.state.selectedYear}
-            selectYear={(e) => this.selectYear(e)}
-            query={this.state.query}
-            changeSearch={(e) => this.changeSearch(e)}
-            selectedType={this.state.selectedType}
-            selectType={(e) => this.selectType(e)}
-          />
-          <EventList events={this.state.filteredEvents} />
-        </Loader>
-      </div>
-    )
   }
   selectYear(year) {
     this.setState({
@@ -62,7 +44,7 @@ export default class EventApp extends React.Component {
   changeSearch(e) {
     const query = e.target.value
     this.setState({
-      query: query,
+      query,
     }, this.filterEvents)
   }
   filterEvents() {
@@ -84,9 +66,9 @@ export default class EventApp extends React.Component {
     if (query) {
       filteredEvents = filteredEvents
       .filter(event => {
-        let bestResult = doesMatch(event.name, query, {highlightMatches: true})
+        let bestResult = doesMatch(event.name, query, { highlightMatches: true })
         event.formattedTagArray.forEach(tag => {
-          const tagResult = doesMatch(tag, query, {highlightMatches: true})
+          const tagResult = doesMatch(tag, query, { highlightMatches: true })
           if (tagResult.relevance > bestResult.relevance) {
             bestResult = tagResult
           }
@@ -98,7 +80,25 @@ export default class EventApp extends React.Component {
     }
 
     this.setState({
-      filteredEvents: filteredEvents,
+      filteredEvents,
     })
+  }
+  render() {
+    return (
+      <div>
+        <Loader loaded={this.state.loaded}>
+          <EventFilter
+            events={this.state.events}
+            selectedYear={this.state.selectedYear}
+            selectYear={(e) => this.selectYear(e)}
+            query={this.state.query}
+            changeSearch={(e) => this.changeSearch(e)}
+            selectedType={this.state.selectedType}
+            selectType={(e) => this.selectType(e)}
+          />
+          <EventList events={this.state.filteredEvents} />
+        </Loader>
+      </div>
+    )
   }
 }

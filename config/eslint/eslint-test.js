@@ -8,5 +8,6 @@ export default {
     'max-params': [2, 4],
     'no-unused-expressions': [0],
     'semi': [2, 'never'],
+    'no-magic-numbers': 0,
   },
 }
