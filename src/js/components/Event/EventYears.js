@@ -1,19 +1,17 @@
 import React, { PropTypes } from 'react'
+import { Link } from 'react-router'
 import util from '../../util/util'
 
-const EventYears = ({ events, selectedYear, selectYear }) => {
+const EventYears = ({ events }) => {
   const years = util.arrayUniq(events.map(event => event.formattedYear))
   .sort((e1, e2) => parseInt(e2) - parseInt(e1))
 
   const yearsButtons = years.map((year, index) => {
     return (
       <div key={index}>
-        <button type="button"
-          onClick={() => selectYear(year)}
-          className={'pure-button ' + (selectedYear === year ? 'pure-button-disabled' : '')}
-        >
-          {year}
-        </button>
+        <Link to={`/${year}`} className="pure-button" activeClassName="pure-button-disabled">
+          { year }
+        </Link>
       </div>
     )
   })
@@ -27,8 +25,6 @@ const EventYears = ({ events, selectedYear, selectYear }) => {
 
 EventYears.propTypes = {
   events: PropTypes.array.isRequired,
-  selectedYear: PropTypes.number.isRequired,
-  selectYear: PropTypes.func.isRequired,
 }
 
 export default EventYears
