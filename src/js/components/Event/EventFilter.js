@@ -3,10 +3,10 @@ import EventYears from './EventYears'
 import EventSearch from './EventSearch'
 import EventTypeRadio from './EventTypeRadio'
 
-const EventFilter = ({ events, selectedYear, selectYear, query, changeSearch, selectedType, selectType }) => {
+const EventFilter = ({ events, query, changeSearch, selectedType, selectType }) => {
   return (
     <div className="ev-page-header">
-      <EventYears events={events} selectedYear={selectedYear} selectYear={selectYear} />
+      <EventYears events={events} />
       <EventSearch query={query} changeSearch={changeSearch} />
       <EventTypeRadio selectedType={selectedType} selectType={selectType} />
     </div>
@@ -15,8 +15,6 @@ const EventFilter = ({ events, selectedYear, selectYear, query, changeSearch, se
 
 EventFilter.propTypes = {
   events: PropTypes.array.isRequired,
-  selectedYear: PropTypes.number.isRequired,
-  selectYear: PropTypes.func.isRequired,
   query: PropTypes.string.isRequired,
   changeSearch: PropTypes.func.isRequired,
   selectedType: PropTypes.number,
