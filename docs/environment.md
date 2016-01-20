@@ -13,9 +13,11 @@
 Para desenvolvimento, é necessário subir o servidor do Jekyll e rodar as tasks de desenvolvimento, simultaneamente.
 
 Para rodar o servidor do Jekyll:
+
 1. `jekyll s`
 
 Para rodar as tasks de desenvolvimento:
+
 1. `npm run dev`
 
 ## Outras tasks
