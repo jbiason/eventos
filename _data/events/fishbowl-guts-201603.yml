@@ -1,0 +1,11 @@
+name: Tendências de Teste de Software para 2016 # não colocar o ano do evento no nome
+date: 23/03/2016 # formato dd/MM/yyyy. Para vários dias, separe por vírgula: 28/01/2015, 29/01/2015
+time: 19:15 - 21:30 # formato HH:mm
+type: 0 # 0 ou em branco para Externo, 1 para Interno
+location: PUCRS - Prédio 32 - Sala 516 (Facin) # o nome do lugar
+address: Av. Ipiranga, 6681 - Partenon, Porto Alegre/RS # o endereço do lugar
+price: 0 # valor sem centavos. Se gratuito, informe 0. Para vários valores (lotes), separe por vírgula: 180, 240, 300
+url: http://guts-rs.blogspot.com.br/2016/02/evento-de-marco-tendencias-de-teste-de.html # URL do site do evento
+img: http://3.bp.blogspot.com/-0Ovlv1niKiM/U4tcCEZpZWI/AAAAAAAAFIE/g7JhbVuuD3s/s1600/LogoGUTS%2B-%2BAlta%2BResolu%25C3%25A7%25C3%25A3o.jpg # URL da imagem do evento. Máximo de 100kb. Ideal < 50kb
+description: O futuro dos testes de software será debatido em um empolgante fishbowl com a comunidade de teste.
+tags: Testes, Fishbowl, GUTS # no máximo umas 5 ou 6 tags, separadas por vírgula
