@@ -78,6 +78,16 @@ function prepareEventData(event) {
   return event
 }
 
+function sortEvents(e1, e2) {
+  const now = new Date()
+  const d1 = e1.formattedDateArray[0].valueOf()
+  const d2 = e2.formattedDateArray[0].valueOf()
+  if (d1 < now) {
+    return d2 < now && d1 > d2 ? -1 : 1
+  }
+  return d1 < d2 || d2 < now ? -1 : 1
+}
+
 export function getEvents() {
   return axios.get('./data/events.json')
   .then(({ data }) => {
@@ -86,6 +96,6 @@ export function getEvents() {
       event.id = index
       return prepareEventData(event)
     })
-    .sort((e1, e2) => e2.formattedDateArray[0].valueOf() - e1.formattedDateArray[0].valueOf())
+    .sort(sortEvents)
   })
 }

@@ -2,9 +2,11 @@ import React, { PropTypes } from 'react'
 
 const EventTypeRadio = ({ selectedType, selectType }) => {
   const types = [
-    { text: 'Todos' },
-    { type: 0, text: 'Externo' },
-    { type: 1, text: 'Interno' },
+    /*
+     *{ text: 'Todos' },
+     *{ type: 0, text: 'Externo' },
+     *{ type: 1, text: 'Interno' },
+    */
   ]
 
   const typesRadios = types.map((type, i) => (
