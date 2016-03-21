@@ -1,0 +1,16 @@
+# ATENÇÃO:
+# - `name` e `date` são obrigatórios
+# - se não souber algum dado, apague a linha
+# - apague os comentários (tudo que tem um `#` na frente)
+
+name: ERAD 2016 
+date: 13/04/2016, 14/04/2016, 15/04/2016 # formato dd/MM/yyyy. Para vários dias, separe por vírgula: 28/01/2015, 29/01/2015
+time: 09:00 - 18:30 # formato HH:mm
+type: 0 # 0 ou em branco para Externo, 1 para Interno
+location: Unisinos # o nome do lugar
+address: Av. Unisinos, 950 - Cristo Rei, São Leopoldo - RS # o endereço do lugar
+price: 20, 30, 40 # valor sem centavos. Se gratuito, informe 0. Para vários valores (lotes), separe por vírgula: 180, 240, 300
+url: http://www.unisinos.br/eventos/erad-rs-2016-exerad # URL do site do evento
+img: http://www.unisinos.br/images/eventos/2015/erad-rs/logo-erad.png # URL da imagem do evento. Máximo de 100kb. Ideal < 50kb
+description: Escola Regional de Alto Desempenho. Evento com diversas palestras e mini-cursos.
+tags: IOT, AltoDesempenho, ProcessamentoParalelo # no máximo umas 5 ou 6 tags, separadas por vírgula
