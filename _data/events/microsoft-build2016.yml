@@ -1,0 +1,16 @@
+# ATENÇÃO:
+# - `name` e `date` são obrigatórios
+# - se não souber algum dado, apague a linha
+# - apague os comentários (tudo que tem um `#` na frente)
+
+name: Microsoft Build
+date: 29/03/2016, 30/03/2016, 31/03/2016, 01/04/2016
+time: 07:00 - 23:00
+type: 0 # 0 ou em branco para Externo, 1 para Interno
+location: The Moscone Center (Online Channel9) # o nome do lugar
+address: San Francisco, CA
+price: 8000, 4000, 0
+url: http://build.microsoft.com/
+img: http://cdn1.tnwcdn.com/wp-content/blogs.dir/1/files/2015/01/build-conference.jpg
+description: Novidades no mundo de tecnologia Microsoft. O conteúdo poderá ser visto no Channel9 (https://channel9.msdn.com/?wt.mc_id=DX_59105)
+tags: microsoft, build, news
