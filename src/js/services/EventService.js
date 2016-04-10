@@ -80,8 +80,8 @@ function prepareEventData(event) {
 
 function sortEvents(e1, e2) {
   const now = new Date()
-  const d1 = e1.formattedDateArray[0].valueOf()
-  const d2 = e2.formattedDateArray[0].valueOf()
+  const d1 = e1.formattedDateArray.slice().pop().valueOf()
+  const d2 = e2.formattedDateArray.slice().pop().valueOf()
   if (d1 < now) {
     return d2 < now && d1 > d2 ? -1 : 1
   }
