@@ -1,0 +1,11 @@
+name: QCon Rio de Janeiro
+date: 5/10/2016,6/10/2016,7/10/2016
+time: 08:00 - 18:00
+type: 0
+location: Centro de Convenções SulAmérica
+address: Av. Paulo de Frontin, 1, Cidade Nova - Centro, Rio de Janeiro
+price: 1295, 1395, 1495, 1595, 1695, 1895
+url: http://qconrio.com/
+img: http://qconrio.com/sites/all/themes/qconbs/images/logo2x.png
+description: Conferência Internacional de Desenvolvimento de Software
+tags: arquitetura, bigdata, processo, IoT, Desenvolvimento
