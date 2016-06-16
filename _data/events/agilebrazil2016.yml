@@ -1,0 +1,10 @@
+name: Agile Brazil
+date: 07/11/2016, 08/11/2016, 09/11/2016
+type: 0
+location: PUCPR
+address: R. Imac. Conceição, 1155, bairro Prado Velho, Curitiba/PR
+price: 520, 468, 470 # valor sem centavos. Se gratuito, informe 0. Para vários valores (lotes), separe por vírgula: 180, 240, 300
+url: http://www.agilebrazil.com/2016
+img: https://submissoes.agilebrazil.com/system/conferences/logos/000/000/007/medium/Marca_Texto_AB2016.png
+description: Agile Brazil, a mais relevante conferência brasileira sobre agilidade em desenvolvimento de software!
+tags: agile
