@@ -1,0 +1,11 @@
+name: The Developers Conference POA
+date: 05/10/2016, 06/10/2016, 07/10/2016, 08/10/2016
+time: 09:00 - 19:00
+type: 0
+location: UniRitter - Campus Porto Alegre
+address: Rua Orfanotrófio, 555 - Alto Teresópolis, Porto Alegre/RS # o endereço do lugar
+price: 120, 150, 200 # valor sem centavos. Se gratuito, informe 0. Para vários valores (lotes), separe por vírgula: 180, 240, 300
+url: http://www.thedevelopersconference.com.br/tdc/2016/
+img: https://gutssc.files.wordpress.com/2016/05/tdc-logo-post.png
+description: O evento reúne várias trilhas que abordarão as tendências do mercado em temas como Android, Windows 8, iOS, Java, Python, Testes, Cloud Computing, Games, Robótica, Negócios, Mobile, entre várias outras. Ao todo são mais de 30 trilhas que serão apresentadas por cerca de 260 palestrantes.
+tags: tdc, poa, android, windows, iOS, Java, python, testes, cloud, games, robótica, negócios, mobile
