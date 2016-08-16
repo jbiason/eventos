@@ -1,0 +1,10 @@
+name: TheDevelopersConference
+date: 05/10/2016, 06/10/2016, 07/10/2016, 08/10/2016
+time: 08:00 - 19:00
+type: 0
+location: UniRitter - Campus Porto Alegre
+address:  Rua Orfanotrófio, 555 - Alto Teresópolis
+price: 120, 150, 200
+url: http://www.thedevelopersconference.com.br/tdc/2016/portoalegre/trilhas
+img: https://s3-sa-east-1.amazonaws.com/thedevconf/2016/img/banners/tdc2016poa-inscricoes-abertas.png
+tags: testes, data science, ios, javascript, iot, devops, bigdata, android, web, programação funcional, ruby, python, java, agile, games, arduino, .net
